@@ -1,0 +1,47 @@
+.container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  justify-content: space-between;
+  padding: 72rpx 0;
+  box-sizing: border-box;
+}
+
+.personal-container {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  flex-direction: row;
+  padding: 0 64rpx 0 64rpx;
+  justify-content: center;
+
+  .personal-avatar {
+    width: 128rpx;
+    height: 128rpx;
+    border-radius: 50%;
+  }
+
+  .personal-nickname {
+    margin-left: 22px;
+  }
+
+}
+
+.personal-h {
+  height: 100%;
+  margin-top: 36rpx;
+  padding: 0 64rpx 0 64rpx;
+  justify-content: center;
+
+  .personal-tag {
+    margin: 18rpx 0 12rpx;
+
+    .personal-line {
+      height: 2rpx;
+      background: #ccc;
+      margin-right: 64rpx;
+    }
+
+  }
+}

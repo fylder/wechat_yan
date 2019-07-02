@@ -1,0 +1,27 @@
+/* Custom Theme */
+$color-brand: #e91e63;
+$color-brand-light: #ed4b82;
+$color-brand-dark: #a31545;
+
+@import "~taro-ui/dist/style/index.scss";
+
+.font-title {
+  color: #666;
+  font-size: larger;
+}
+
+.font-content {
+  color: #888;
+  font-size: medium;
+}
+
+/* small比smaller小 */
+
+.font-content-small {
+  color: #888;
+  font-size: small;
+}
+
+.font-bord {
+  font-weight: bold;
+}

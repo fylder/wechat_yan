@@ -1,0 +1,31 @@
+$color-primary: #e91e63;
+$info-color:#2ca6bc;
+$white:#FFFFFF;
+
+.btn {
+  margin: 1rem;
+}
+
+.info-btn {
+  background: $info-color;
+  color: $white;
+}
+
+.info-lay {
+  margin: 0.01rem;
+}
+
+.info-lay-description {
+  margin-top: 0.02rem;
+}
+
+.info-font {
+  color: $white;
+}
+
+.info-card {
+  margin: 0.4rem;
+  padding: 1rem;
+  // background: $color-primary;
+  box-shadow: 0.2rem 0.2rem 0.4rem rgb(233, 161, 161);
+}

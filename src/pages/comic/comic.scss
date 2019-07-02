@@ -1,0 +1,17 @@
+$color-primary: #e91e63;
+
+.btn {
+  margin: 1rem;
+}
+
+.info-card {
+  margin: 0.4rem;
+  padding: 0.5rem;
+
+  .info-index {
+    background: $color-primary;
+    width: 0.1rem;
+    height: 1rem;
+    margin-right: 0.2rem;
+  }
+}
