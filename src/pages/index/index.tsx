@@ -27,13 +27,10 @@ type PageStateProps = {
 
 type PageDispatchProps = {
   handleLogin(): () => void
-  handleUser: () => void
-  handleInfo: () => void
   handleItemClick: () => void
   handleComicClick: () => void
   handleTypeItemClick: () => void
   handleMoreClick: () => void
-  handleCart: (id: string) => void
 }
 
 type PageOwnProps = {}

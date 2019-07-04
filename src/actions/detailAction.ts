@@ -1,8 +1,8 @@
-import { BOOK_DETAIL, BOOK_SHOW, BOOK_HIDE } from "../constants/actionType"
+import { COMIC_DETAIL, COMIC_SHOW, COMIC_HIDE } from "../constants/actionType"
 
 export const detail = (id: number, info: string) => {
   return {
-    type: BOOK_DETAIL,
+    type: COMIC_DETAIL,
     id,
     info
   }
@@ -10,8 +10,8 @@ export const detail = (id: number, info: string) => {
 
 export const load = (open: boolean) => {
   if (open) {
-    return { type: BOOK_SHOW, isLoading: open }
+    return { type: COMIC_SHOW, isLoading: open }
   } else {
-    return { type: BOOK_HIDE, isLoading: open }
+    return { type: COMIC_HIDE, isLoading: open }
   }
 }

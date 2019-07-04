@@ -3,9 +3,9 @@ export const USER_DETAIL = "USER_DETAIL"
 export const USER_EXIT = "USER_EXIT"
 
 //detail
-export const BOOK_DETAIL = "BOOK_DETAIL"
-export const BOOK_SHOW = "BOOK_SHOW"
-export const BOOK_HIDE = "BOOK_HIDE"
+export const COMIC_DETAIL = "COMIC_DETAIL"
+export const COMIC_SHOW = "COMIC_SHOW"
+export const COMIC_HIDE = "COMIC_HIDE"
 
 //shopping cart
 export const CART_SELECT = "CART_SELECT"

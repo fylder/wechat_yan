@@ -1,7 +1,7 @@
 {
 	"miniprogramRoot": "dist/",
-	"projectname": "book-taro",
-	"description": "book",
+	"projectname": "yan",
+	"description": "yan",
 	"appid": "wx671e412fee5905eb",
 	"setting": {
 		"urlCheck": true,

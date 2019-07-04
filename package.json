@@ -1,8 +1,8 @@
 {
-  "name": "book-taro",
+  "name": "yan",
   "version": "1.0.0",
   "private": true,
-  "description": "book",
+  "description": "yan",
   "templateInfo": {
     "name": "redux",
     "typescript": true,

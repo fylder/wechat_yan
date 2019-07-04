@@ -141,9 +141,7 @@ class Info extends Component<ComponentProps, ComponentState> {
               <View className="at-article__content" key={item.id}>
                 <Image className="at-article__img" src={tag} mode="widthFix" />
                 <View className="at-article__section">
-                  <View className="at-article__h3">
-                    {item.title}
-                  </View>
+                  <View className="at-article__h3">{item.title}</View>
                   <Image
                     className="at-article__img"
                     src={item.src}

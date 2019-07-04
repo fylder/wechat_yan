@@ -1,4 +1,4 @@
-import { Text, View } from "@tarojs/components"
+import { View } from "@tarojs/components"
 import { connect } from "@tarojs/redux"
 import Taro, { Component, Config } from "@tarojs/taro"
 import { ComponentClass } from "react"

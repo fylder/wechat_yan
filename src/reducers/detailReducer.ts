@@ -1,4 +1,4 @@
-import { BOOK_DETAIL, BOOK_SHOW, BOOK_HIDE } from "../constants/actionType"
+import { COMIC_DETAIL, COMIC_SHOW, COMIC_HIDE } from "../constants/actionType"
 
 /**
  * 一个function对应一个action
@@ -7,7 +7,7 @@ import { BOOK_DETAIL, BOOK_SHOW, BOOK_HIDE } from "../constants/actionType"
  */
 export function detail(state = {}, action) {
   switch (action.type) {
-    case BOOK_DETAIL:
+    case COMIC_DETAIL:
       return {
         ...state,
         id: action.id,
@@ -20,12 +20,12 @@ export function detail(state = {}, action) {
 
 export function load(state = {}, action) {
   switch (action.type) {
-    case BOOK_SHOW:
+    case COMIC_SHOW:
       return {
         ...state,
         isLoading: action.isLoading
       }
-    case BOOK_HIDE:
+    case COMIC_HIDE:
       return {
         ...state,
         isLoading: action.isLoading
