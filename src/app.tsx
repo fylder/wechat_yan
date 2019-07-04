@@ -29,6 +29,7 @@ class App extends Component {
       "pages/about/about",
       "pages/album/album",
       "pages/comic/comic",
+      "pages/monthly/monthly",
       "pages/detail/detail",
       "pages/cart/cart",
       "pages/indent/indent"

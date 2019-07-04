@@ -105,6 +105,11 @@ interface ComponentState {
             })
           }
           break
+        case 3:
+          Taro.navigateTo({
+            url: "/pages/monthly/monthly"
+          })
+          break
       }
     },
     handleMoreClick() {
@@ -160,7 +165,7 @@ class Index extends Component<ComponentProps, ComponentState> {
   }
 
   render() {
-    const typeArray = ["fylder", "用户信息", "购物车"]
+    const typeArray = ["fylder", "用户信息", "购物车", "今月份"]
     return (
       <View className="index">
         <View className="lay">

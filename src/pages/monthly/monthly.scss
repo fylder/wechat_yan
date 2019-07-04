@@ -1,0 +1,40 @@
+$color-primary: #e91e63;
+
+.index {
+  margin-bottom: 1rem;
+
+}
+
+.info-card {
+  margin: 0.4rem;
+  padding: 0.5rem;
+
+  .info-index {
+    background: $color-primary;
+    width: 0.1rem;
+    height: 1rem;
+    margin-right: 0.2rem;
+  }
+}
+
+.tag {
+  width: fit-content;
+  border-style: solid;
+  border-color: $color-primary;
+  border-top-color: $color-primary;
+  border-bottom-color: #666666;
+  border-left-color: #666666;
+  border-right-color: #666666;
+  border-width: 0.4rem 0.05rem 0.05rem;
+  font-size: 24rpx;
+  margin: 0.5rem 1rem 0.5rem;
+  padding: 0.1rem;
+}
+
+.title {
+  margin-top: 1rem;
+}
+
+.describe {
+  // margin: 0.2rem 0.4rem 0.2rem;
+}
