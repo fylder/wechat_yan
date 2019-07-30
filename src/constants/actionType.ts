@@ -1,4 +1,5 @@
 //user
+export const USER_TOKEN = "USER_TOKEN"
 export const USER_DETAIL = "USER_DETAIL"
 export const USER_EXIT = "USER_EXIT"
 

@@ -13,6 +13,7 @@ type PageStateProps = {
     id: string
     username: string
     avatar: string
+    accessToken: string
   }
 }
 
@@ -87,7 +88,12 @@ class Info extends Component<ComponentProps, ComponentState> {
     })
     Taro.request({
       url: "https://wechat.fylder.me:8022/api/album/" + type,
-      method: "GET"
+      method: "GET",
+      mode: "cors",
+      header: {
+        Authorization: `Bearer ${this.props.user.accessToken}`,
+        "Content-Type": "application/x-www-form-urlencoded"
+      }
     }).then(res =>
       this.setState({
         datas: res.data

@@ -1,7 +1,12 @@
-import { USER_DETAIL, USER_EXIT } from "../constants/actionType"
+import { USER_DETAIL, USER_EXIT, USER_TOKEN } from "../constants/actionType"
 
 export default function user(state = {}, action) {
   switch (action.type) {
+    case USER_TOKEN:
+      return {
+        ...state,
+        accessToken: action.accessToken
+      }
     case USER_DETAIL:
       return {
         ...state,

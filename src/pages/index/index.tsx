@@ -3,7 +3,7 @@ import { connect } from "@tarojs/redux"
 import Taro, { Component, Config } from "@tarojs/taro"
 import { ComponentClass } from "react"
 import { AtIcon } from "taro-ui"
-import { detail } from "../../actions/userAction"
+import { detail, saveToken } from "../../actions/userAction"
 import { image_data, item_datas } from "./data"
 import "./index.scss"
 
@@ -22,6 +22,7 @@ type PageStateProps = {
     id: string
     username: string
     avatar: string
+    accessToken: string
   }
 }
 
@@ -33,7 +34,7 @@ type PageDispatchProps = {
   handleMoreClick: () => void
 }
 
-type PageOwnProps = {}
+type PageOwnProps = { dispatch(type: any): Promise<any> }
 
 type PageState = {}
 
@@ -49,6 +50,7 @@ interface ComponentState {
   type: string
   title: string
   covers
+  accessToken: string
 }
 
 @connect(
@@ -137,14 +139,32 @@ class Index extends Component<ComponentProps, ComponentState> {
 
   componentWillMount() {
     this.props.handleLogin()
-    Taro.request({
-      url: "https://wechat.fylder.me:8022/api/album/",
-      method: "GET"
-    }).then(res =>
-      this.setState({
-        covers: res.data
+    //验证是否过期
+    if (this.props.user.accessToken) {
+      Taro.request({
+        url: "https://wechat.fylder.me:8022//user/authenticate",
+        method: "POST",
+        mode: "cors",
+        header: {
+          Authorization: `Bearer ${this.props.user.accessToken}`,
+          "Content-Type": "application/x-www-form-urlencoded"
+        }
+      }).then(res => {
+        console.log(res.data)
+        if (res.data.error_description) {
+          this.getAccesssToken()
+        } else {
+          if (this.state.covers === []) {
+            console.log("获取数据")
+            this.getAlbum(this.props.user.accessToken)
+          } else {
+            console.log("不需要获取数据")
+          }
+        }
       })
-    )
+    } else {
+      this.getAccesssToken()
+    }
   }
 
   componentWillUnmount() {}
@@ -162,6 +182,45 @@ class Index extends Component<ComponentProps, ComponentState> {
       title: "带着毛驴去兜风",
       path: "/pages/index/index"
     }
+  }
+
+  getAccesssToken = () => {
+    Taro.request({
+      url: "https://wechat.fylder.me:8022/user/login",
+      method: "POST",
+      mode: "cors",
+      header: {
+        Authorization: "Basic ZnlsZGVyOm15X3NlY3JldA==",
+        "Content-Type": "application/x-www-form-urlencoded"
+      },
+      data: {
+        grant_type: "password",
+        username: "fylder",
+        password: "123"
+      }
+    }).then(res => {
+      const accessToken = res.data.access_token
+      console.log("accessToken:", accessToken)
+      this.props.dispatch(saveToken(accessToken))
+      this.setState({
+        accessToken
+      })
+      this.getAlbum(accessToken)
+    })
+  }
+
+  getAlbum = (accessToken: string) => {
+    Taro.request({
+      url: "https://wechat.fylder.me:8022/api/album/",
+      method: "GET",
+      header: {
+        Authorization: `Bearer ${accessToken}`
+      }
+    }).then(res =>
+      this.setState({
+        covers: res.data
+      })
+    )
   }
 
   render() {

@@ -1,4 +1,11 @@
-import { USER_DETAIL, USER_EXIT } from "../constants/actionType"
+import { USER_DETAIL, USER_EXIT, USER_TOKEN } from "../constants/actionType"
+
+export const saveToken = (accessToken: string) => {
+  return {
+    type: USER_TOKEN,
+    accessToken
+  }
+}
 
 export const detail = (id: string, username: string, avatar: string) => {
   return {
