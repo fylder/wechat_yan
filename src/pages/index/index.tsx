@@ -196,7 +196,7 @@ class Index extends Component<ComponentProps, ComponentState> {
       data: {
         grant_type: "password",
         username: "fylder",
-        password: "123"
+        password: "1234567"
       }
     }).then(res => {
       const accessToken = res.data.access_token
@@ -317,9 +317,9 @@ class Index extends Component<ComponentProps, ComponentState> {
                   {this.state.covers.map((item, index) => {
                     return (
                       <View className="at-col at-col-6" key={item.id}>
-                        <View className="second_item_lay">
+                        <View className="first_item_lay">
                           <Image
-                            className="second_item_img"
+                            className="first_item_img"
                             src={item.cover}
                             mode="aspectFill"
                           />
@@ -345,22 +345,30 @@ class Index extends Component<ComponentProps, ComponentState> {
                   {typeArray.map((item, index) => {
                     return (
                       <View className="at-col at-col-6" key={index}>
-                        <View className="second_item_lay">
-                          <Image
-                            className="second_item_img"
+                        <View
+                          className="menu_item_lay"
+                          onClick={this.props.handleTypeItemClick.bind(
+                            this,
+                            index,
+                            this.props.user.id
+                          )}
+                        >
+                          {/* <Image
+                            className="menu_item_img"
                             src="http://img5.mtime.cn/pi/2019/05/29/083826.86010876_1000X1000.jpg"
                             mode="aspectFill"
-                          />
-                          <View />
-                          <View className="flex-container">
-                            <View
-                              className="at-article__h3 flex-item-detail"
-                              onClick={this.props.handleTypeItemClick.bind(
-                                this,
-                                index,
-                                this.props.user.id
-                              )}
-                            >
+                          /> */}
+
+                          <View className="menu-item-img">
+                            <AtIcon
+                              prefixClass="tao"
+                              value="lipinka"
+                              size="30"
+                              color="#e91e63"
+                            />
+                          </View>
+                          <View className="menu-flex-container">
+                            <View className="at-article__h3 menu-flex-item-detail">
                               {item}
                             </View>
                           </View>

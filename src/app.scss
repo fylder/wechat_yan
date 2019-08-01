@@ -4,6 +4,8 @@ $color-brand-light: #ed4b82;
 $color-brand-dark: #a31545;
 
 @import "~taro-ui/dist/style/index.scss";
+@import "./static/icon/tao/iconfont.scss";
+@import "./static/icon/iconfont.scss";
 
 .font-title {
   color: #666;
