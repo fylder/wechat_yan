@@ -97,7 +97,6 @@ class Indent extends Component {
           {datas.map((item, index) => {
             return (
               <AtListItem
-                key={index}
                 title="2019-06-13 15:25:33"
                 note={item.name}
                 arrow="right"

@@ -3,9 +3,9 @@ import { connect } from "@tarojs/redux"
 import Taro, { Component, Config } from "@tarojs/taro"
 import { ComponentClass } from "react"
 import { AtButton, AtInputNumber, AtList, AtListItem, AtMessage } from "taro-ui"
-import { remove, save } from "../../actions/cartAction"
-import { add } from "../../actions/indentAction"
-import { IndentModel } from "../../actions/model/indentModel"
+import { remove, save } from "../../../actions/cartAction"
+import { add } from "../../../actions/indentAction"
+import { IndentModel } from "../../../actions/model/indentModel"
 import "./cart.scss"
 
 type PageStateProps = {
@@ -179,7 +179,7 @@ class Cart extends Component<ComponentProps, ComponentState> {
         <AtList>
           {datas.map((item, index) => {
             return (
-              <View key={index}>
+              <View>
                 <AtListItem
                   title="2019-06-13 15:25:33"
                   note={item.name}

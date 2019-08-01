@@ -6,6 +6,7 @@ import linePng from "../../static/img/line.jpg"
 import linePng2 from "../../static/img/line2.jpg"
 import linePng3 from "../../static/img/line4.jpg"
 import linePng4 from "../../static/img/line5.jpg"
+import { Album } from "../../store/model/data.d"
 import "./album.scss"
 
 type PageStateProps = {
@@ -13,7 +14,6 @@ type PageStateProps = {
     id: string
     username: string
     avatar: string
-    accessToken: string
   }
 }
 
@@ -37,7 +37,7 @@ interface ComponentProps {
 interface ComponentState {
   type: string
   title: string
-  datas
+  datas: Album[]
 }
 
 @connect(
@@ -87,13 +87,9 @@ class Info extends Component<ComponentProps, ComponentState> {
       title
     })
     Taro.request({
-      url: "https://wechat.fylder.me:8022/api/album/" + type,
+      url: "https://wechat.fylder.me:8022/wechat/album/" + type,
       method: "GET",
-      mode: "cors",
-      header: {
-        Authorization: `Bearer ${this.props.user.accessToken}`,
-        "Content-Type": "application/x-www-form-urlencoded"
-      }
+      mode: "cors"
     }).then(res =>
       this.setState({
         datas: res.data
@@ -110,7 +106,7 @@ class Info extends Component<ComponentProps, ComponentState> {
     const defaultImg =
       "http://img5.mtime.cn/pi/2019/03/30/100155.92232373_1000X1000.jpg"
     const data = this.state.datas
-    data[index].src = defaultImg
+    data[index].cover = defaultImg
     this.setState({ datas: data })
   }
 
@@ -142,15 +138,15 @@ class Info extends Component<ComponentProps, ComponentState> {
               </View>
             </View>
           </View>
-          {this.state.datas.map((item, index) => {
+          {this.state.datas.map((item: Album, index: number) => {
             return (
               <View className="at-article__content" key={item.id}>
                 <Image className="at-article__img" src={tag} mode="widthFix" />
                 <View className="at-article__section">
-                  <View className="at-article__h3">{item.title}</View>
+                  <View className="at-article__h3">{item.subject}</View>
                   <Image
                     className="at-article__img"
-                    src={item.src}
+                    src={item.cover}
                     onError={this.imageError.bind(this, index)}
                     mode="widthFix"
                   />

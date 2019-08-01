@@ -4,8 +4,7 @@ export default function user(state = {}, action) {
   switch (action.type) {
     case USER_TOKEN:
       return {
-        ...state,
-        accessToken: action.accessToken
+        ...state
       }
     case USER_DETAIL:
       return {

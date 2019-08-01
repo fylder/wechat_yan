@@ -3,9 +3,9 @@ import { connect } from "@tarojs/redux"
 import Taro, { Component, Config } from "@tarojs/taro"
 import { ComponentClass } from "react"
 import { AtButton, AtTag, AtToast } from "taro-ui"
-import { add } from "../../actions/cartAction"
-import { detail, load } from "../../actions/detailAction"
-import { CartModel } from "../../actions/model/cartModel"
+import { add } from "../../../actions/cartAction"
+import { detail, load } from "../../../actions/detailAction"
+import { CartModel } from "../../../actions/model/cartModel"
 import anime_data from "./data"
 import "./detail.scss"
 
@@ -119,7 +119,7 @@ class Detail extends Component<ComponentProps, ComponentState> {
             <View className="at-article__info">
               {data.tags.map((item, index) => {
                 return (
-                  <AtTag className="tag-item" size="small" key={index}>
+                  <AtTag className="tag-item" size="small">
                     {item}
                   </AtTag>
                 )

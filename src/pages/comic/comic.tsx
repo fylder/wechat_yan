@@ -10,7 +10,6 @@ type PageStateProps = {
     id: string
     username: string
     avatar: string
-    accessToken: string
   }
 }
 
@@ -37,6 +36,9 @@ interface ComponentState {
   datas
 }
 
+/**
+ * 照片详情
+ */
 @connect(
   ({ user }) => ({
     user
@@ -70,13 +72,9 @@ class Info extends Component<ComponentProps, ComponentState> {
       title
     })
     Taro.request({
-      url: "https://wechat.fylder.me:8022/api/picture/" + id,
+      url: "https://wechat.fylder.me:8022/wechat/picture/" + id,
       method: "GET",
-      mode: "cors",
-      header: {
-        Authorization: `Bearer ${this.props.user.accessToken}`,
-        "Content-Type": "application/x-www-form-urlencoded"
-      }
+      mode: "cors"
     }).then(res =>
       this.setState({
         datas: res.data
@@ -119,7 +117,7 @@ class Info extends Component<ComponentProps, ComponentState> {
                   <View className="at-article__h3">{item.title}</View>
                   <Image
                     className="at-article__img"
-                    src={item.src}
+                    src={item.photo}
                     onError={this.imageError.bind(this, index)}
                     mode="widthFix"
                   />
