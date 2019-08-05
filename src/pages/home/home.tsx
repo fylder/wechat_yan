@@ -54,27 +54,36 @@ interface ComponentState {
     handleTypeItemClick(index: number) {
       switch (index) {
         case 0: {
+          //天气之子
           Taro.navigateTo({
             url: "/pages/other/detail/detail?id=" + index
           })
           break
         }
         case 1: {
+          //随手拍
           break
         }
         case 2: {
+          //游历
           break
         }
         case 3: {
+          //心情线
           break
         }
         case 4: {
+          //今月份
           Taro.navigateTo({
             url: "/pages/monthly/monthly"
           })
           break
         }
         case 5: {
+          //小玩意
+          Taro.navigateTo({
+            url: "/pages/toy/toy"
+          })
           break
         }
         default: {

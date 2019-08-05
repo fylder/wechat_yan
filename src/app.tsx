@@ -31,6 +31,7 @@ class App extends Component {
       "pages/album/album",
       "pages/comic/comic",
       "pages/monthly/monthly",
+      "pages/toy/toy",
       //other
       "pages/other/detail/detail",
       "pages/other/cart/cart",

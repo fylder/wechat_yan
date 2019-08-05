@@ -24,7 +24,7 @@ type PageState = {}
 
 type IProps = PageStateProps & PageDispatchProps & PageOwnProps
 
-interface Info {
+interface Monthly {
   props: IProps
 }
 
@@ -43,7 +43,7 @@ interface ComponentState {
   }),
   dispatch => ({})
 )
-class Info extends Component<ComponentProps, ComponentState> {
+class Monthly extends Component<ComponentProps, ComponentState> {
   /**
    * 指定config的类型声明为: Taro.Config
    *
@@ -123,4 +123,4 @@ class Info extends Component<ComponentProps, ComponentState> {
   }
 }
 
-export default Info as ComponentClass<PageOwnProps, PageState>
+export default Monthly as ComponentClass<PageOwnProps, PageState>
