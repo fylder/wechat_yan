@@ -2,7 +2,6 @@ import { Image, View } from "@tarojs/components"
 import { connect } from "@tarojs/redux"
 import Taro, { Component, Config } from "@tarojs/taro"
 import { ComponentClass } from "react"
-import linePng from "../../static/img/line.jpg"
 import { type } from "./data"
 import "./toy.scss"
 
@@ -82,9 +81,13 @@ class Toy extends Component<ComponentProps, ComponentState> {
     this.setState({ datas: data })
   }
 
-  render() {
-    let tag = linePng
+  itemClick = (index: number) => {
+    Taro.navigateTo({
+      url: "/pages/comic/comic?id=" + index + "&title=ahh"
+    })
+  }
 
+  render() {
     return (
       <View>
         <View className="index">
@@ -92,7 +95,7 @@ class Toy extends Component<ComponentProps, ComponentState> {
             <View className="lay_bg">
               <Image
                 className="lay_img"
-                src="http://img5.mtime.cn/pi/2019/05/29/083826.86010876_1000X1000.jpg"
+                src="http://spider.ws.126.net/6b1df938dab6a363b5a475c4e9e21345.jpeg"
                 mode="aspectFill"
               />
             </View>
@@ -125,15 +128,19 @@ class Toy extends Component<ComponentProps, ComponentState> {
             </View>
           </View>
           <View className="item_lay">
-            {type.map((item, index) => {
+            {type.map(item => {
               return (
-                <View className="item_lay_container" key={item.id}>
+                <View
+                  className="item_lay_container"
+                  key={item.id}
+                  onClick={this.itemClick.bind(this, item.id)}
+                >
                   <View className="at-article__h3 item_lay_title">
                     Onmyoji主题店
                   </View>
                   <Image
                     className="item_lay_img"
-                    src="http://img5.mtime.cn/pi/2019/05/29/083826.86010876_1000X1000.jpg"
+                    src="http://spider.ws.126.net/6b1df938dab6a363b5a475c4e9e21345.jpeg"
                     mode="aspectFill"
                   />
                   <View className="at-article__info item_lay_info">
