@@ -18,3 +18,6 @@ export const CART_REMOVE = "CART_REMOVE"
 export const INDENT_LIST = "INDENT_LIST"
 export const INDENT_ADD = "INDENT_ADD"
 export const INDENT_PAY = "INDENT_PAY"
+
+//toy
+export const TOY_LIST = "TOY_LIST"

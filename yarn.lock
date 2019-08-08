@@ -116,10 +116,10 @@
   resolved "https://registry.npm.taobao.org/@nodelib/fs.stat/download/@nodelib/fs.stat-1.1.3.tgz#2b5a3ab3f918cca48a8c754c08168e3f03eba61b"
   integrity sha1-K1o6s/kYzKSKjHVMCBaOPwPrphs=
 
-"@tarojs/async-await@1.3.4":
-  version "1.3.4"
-  resolved "https://registry.npm.taobao.org/@tarojs/async-await/download/@tarojs/async-await-1.3.4.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40tarojs%2Fasync-await%2Fdownload%2F%40tarojs%2Fasync-await-1.3.4.tgz#82dc0453c2288e248feced32f81352d2ac778b68"
-  integrity sha1-gtwEU8IojiSP7O0y+BNS0qx3i2g=
+"@tarojs/async-await@^1.3.12":
+  version "1.3.12"
+  resolved "https://registry.npm.taobao.org/@tarojs/async-await/download/@tarojs/async-await-1.3.12.tgz#9fd5b1f3b4f0e72db499bb1a2644cca8fe0f0b42"
+  integrity sha1-n9Wx87Tw5y20mbsaJkTMqP4PC0I=
   dependencies:
     promise-polyfill "^7.1.2"
     regenerator-runtime "^0.11.1"

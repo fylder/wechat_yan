@@ -25,7 +25,7 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@tarojs/async-await": "1.3.4",
+    "@tarojs/async-await": "^1.3.12",
     "@tarojs/components": "1.3.4",
     "@tarojs/redux": "1.3.4",
     "@tarojs/redux-h5": "1.3.4",
@@ -44,13 +44,13 @@
     "taro-ui": "^2.1.0"
   },
   "devDependencies": {
-    "@types/react": "^16.4.8",
-    "@types/webpack-env": "^1.13.6",
     "@tarojs/plugin-babel": "1.3.4",
     "@tarojs/plugin-csso": "1.3.4",
     "@tarojs/plugin-sass": "1.3.4",
     "@tarojs/plugin-uglifyjs": "1.3.4",
     "@tarojs/webpack-runner": "1.3.4",
+    "@types/react": "^16.4.8",
+    "@types/webpack-env": "^1.13.6",
     "@typescript-eslint/parser": "^1.6.0",
     "babel-eslint": "^8.2.3",
     "babel-plugin-transform-class-properties": "^6.24.1",

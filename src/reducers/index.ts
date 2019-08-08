@@ -2,6 +2,7 @@ import { combineReducers } from "redux"
 import cart from "./cartReducer"
 import { detail, load } from "./detailReducer"
 import indent from "./indentReducer"
+import toy from "./toyReducer"
 import user from "./userReducer"
 
 export default combineReducers({
@@ -9,5 +10,6 @@ export default combineReducers({
   detail,
   load,
   cart,
-  indent
+  indent,
+  toy
 })

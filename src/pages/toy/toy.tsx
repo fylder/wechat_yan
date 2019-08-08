@@ -2,7 +2,8 @@ import { Image, View } from "@tarojs/components"
 import { connect } from "@tarojs/redux"
 import Taro, { Component, Config } from "@tarojs/taro"
 import { ComponentClass } from "react"
-import { type } from "./data"
+import { getList } from "../../actions/toyAction"
+import { Album } from "../../model/AlbumModel"
 import "./toy.scss"
 
 type PageStateProps = {
@@ -10,6 +11,9 @@ type PageStateProps = {
     id: string
     username: string
     avatar: string
+  }
+  toy: {
+    album: Album[]
   }
 }
 
@@ -34,11 +38,13 @@ interface ComponentState {
   id: number
   title: string
   datas: any
+  album: Album[]
 }
 
 @connect(
-  ({ user }) => ({
-    user
+  ({ user, toy }) => ({
+    user,
+    toy
   }),
   dispatch => ({})
 )
@@ -55,9 +61,11 @@ class Toy extends Component<ComponentProps, ComponentState> {
   }
   constructor(props, context) {
     super(props, context)
+    props.dispatch(getList())
   }
   componentWillReceiveProps(nextProps) {
     console.log(this.props, nextProps)
+    console.log("ahh", nextProps)
   }
 
   componentWillMount() {
@@ -88,6 +96,9 @@ class Toy extends Component<ComponentProps, ComponentState> {
   }
 
   render() {
+    this.setState({
+      album: this.props.toy.album
+    })
     return (
       <View>
         <View className="index">
@@ -128,7 +139,7 @@ class Toy extends Component<ComponentProps, ComponentState> {
             </View>
           </View>
           <View className="item_lay">
-            {type.map(item => {
+            {this.state.album.map((item: Album) => {
               return (
                 <View
                   className="item_lay_container"
@@ -136,11 +147,11 @@ class Toy extends Component<ComponentProps, ComponentState> {
                   onClick={this.itemClick.bind(this, item.id)}
                 >
                   <View className="at-article__h3 item_lay_title">
-                    Onmyoji主题店
+                    {item.name}
                   </View>
                   <Image
                     className="item_lay_img"
-                    src="http://spider.ws.126.net/6b1df938dab6a363b5a475c4e9e21345.jpeg"
+                    src={item.cover}
                     mode="aspectFill"
                   />
                   <View className="at-article__info item_lay_info">
