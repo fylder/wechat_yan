@@ -65,7 +65,6 @@ class Toy extends Component<ComponentProps, ComponentState> {
   }
   componentWillReceiveProps(nextProps) {
     console.log(this.props, nextProps)
-    console.log("ahh", nextProps)
   }
 
   componentWillMount() {
@@ -89,9 +88,9 @@ class Toy extends Component<ComponentProps, ComponentState> {
     this.setState({ datas: data })
   }
 
-  itemClick = (index: number) => {
+  itemClick = (id: number, title: string, subject: string) => {
     Taro.navigateTo({
-      url: "/pages/comic/comic?id=" + index + "&title=ahh"
+      url: `/pages/comic/comic?id=${id}&title=${title}&subject=${subject}`
     })
   }
 
@@ -144,7 +143,12 @@ class Toy extends Component<ComponentProps, ComponentState> {
                 <View
                   className="item_lay_container"
                   key={item.id}
-                  onClick={this.itemClick.bind(this, item.id)}
+                  onClick={this.itemClick.bind(
+                    this,
+                    item.id,
+                    item.subject,
+                    item.name
+                  )}
                 >
                   <View className="at-article__h3 item_lay_title">
                     {item.name}

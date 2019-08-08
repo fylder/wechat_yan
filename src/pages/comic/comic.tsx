@@ -33,6 +33,7 @@ interface ComponentProps {
 interface ComponentState {
   id: number
   title: string
+  subject: string
   datas
 }
 
@@ -66,10 +67,15 @@ class Info extends Component<ComponentProps, ComponentState> {
   componentWillMount() {
     const id = this.$router.params.id
     const title = this.$router.params.title
+    const subject = this.$router.params.subject
+    if (subject) {
+      Taro.setNavigationBarTitle({ title })
+    }
 
     this.setState({
       id,
-      title
+      title,
+      subject
     })
     Taro.request({
       url: "https://wechat.fylder.me:8022/wechat/picture/" + id,
@@ -105,7 +111,7 @@ class Info extends Component<ComponentProps, ComponentState> {
             <View className="at-row at-row__align--center">
               <View className="info-index" />
               <View className="at-col">
-                <Text>{this.state.title}</Text>
+                <Text>{this.state.subject}</Text>
               </View>
             </View>
           </View>
