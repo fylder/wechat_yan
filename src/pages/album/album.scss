@@ -1,4 +1,5 @@
 $color-primary: #e91e63;
+$grid-item-active:rgba(50, 196, 240, 0.308);
 
 .btn {
   margin: 1rem;
@@ -14,4 +15,50 @@ $color-primary: #e91e63;
     height: 1rem;
     margin-right: 0.2rem;
   }
+}
+
+.album-lay {
+  padding: 0.2rem 0.4rem;
+}
+
+.album-card {
+  height: 10rem;
+  background: #e91e62;
+  box-shadow: 0.05rem 0.2rem 0.6rem rgb(218, 218, 218);
+  // border-radius: 2em/5em;
+  border-top-left-radius: 0.2rem;
+  border-top-right-radius: 0.2rem;
+  border-bottom-right-radius: 0.4rem;
+  border-bottom-left-radius: 0.4rem;
+
+  transition-duration: 0.5s;
+  transition-timing-function: ease-out;
+  /* 动画变幻速度 ease:减速(默认)  linear:匀速  ease-in:加速 ease-out:减速  ease-in-out:先加速后减速 */
+  transition-delay: 0s;
+  /* 动画延迟 */
+  transition: all 0.2s ease-in-out 0s;
+
+  &:active {
+    background-color: $grid-item-active;
+  }
+
+  $title-height: 1.8rem;
+
+  .album-img {
+    width: 100%;
+    height: calc(100% - #{$title-height});
+  }
+
+  .album-title {
+    height: $title-height;
+    color: white;
+    font-size: 28rpx;
+    padding: 0 0.8rem;
+  }
+
+}
+
+.index-img {
+  width: 100%;
+  height: 12rem;
 }

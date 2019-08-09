@@ -2,10 +2,6 @@ import { Image, Text, View } from "@tarojs/components"
 import { connect } from "@tarojs/redux"
 import Taro, { Component, Config } from "@tarojs/taro"
 import { ComponentClass } from "react"
-import linePng from "../../static/img/line.jpg"
-import linePng2 from "../../static/img/line2.jpg"
-import linePng3 from "../../static/img/line4.jpg"
-import linePng4 from "../../static/img/line5.jpg"
 import { Album } from "../../store/model/data.d"
 import "./album.scss"
 
@@ -55,7 +51,7 @@ class Info extends Component<ComponentProps, ComponentState> {
    * 提示和声明 navigationBarTextStyle: 'black' | 'white' 类型冲突, 需要显示声明类型
    */
   config: Config = {
-    navigationBarTitleText: "fylder"
+    navigationBarTitleText: "fylder' album"
   }
   constructor(props, context) {
     super(props, context)
@@ -66,35 +62,20 @@ class Info extends Component<ComponentProps, ComponentState> {
 
   componentWillMount() {
     const type = this.$router.params.type
-    let title
-    switch (type) {
-      case "photos":
-        title = "游历"
-        break
-      case "cosplays":
-        title = "cosplays"
-        break
-      case "flowers":
-        title = "花草"
-        break
-      case "cyclings":
-        title = "骑行"
-        break
-    }
-
     this.setState({
       type,
-      title
+      title: "fylder"
     })
     Taro.request({
-      url: "https://wechat.fylder.me:8022/wechat/album/" + type,
+      url: "https://wechat.fylder.me:8022/wechat/album",
       method: "GET",
       mode: "cors"
-    }).then(res =>
+    }).then(res => {
+      console.log("data", res.data)
       this.setState({
         datas: res.data
       })
-    )
+    })
   }
   componentWillUnmount() {}
 
@@ -110,25 +91,20 @@ class Info extends Component<ComponentProps, ComponentState> {
     this.setState({ datas: data })
   }
 
+  handleItemClick = (id: number, title: string, subject: string) => {
+    Taro.navigateTo({
+      url: `/pages/comic/comic?id=${id}&title=${title}&subject=${subject}`
+    })
+  }
   render() {
-    let tag
-    switch (this.state.type) {
-      case "photos":
-        tag = linePng
-        break
-      case "cosplays":
-        tag = linePng2
-        break
-      case "flowers":
-        tag = linePng3
-        break
-      case "cyclings":
-        tag = linePng4
-        break
-    }
-
     return (
       <View>
+        <Image
+          className="index-img"
+          src="http://spider.ws.126.net/6b1df938dab6a363b5a475c4e9e21345.jpeg"
+          onError={this.imageError.bind(this, 1)}
+          mode="aspectFill"
+        />
         <View className="index">
           <View className="info-card">
             <View className="at-row at-row__align--center">
@@ -138,33 +114,41 @@ class Info extends Component<ComponentProps, ComponentState> {
               </View>
             </View>
           </View>
-          {this.state.datas.map((item: Album, index: number) => {
-            return (
-              <View className="at-article__content" key={item.id}>
-                <Image className="at-article__img" src={tag} mode="widthFix" />
-                <View className="at-article__section">
-                  <View className="at-article__h3">{item.subject}</View>
-                  <Image
-                    className="at-article__img"
-                    src={item.cover}
-                    onError={this.imageError.bind(this, index)}
-                    mode="widthFix"
-                  />
-                </View>
+          <View className="at-row at-row__justify--center">
+            <View className="at-col at-col-11">
+              <View className="at-row at-row--wrap">
+                {this.state.datas.map((item: Album, index: number) => {
+                  return (
+                    <View className="at-col at-col-6" key={item.id}>
+                      <View
+                        className="album-lay"
+                        onClick={this.handleItemClick.bind(
+                          this,
+                          item.id,
+                          item.name,
+                          item.subject
+                        )}
+                      >
+                        <View className="album-card">
+                          <Image
+                            className="album-img"
+                            src={item.cover}
+                            onError={this.imageError.bind(this, index)}
+                            mode="aspectFill"
+                          />
+                          <View className="album-title">{item.name}</View>
+                        </View>
+                      </View>
+                    </View>
+                  )
+                })}
               </View>
-            )
-          })}
+            </View>
+          </View>
         </View>
       </View>
     )
   }
 }
-
-// #region 导出注意
-//
-// 经过上面的声明后需要将导出的 Taro.Component 子类修改为子类本身的 props 属性
-// 这样在使用这个子类时 Ts 才不会提示缺少 JSX 类型参数错误
-//
-// #endregion
 
 export default Info as ComponentClass<PageOwnProps, PageState>

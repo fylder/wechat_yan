@@ -2,7 +2,7 @@ import "@tarojs/async-await"
 import { Provider } from "@tarojs/redux"
 import Taro, { Component, Config } from "@tarojs/taro"
 import "./app.scss"
-import Index from "./pages/index"
+import Home from "./pages/home/home"
 import configStore from "./store"
 
 // 如果需要在 h5 环境中开启 React Devtools
@@ -58,7 +58,7 @@ class App extends Component {
   render() {
     return (
       <Provider store={store}>
-        <Index />
+        <Home />
       </Provider>
     )
   }

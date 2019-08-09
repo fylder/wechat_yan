@@ -62,10 +62,16 @@ interface ComponentState {
         }
         case 1: {
           //随手拍
+          Taro.navigateTo({
+            url: "/pages/album/album?type="
+          })
           break
         }
         case 2: {
           //游历
+          Taro.navigateTo({
+            url: "/pages/album/album?type="
+          })
           break
         }
         case 3: {
