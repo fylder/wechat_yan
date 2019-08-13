@@ -39,6 +39,7 @@ interface ComponentState {
   type: string
   title: string
   covers
+  isRefresh: boolean
 }
 
 @connect(
@@ -75,7 +76,10 @@ interface ComponentState {
           break
         }
         case 3: {
-          //心情线
+          //心情
+          Taro.navigateTo({
+            url: "/pages/archives/archives"
+          })
           break
         }
         case 4: {
@@ -114,7 +118,9 @@ interface ComponentState {
 )
 class Home extends Component<ComponentProps, ComponentState> {
   config: Config = {
-    navigationBarTitleText: "首页"
+    navigationBarTitleText: "首页",
+    enablePullDownRefresh: true,
+    backgroundTextStyle: "dark"
   }
 
   componentWillReceiveProps(nextProps) {
@@ -137,15 +143,26 @@ class Home extends Component<ComponentProps, ComponentState> {
     }
   }
 
+  onPullDownRefresh() {
+    if (!this.state.isRefresh) {
+      this.getAlbum()
+      this.setState({
+        isRefresh: true
+      })
+    }
+  }
+
   getAlbum = () => {
     Taro.request({
       url: "https://wechat.fylder.me:8022/wechat/album/",
       method: "GET"
-    }).then(res =>
+    }).then(res => {
+      Taro.stopPullDownRefresh()
       this.setState({
-        covers: res.data
+        covers: res.data,
+        isRefresh: false
       })
-    )
+    })
   }
 
   render() {
