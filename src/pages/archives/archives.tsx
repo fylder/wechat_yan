@@ -3,7 +3,6 @@ import { connect } from "@tarojs/redux"
 import Taro, { Component, Config } from "@tarojs/taro"
 import { ComponentClass } from "react"
 import "./archives.scss"
-import { archives } from "./data"
 import { ArchivesModel } from "./model"
 
 type PageStateProps = {
@@ -30,7 +29,7 @@ interface ComponentProps {
   /* declare your component's props here */
 }
 interface ComponentState {
-  archives: any
+  archives: any | undefined
 }
 
 @connect(({ user }) => ({
@@ -43,19 +42,32 @@ class Archives extends Component<ComponentProps, ComponentState> {
   constructor(props, context) {
     super(props, context)
     this.setState({
-      archives: archives
+      archives: undefined
     })
   }
 
-  componentWillMount() {}
+  componentWillMount() {
+    this.getArticle()
+  }
 
   componentWillReceiveProps(nextProps) {
     console.log(this.props, nextProps)
   }
 
+  getArticle = () => {
+    Taro.request({
+      url: "https://wechat.fylder.me:8022/wechat/article",
+      method: "GET"
+    }).then(res => {
+      this.setState({
+        archives: res.data
+      })
+    })
+  }
+
   itemClick = (item: ArchivesModel) => {
     Taro.navigateTo({
-      url: "/pages/blog/blog"
+      url: "/pages/article/article"
     })
   }
 

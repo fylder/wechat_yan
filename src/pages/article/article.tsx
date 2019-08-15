@@ -2,8 +2,7 @@ import { View } from "@tarojs/components"
 import { connect } from "@tarojs/redux"
 import Taro, { Component, Config } from "@tarojs/taro"
 import { ComponentClass } from "react"
-import "./blog.scss"
-import { about } from "./data"
+import "./article.scss"
 
 type PageStateProps = {
   user: {
@@ -21,19 +20,21 @@ type PageState = {}
 
 type IProps = PageStateProps & PageDispatchProps & PageOwnProps
 
-interface Blog {
+interface Article {
   props: IProps
 }
 
 interface ComponentProps {
   /* declare your component's props here */
 }
-interface ComponentState {}
+interface ComponentState {
+  article: any
+}
 
 @connect(({ user }) => ({
   user
 }))
-class Blog extends Component<ComponentProps, ComponentState> {
+class Article extends Component<ComponentProps, ComponentState> {
   config: Config = {
     navigationBarTitleText: "fylder",
     usingComponents: {
@@ -44,19 +45,33 @@ class Blog extends Component<ComponentProps, ComponentState> {
     super(props, context)
   }
 
-  componentWillMount() {}
+  componentWillMount() {
+    this.getArticle()
+  }
 
   componentWillReceiveProps(nextProps) {
     console.log(this.props, nextProps)
+  }
+  
+  getArticle = () => {
+    Taro.request({
+      url: "https://wechat.fylder.me:8022/wechat/article/1",
+      method: "GET"
+    }).then(res => {
+      console.log("article data", res.data)
+      this.setState({
+        article: res.data
+      })
+    })
   }
 
   render() {
     return (
       <View className="mark-lay">
-        <wemark md={about.content} />
+        <wemark md={this.state.article.content} />
       </View>
     )
   }
 }
 
-export default Blog as ComponentClass<PageOwnProps, PageState>
+export default Article as ComponentClass<PageOwnProps, PageState>

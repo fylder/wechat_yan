@@ -101,6 +101,12 @@ class Info extends Component<ComponentProps, ComponentState> {
     this.setState({ datas: data })
   }
 
+  handlePicture = (src: string) => {
+    Taro.previewImage({
+      urls: [src]
+    })
+  }
+
   render() {
     let tag = linePng
 
@@ -126,6 +132,7 @@ class Info extends Component<ComponentProps, ComponentState> {
                     src={item.photo}
                     onError={this.imageError.bind(this, index)}
                     mode="widthFix"
+                    onClick={this.handlePicture.bind(this, item.photo)}
                   />
                 </View>
               </View>

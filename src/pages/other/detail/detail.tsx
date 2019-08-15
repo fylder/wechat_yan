@@ -141,7 +141,7 @@ class Detail extends Component<ComponentProps, ComponentState> {
             </View>
           </View>
         </View>
-        <View className="detail-footer">
+        {/* <View className="detail-footer">
           <AtButton
             type="primary"
             full
@@ -153,7 +153,7 @@ class Detail extends Component<ComponentProps, ComponentState> {
           >
             get√
           </AtButton>
-        </View>
+        </View> */}
         <AtToast
           isOpened={this.props.load.isLoading}
           status="loading"
