@@ -1,7 +1,8 @@
-import { View } from "@tarojs/components"
+import { Image, View } from "@tarojs/components"
 import { connect } from "@tarojs/redux"
 import Taro, { Component, Config } from "@tarojs/taro"
 import { ComponentClass } from "react"
+import { ArchivesModel } from "../archives/model"
 import "./article.scss"
 
 type PageStateProps = {
@@ -28,7 +29,8 @@ interface ComponentProps {
   /* declare your component's props here */
 }
 interface ComponentState {
-  article: any
+  id: number
+  article: ArchivesModel | undefined
 }
 
 @connect(({ user }) => ({
@@ -43,6 +45,11 @@ class Article extends Component<ComponentProps, ComponentState> {
   }
   constructor(props, context) {
     super(props, context)
+    const id = this.$router.params.id
+    this.state = {
+      id,
+      article: undefined
+    }
   }
 
   componentWillMount() {
@@ -52,13 +59,12 @@ class Article extends Component<ComponentProps, ComponentState> {
   componentWillReceiveProps(nextProps) {
     console.log(this.props, nextProps)
   }
-  
+
   getArticle = () => {
     Taro.request({
-      url: "https://wechat.fylder.me:8022/wechat/article/1",
+      url: `https://wechat.fylder.me:8022/wechat/article/${this.state.id}`,
       method: "GET"
     }).then(res => {
-      console.log("article data", res.data)
       this.setState({
         article: res.data
       })
@@ -67,8 +73,19 @@ class Article extends Component<ComponentProps, ComponentState> {
 
   render() {
     return (
-      <View className="mark-lay">
-        <wemark md={this.state.article.content} />
+      <View>
+        <Image
+          className="header_img"
+          src={this.state.article === undefined ? "" : this.state.article.cover}
+          mode="aspectFill"
+        />
+        <View className="mark-lay">
+          <wemark
+            md={
+              this.state.article === undefined ? "" : this.state.article.content
+            }
+          />
+        </View>
       </View>
     )
   }

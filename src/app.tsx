@@ -32,6 +32,7 @@ class App extends Component {
       "pages/comic/comic",
       "pages/monthly/monthly",
       "pages/toy/toy",
+      "pages/category/category",
       "pages/archives/archives",
       "pages/article/article",
       //other

@@ -104,14 +104,14 @@ interface ComponentState {
         }
       }
     },
-    handleComicClick(id: number, title: string) {
+    handleComicClick(id: number, title: string, subject: string) {
       Taro.navigateTo({
-        url: "/pages/comic/comic?id=" + id + "&title=" + title
+        url: `/pages/comic/comic?id=${id}&title=${title}&subject=${subject}`
       })
     },
     handleMoreClick() {
       Taro.navigateTo({
-        url: "/pages/other/detail/detail?id=1"
+        url: "/pages/album/album?type="
       })
     }
   })
@@ -154,8 +154,11 @@ class Home extends Component<ComponentProps, ComponentState> {
 
   getAlbum = () => {
     Taro.request({
-      url: "https://wechat.fylder.me:8022/wechat/album/",
-      method: "GET"
+      url: "https://wechat.fylder.me:8022/wechat/album/latest",
+      method: "POST",
+      data: {
+        size: 4
+      }
     }).then(res => {
       Taro.stopPullDownRefresh()
       this.setState({
@@ -245,7 +248,15 @@ class Home extends Component<ComponentProps, ComponentState> {
                   {this.state.covers.map((item, index) => {
                     return (
                       <View className="at-col at-col-6" key={item.id}>
-                        <View className="first_item_lay">
+                        <View
+                          className="first_item_lay"
+                          onClick={this.props.handleComicClick.bind(
+                            this,
+                            item.id,
+                            item.name,
+                            item.subject
+                          )}
+                        >
                           <Image
                             className="first_item_img"
                             src={item.cover}
@@ -253,14 +264,7 @@ class Home extends Component<ComponentProps, ComponentState> {
                           />
                           <View />
                           <View className="flex-container">
-                            <View
-                              className="at-article__h3 flex-item-detail"
-                              onClick={this.props.handleComicClick.bind(
-                                this,
-                                item.id,
-                                item.name
-                              )}
-                            >
+                            <View className="at-article__h3 flex-item-detail">
                               {item.name}
                             </View>
                           </View>

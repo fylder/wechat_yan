@@ -2,8 +2,8 @@ import { Image, Text, View } from "@tarojs/components"
 import { connect } from "@tarojs/redux"
 import Taro, { Component, Config } from "@tarojs/taro"
 import { ComponentClass } from "react"
+import { Picture } from "../../model/AlbumModel"
 import linePng from "../../static/img/line.jpg"
-import datas from "./data"
 import "./monthly.scss"
 
 type PageStateProps = {
@@ -34,7 +34,7 @@ interface ComponentProps {
 interface ComponentState {
   id: number
   title: string
-  datas
+  album: Picture[]
 }
 
 @connect(
@@ -63,10 +63,10 @@ class Monthly extends Component<ComponentProps, ComponentState> {
 
   componentWillMount() {
     const title = "今月份的花束"
+    this.getMonthlyAlbum()
 
     this.setState({
-      title,
-      datas: datas
+      title
     })
   }
   componentWillUnmount() {}
@@ -75,13 +75,28 @@ class Monthly extends Component<ComponentProps, ComponentState> {
 
   componentDidHide() {}
 
-  imageError = index => {
-    const defaultImg =
-      "http://img5.mtime.cn/pi/2019/03/30/100155.92232373_1000X1000.jpg"
-    const data = this.state.datas
-    data[index].src = defaultImg
-    this.setState({ datas: data })
+  getMonthlyAlbum = () => {
+    Taro.request({
+      url: "https://wechat.fylder.me:8022/wechat/picture/type",
+      method: "POST",
+      data: {
+        type: "flower"
+      }
+    }).then(resp => {
+      const albums: Picture[] = resp.data
+      this.setState({
+        album: albums
+      })
+    })
   }
+
+  // imageError = index => {
+  //   const defaultImg =
+  //     "http://img5.mtime.cn/pi/2019/03/30/100155.92232373_1000X1000.jpg"
+  //   const data = this.state.album
+  //   data[index].src = defaultImg
+  //   this.setState({ album: data })
+  // }
 
   render() {
     let tag = linePng
@@ -97,19 +112,19 @@ class Monthly extends Component<ComponentProps, ComponentState> {
               </View>
             </View>
           </View>
-          {this.state.datas.map((item, index) => {
+          {this.state.album.map((item: Picture, index) => {
             return (
               <View className="at-article__content" key={item.id}>
                 <Image className="at-article__img" src={tag} mode="widthFix" />
                 <View className="at-article__section">
                   <Image
                     className="at-article__img"
-                    src={item.image}
-                    onError={this.imageError.bind(this, index)}
+                    src={item.photo}
+                    // onError={this.imageError.bind(this, index)}
                     mode="widthFix"
                   />
-                  <View className="tag">{item.month}</View>
-                  <View className="at-article__h3 title">{item.title}</View>
+                  <View className="tag">{item.createdAt}</View>
+                  <View className="at-article__h3 title">{item.subject}</View>
                   <View className="at-article__p describe">
                     {item.describe}
                   </View>

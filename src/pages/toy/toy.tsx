@@ -4,6 +4,7 @@ import Taro, { Component, Config } from "@tarojs/taro"
 import { ComponentClass } from "react"
 import { getList } from "../../actions/toyAction"
 import { Album } from "../../model/AlbumModel"
+import { TYPE_COMIC, TYPE_DEFAULT, TYPE_TOY } from "./data"
 import "./toy.scss"
 
 type PageStateProps = {
@@ -94,6 +95,12 @@ class Toy extends Component<ComponentProps, ComponentState> {
     })
   }
 
+  categoryItemClick = (title: string, tags: string) => {
+    Taro.navigateTo({
+      url: `/pages/category/category?title=${title}&tags=${tags}`
+    })
+  }
+
   render() {
     this.setState({
       album: this.props.toy.album
@@ -115,18 +122,39 @@ class Toy extends Component<ComponentProps, ComponentState> {
                   <View className="at-col at-col-10">
                     <View className="at-row at-row__justify--center toy-item-lay">
                       <View className="at-col-6 toy-item-left">
-                        <View className="toy-type">
+                        <View
+                          className="toy-type"
+                          onClick={this.categoryItemClick.bind(
+                            this,
+                            "fylder",
+                            TYPE_DEFAULT
+                          )}
+                        >
                           <View className="toy-card">fylder</View>
                         </View>
                       </View>
                       <View className="at-col-6 toy-item-right">
                         <View className="at-col-12 toy-item-top">
-                          <View className="toy-type">
+                          <View
+                            className="toy-type"
+                            onClick={this.categoryItemClick.bind(
+                              this,
+                              "模型",
+                              TYPE_TOY
+                            )}
+                          >
                             <View className="toy-card">模型</View>
                           </View>
                         </View>
                         <View className="at-col-12 toy-item-bottom">
-                          <View className="toy-type">
+                          <View
+                            className="toy-type"
+                            onClick={this.categoryItemClick.bind(
+                              this,
+                              "动漫",
+                              TYPE_COMIC
+                            )}
+                          >
                             <View className="toy-card">动漫</View>
                           </View>
                         </View>

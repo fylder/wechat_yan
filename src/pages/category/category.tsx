@@ -2,12 +2,17 @@ import { Image, View } from "@tarojs/components"
 import { connect } from "@tarojs/redux"
 import Taro, { Component, Config } from "@tarojs/taro"
 import { ComponentClass } from "react"
-import "./archives.scss"
-import { ArchivesModel } from "./model"
+import { Album } from "../../model/AlbumModel"
+import "./category.scss"
 
 type PageStateProps = {
   user: {
     id: string
+    username: string
+    avatar: string
+  }
+  category: {
+    album: Album[]
   }
 }
 
@@ -21,7 +26,7 @@ type PageState = {}
 
 type IProps = PageStateProps & PageDispatchProps & PageOwnProps
 
-interface Archives {
+interface Category {
   props: IProps
 }
 
@@ -29,64 +34,84 @@ interface ComponentProps {
   /* declare your component's props here */
 }
 interface ComponentState {
-  archives: any | undefined
+  title: string
+  tags: string
+  album: Album[]
 }
 
-@connect(({ user }) => ({
-  user
-}))
-class Archives extends Component<ComponentProps, ComponentState> {
+@connect(
+  ({ user, category }) => ({
+    user,
+    category
+  }),
+  dispatch => ({})
+)
+class Category extends Component<ComponentProps, ComponentState> {
   config: Config = {
-    navigationBarTitleText: "随笔"
+    navigationBarTitleText: "小玩意"
   }
+
   constructor(props, context) {
     super(props, context)
-    this.setState({
-      archives: undefined
-    })
+    const title =
+      this.$router.params.title === undefined ? "" : this.$router.params.title
+    const tags = this.$router.params.tags
+    this.state = {
+      title,
+      tags,
+      album: []
+    }
+    Taro.setNavigationBarTitle({ title })
   }
-
-  componentWillMount() {
-    this.getArticle()
-  }
-
   componentWillReceiveProps(nextProps) {
     console.log(this.props, nextProps)
   }
 
-  getArticle = () => {
+  componentWillMount() {
+    this.getAlbum()
+  }
+  componentWillUnmount() {}
+
+  componentDidShow() {}
+
+  componentDidHide() {}
+
+  getAlbum = () => {
     Taro.request({
-      url: "https://wechat.fylder.me:8022/wechat/article",
-      method: "GET"
+      url: "https://wechat.fylder.me:8022/wechat/album/tag",
+      method: "POST",
+      mode: "cors",
+      data: {
+        tags: this.state.tags
+      }
     }).then(res => {
+      console.log("data", res.data)
       this.setState({
-        archives: res.data
+        album: res.data
       })
     })
   }
 
-  itemClick = (item: ArchivesModel) => {
+  itemClick = (item: Album) => {
     Taro.navigateTo({
-      url: `/pages/article/article?id=${item.id}`
+      url: `/pages/comic/comic?id=${item.id}&title=${item.name}&subject=${
+        item.subject
+      }`
     })
   }
 
   render() {
     return (
       <View>
-        <View className="header_lay">
+        <View>
           <Image
             className="header_img"
-            src="http://b275.photo.store.qq.com/psb?/V13MxeJc2qpf92/A92lmM5FnNd6k.tL2pCLVw1EEVYJz*2BR3LUsf3DHo8!/b/dIvt8qNCBgAA&bo=IAMWAkAGKwQBCHE!&rf=viewer_4"
+            src="http://spider.ws.126.net/6b1df938dab6a363b5a475c4e9e21345.jpeg"
             mode="aspectFill"
           />
-          <View className="subject-lay">
-            <View className="at-article__h3 subject-font">fylder' 随笔</View>
-          </View>
         </View>
-
         <View className="item_lay">
-          {this.state.archives.map((item: ArchivesModel) => {
+          {this.state.album.map((item: Album) => {
             return (
               <View
                 className="item_lay_container"
@@ -113,4 +138,4 @@ class Archives extends Component<ComponentProps, ComponentState> {
   }
 }
 
-export default Archives as ComponentClass<PageOwnProps, PageState>
+export default Category as ComponentClass<PageOwnProps, PageState>
