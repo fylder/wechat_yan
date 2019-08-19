@@ -122,6 +122,7 @@ class Monthly extends Component<ComponentProps, ComponentState> {
                     src={item.photo}
                     // onError={this.imageError.bind(this, index)}
                     mode="widthFix"
+                    lazyLoad={true}
                   />
                   <View className="tag">{item.createdAt}</View>
                   <View className="at-article__h3 title">{item.subject}</View>

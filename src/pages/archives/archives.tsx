@@ -100,6 +100,7 @@ class Archives extends Component<ComponentProps, ComponentState> {
                   className="item_lay_img"
                   src={item.cover}
                   mode="aspectFill"
+                  lazyLoad={true}
                 />
                 <View className="at-article__info item_lay_info">
                   {item.createdAt}

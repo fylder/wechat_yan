@@ -2,6 +2,7 @@ import { Image, Text, View } from "@tarojs/components"
 import { connect } from "@tarojs/redux"
 import Taro, { Component, Config } from "@tarojs/taro"
 import { ComponentClass } from "react"
+import { Picture } from "../../model/AlbumModel"
 import linePng from "../../static/img/line.jpg"
 import "./comic.scss"
 
@@ -34,7 +35,7 @@ interface ComponentState {
   id: number
   title: string
   subject: string
-  datas
+  datas: Picture[]
 }
 
 /**
@@ -97,7 +98,7 @@ class Info extends Component<ComponentProps, ComponentState> {
     const defaultImg =
       "http://img5.mtime.cn/pi/2019/03/30/100155.92232373_1000X1000.jpg"
     const data = this.state.datas
-    data[index].src = defaultImg
+    data[index].photo = defaultImg
     this.setState({ datas: data })
   }
 
@@ -121,17 +122,18 @@ class Info extends Component<ComponentProps, ComponentState> {
               </View>
             </View>
           </View>
-          {this.state.datas.map((item, index) => {
+          {this.state.datas.map((item: Picture, index) => {
             return (
               <View className="at-article__content" key={item.id}>
                 <Image className="at-article__img" src={tag} mode="widthFix" />
                 <View className="at-article__section">
-                  <View className="at-article__h3">{item.title}</View>
+                  <View className="at-article__h3">{item.subject}</View>
                   <Image
                     className="at-article__img"
                     src={item.photo}
                     onError={this.imageError.bind(this, index)}
                     mode="widthFix"
+                    lazyLoad={true}
                     onClick={this.handlePicture.bind(this, item.photo)}
                   />
                 </View>

@@ -135,6 +135,7 @@ class Info extends Component<ComponentProps, ComponentState> {
                             src={item.cover}
                             onError={this.imageError.bind(this, index)}
                             mode="aspectFill"
+                            lazyLoad={true}
                           />
                           <View className="album-title">{item.name}</View>
                         </View>

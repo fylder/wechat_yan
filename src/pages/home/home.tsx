@@ -261,6 +261,7 @@ class Home extends Component<ComponentProps, ComponentState> {
                             className="first_item_img"
                             src={item.cover}
                             mode="aspectFill"
+                            lazyLoad={true}
                           />
                           <View />
                           <View className="flex-container">
