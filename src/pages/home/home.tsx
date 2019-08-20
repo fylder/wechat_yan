@@ -157,7 +157,7 @@ class Home extends Component<ComponentProps, ComponentState> {
       url: "https://wechat.fylder.me:8022/wechat/album/latest",
       method: "POST",
       data: {
-        size: 4
+        size: 6
       }
     }).then(res => {
       Taro.stopPullDownRefresh()

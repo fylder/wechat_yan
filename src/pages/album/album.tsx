@@ -71,7 +71,6 @@ class Info extends Component<ComponentProps, ComponentState> {
       method: "GET",
       mode: "cors"
     }).then(res => {
-      console.log("data", res.data)
       this.setState({
         datas: res.data
       })

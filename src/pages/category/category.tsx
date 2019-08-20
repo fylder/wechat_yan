@@ -85,7 +85,6 @@ class Category extends Component<ComponentProps, ComponentState> {
         tags: this.state.tags
       }
     }).then(res => {
-      console.log("data", res.data)
       this.setState({
         album: res.data
       })

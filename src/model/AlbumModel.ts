@@ -21,4 +21,5 @@ export interface Picture {
   describe?: string
   status: number
   createdAt: string
+  loaded: boolean | false
 }

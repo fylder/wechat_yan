@@ -1,5 +1,15 @@
 $color-primary: #e91e63;
 
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
 .btn {
   margin: 1rem;
 }
@@ -14,4 +24,9 @@ $color-primary: #e91e63;
     height: 1rem;
     margin-right: 0.2rem;
   }
+}
+
+
+.fade_in {
+  animation: fadeIn 1s both;
 }
