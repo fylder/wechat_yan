@@ -49,17 +49,7 @@ interface User {
         // })
       })
     },
-    handleClickItem(position: number) {
-      if (position === 2) {
-        Taro.navigateTo({
-          url: "/pages/cart/cart"
-        })
-      } else {
-        Taro.navigateTo({
-          url: "/pages/indent/indent"
-        })
-      }
-    },
+
     handleExit() {
       dispatch(exit())
     }
@@ -107,20 +97,7 @@ class User extends Component {
               </View>
             </View>
           </View>
-          <AtButton
-            className="btn"
-            type="secondary"
-            onClick={this.props.handleClickItem.bind(this, 2)}
-          >
-            购物车
-          </AtButton>
-          <AtButton
-            className="btn"
-            type="secondary"
-            onClick={this.props.handleClickItem.bind(this, 3)}
-          >
-            订单记录
-          </AtButton>
+
           <AtButton
             className="btn"
             type="primary"

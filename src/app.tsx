@@ -24,8 +24,6 @@ class App extends Component {
   config: Config = {
     pages: [
       "pages/home/home",
-      "pages/index/index",
-      "pages/user/user",
       "pages/info/info",
       "pages/about/about",
       "pages/album/album",
@@ -36,9 +34,7 @@ class App extends Component {
       "pages/archives/archives",
       "pages/article/article",
       //other
-      "pages/other/detail/detail",
-      "pages/other/cart/cart",
-      "pages/other/indent/indent"
+      "pages/other/detail/detail"
     ],
     window: {
       backgroundTextStyle: "light",

@@ -69,14 +69,14 @@ interface ComponentState {
           break
         }
         case 2: {
-          //游历
+          //来一杯续命吧
           Taro.navigateTo({
-            url: "/pages/album/album?type="
+            url: `/pages/comic/comic?id=${10}&title=${"这个夏天喝过的奶茶"}&subject=${"来一杯续命吧"}`
           })
           break
         }
         case 3: {
-          //心情
+          //随笔
           Taro.navigateTo({
             url: "/pages/archives/archives"
           })
