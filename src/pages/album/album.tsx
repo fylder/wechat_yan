@@ -51,7 +51,7 @@ class Info extends Component<ComponentProps, ComponentState> {
    * 提示和声明 navigationBarTextStyle: 'black' | 'white' 类型冲突, 需要显示声明类型
    */
   config: Config = {
-    navigationBarTitleText: "fylder' album"
+    navigationBarTitleText: "fylder' 相册"
   }
   constructor(props, context) {
     super(props, context)

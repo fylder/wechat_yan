@@ -12,10 +12,10 @@ export const image_data = [
 ]
 
 export const item_datas = [
-  { id: 1, value: "天气之子", icon: "rili" },
+  { id: 1, value: "随笔", icon: "kabao" },
   { id: 2, value: "随手拍", icon: "xiangji" },
-  { id: 3, value: "(゜-゜)つロ 干杯", icon: "dingdan" },
-  { id: 4, value: "随笔", icon: "kabao" },
+  { id: 3, value: "小玩意", icon: "wode" },
+  { id: 4, value: "漫展", icon: "rili" },
   { id: 5, value: "今月份", icon: "xiaoxizhongxin" },
-  { id: 6, value: "小玩意", icon: "wode" }
+  { id: 6, value: "(゜-゜)つロ 干杯", icon: "dingdan" }
 ]

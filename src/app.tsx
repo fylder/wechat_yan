@@ -24,17 +24,13 @@ class App extends Component {
   config: Config = {
     pages: [
       "pages/home/home",
-      "pages/info/info",
-      "pages/about/about",
       "pages/album/album",
       "pages/comic/comic",
       "pages/monthly/monthly",
       "pages/toy/toy",
       "pages/category/category",
       "pages/archives/archives",
-      "pages/article/article",
-      //other
-      "pages/other/detail/detail"
+      "pages/article/article"
     ],
     window: {
       backgroundTextStyle: "light",

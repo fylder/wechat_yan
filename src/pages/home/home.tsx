@@ -55,9 +55,9 @@ interface ComponentState {
     handleTypeItemClick(index: number) {
       switch (index) {
         case 0: {
-          //天气之子
+          //随笔
           Taro.navigateTo({
-            url: "/pages/other/detail/detail?id=" + index
+            url: "/pages/archives/archives"
           })
           break
         }
@@ -69,16 +69,16 @@ interface ComponentState {
           break
         }
         case 2: {
-          //来一杯续命吧
+          //小玩意
           Taro.navigateTo({
-            url: `/pages/comic/comic?id=${10}&title=${"这个夏天喝过的奶茶"}&subject=${"来一杯续命吧"}`
+            url: "/pages/toy/toy"
           })
           break
         }
         case 3: {
-          //随笔
+          //漫展
           Taro.navigateTo({
-            url: "/pages/archives/archives"
+            url: `/pages/category/category?title=${"漫展"}&tags=${"cosplay"}`
           })
           break
         }
@@ -90,15 +90,15 @@ interface ComponentState {
           break
         }
         case 5: {
-          //小玩意
+          //来一杯续命吧
           Taro.navigateTo({
-            url: "/pages/toy/toy"
+            url: `/pages/comic/comic?id=${10}&title=${"这个夏天喝过的奶茶"}&subject=${"来一杯续命吧"}`
           })
           break
         }
         default: {
           Taro.navigateTo({
-            url: "/pages/other/detail/detail?id=" + index
+            url: "/pages/album/album?type="
           })
           break
         }

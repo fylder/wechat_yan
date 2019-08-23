@@ -37,6 +37,7 @@ interface ComponentState {
   title: string
   tags: string
   album: Album[]
+  cover: string
 }
 
 @connect(
@@ -59,7 +60,11 @@ class Category extends Component<ComponentProps, ComponentState> {
     this.state = {
       title,
       tags,
-      album: []
+      album: [],
+      cover:
+        tags === "cosplay"
+          ? "http://m.qpic.cn/psb?/V13MxeJc3V1qtK/VB95QahxYRCY85HadkYjbnQoUhyrhW69FsTDUJ0Uc5Y!/b/dL4AAAAAAAAA&bo=YAlABmAJQAYRBzA!&rf=viewer_4"
+          : "http://spider.ws.126.net/6b1df938dab6a363b5a475c4e9e21345.jpeg"
     }
     Taro.setNavigationBarTitle({ title })
   }
@@ -105,7 +110,7 @@ class Category extends Component<ComponentProps, ComponentState> {
         <View>
           <Image
             className="header_img"
-            src="http://spider.ws.126.net/6b1df938dab6a363b5a475c4e9e21345.jpeg"
+            src={this.state.cover}
             mode="aspectFill"
           />
         </View>
