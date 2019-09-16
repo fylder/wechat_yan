@@ -6,11 +6,6 @@ import { Album } from "../../model/AlbumModel"
 import "./category.scss"
 
 type PageStateProps = {
-  user: {
-    id: string
-    username: string
-    avatar: string
-  }
   category: {
     album: Album[]
   }
@@ -41,8 +36,7 @@ interface ComponentState {
 }
 
 @connect(
-  ({ user, category }) => ({
-    user,
+  ({ category }) => ({
     category
   }),
   dispatch => ({})

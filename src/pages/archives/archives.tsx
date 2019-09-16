@@ -5,11 +5,7 @@ import { ComponentClass } from "react"
 import "./archives.scss"
 import { ArchivesModel } from "./model"
 
-type PageStateProps = {
-  user: {
-    id: string
-  }
-}
+type PageStateProps = {}
 
 type PageDispatchProps = {}
 
@@ -32,9 +28,7 @@ interface ComponentState {
   archives: any | undefined
 }
 
-@connect(({ user }) => ({
-  user
-}))
+@connect(({}) => ({}))
 class Archives extends Component<ComponentProps, ComponentState> {
   config: Config = {
     navigationBarTitleText: "随笔"

@@ -42,11 +42,6 @@ interface User {
         const nickName = result.userInfo.nickName
         const avatarUrl = result.userInfo.avatarUrl
         dispatch(detail("1", nickName, avatarUrl))
-        // Taro.showToast({
-        //   title: nickName,
-        //   icon: "get√",
-        //   duration: 2000
-        // })
       })
     },
 

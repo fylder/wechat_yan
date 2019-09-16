@@ -5,13 +5,7 @@ import { ComponentClass } from "react"
 import { AtAvatar, AtButton } from "taro-ui"
 import "./info.scss"
 
-type PageStateProps = {
-  user: {
-    id: string
-    username: string
-    avatar: string
-  }
-}
+type PageStateProps = {}
 
 type PageDispatchProps = {
   handleInfo: () => void
@@ -31,9 +25,7 @@ interface Info {
 }
 
 @connect(
-  ({ user }) => ({
-    user
-  }),
+  ({}) => ({}),
   dispatch => ({
     handleInfo() {
       Taro.navigateTo({

@@ -5,11 +5,7 @@ import { ComponentClass } from "react"
 import { ArchivesModel } from "../archives/model"
 import "./article.scss"
 
-type PageStateProps = {
-  user: {
-    id: string
-  }
-}
+type PageStateProps = {}
 
 type PageDispatchProps = {}
 
@@ -29,13 +25,11 @@ interface ComponentProps {
   /* declare your component's props here */
 }
 interface ComponentState {
-  id: number
+  id: string
   article: ArchivesModel | undefined
 }
 
-@connect(({ user }) => ({
-  user
-}))
+@connect(({}) => ({}))
 class Article extends Component<ComponentProps, ComponentState> {
   config: Config = {
     navigationBarTitleText: "fylder",

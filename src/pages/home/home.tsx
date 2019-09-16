@@ -3,23 +3,14 @@ import { connect } from "@tarojs/redux"
 import Taro, { Component, Config } from "@tarojs/taro"
 import { ComponentClass } from "react"
 import { AtIcon } from "taro-ui"
-import { detail } from "../../actions/userAction"
 import { image_data, item_datas } from "./data"
 import "./home.scss"
 
-type PageStateProps = {
-  user: {
-    id: string
-    username: string
-    avatar: string
-  }
-}
+type PageStateProps = {}
 
 type PageDispatchProps = {
-  handleLogin(): () => void
   handleTypeItemClick: () => void
   handleComicClick: () => void
-
   handleMoreClick: () => void
 }
 
@@ -43,15 +34,8 @@ interface ComponentState {
 }
 
 @connect(
-  ({ user }) => ({ user }),
+  ({}) => ({}),
   dispatch => ({
-    handleLogin() {
-      Taro.getUserInfo().then(result => {
-        const nickName = result.userInfo.nickName
-        const avatarUrl = result.userInfo.avatarUrl
-        dispatch(detail("1", nickName, avatarUrl))
-      })
-    },
     handleTypeItemClick(index: number) {
       switch (index) {
         case 0: {
@@ -128,7 +112,6 @@ class Home extends Component<ComponentProps, ComponentState> {
   }
 
   componentWillMount() {
-    this.props.handleLogin()
     this.getAlbum()
   }
 

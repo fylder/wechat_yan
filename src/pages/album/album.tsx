@@ -5,13 +5,7 @@ import { ComponentClass } from "react"
 import { Album } from "../../store/model/data.d"
 import "./album.scss"
 
-type PageStateProps = {
-  user: {
-    id: string
-    username: string
-    avatar: string
-  }
-}
+type PageStateProps = {}
 
 type PageDispatchProps = {}
 
@@ -36,12 +30,7 @@ interface ComponentState {
   datas: Album[]
 }
 
-@connect(
-  ({ user }) => ({
-    user
-  }),
-  dispatch => ({})
-)
+@connect(({}) => ({}))
 class Info extends Component<ComponentProps, ComponentState> {
   /**
    * 指定config的类型声明为: Taro.Config

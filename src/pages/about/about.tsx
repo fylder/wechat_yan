@@ -4,13 +4,7 @@ import Taro, { Component, Config } from "@tarojs/taro"
 import { ComponentClass } from "react"
 import "./about.scss"
 
-type PageStateProps = {
-  user: {
-    id: string
-    username: string
-    avatar: string
-  }
-}
+type PageStateProps = {}
 
 type PageDispatchProps = {}
 
@@ -35,9 +29,7 @@ interface ComponentState {
   datas
 }
 
-@connect(({ user }) => ({
-  user
-}))
+@connect(({}) => ({}))
 class About extends Component<ComponentProps, ComponentState> {
   /**
    * 指定config的类型声明为: Taro.Config

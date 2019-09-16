@@ -6,13 +6,7 @@ import { Picture } from "../../model/AlbumModel"
 import linePng from "../../static/img/line.jpg"
 import "./monthly.scss"
 
-type PageStateProps = {
-  user: {
-    id: string
-    username: string
-    avatar: string
-  }
-}
+type PageStateProps = {}
 
 type PageDispatchProps = {}
 
@@ -38,9 +32,7 @@ interface ComponentState {
 }
 
 @connect(
-  ({ user }) => ({
-    user
-  }),
+  ({}) => ({}),
   dispatch => ({})
 )
 class Monthly extends Component<ComponentProps, ComponentState> {

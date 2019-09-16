@@ -8,11 +8,6 @@ import { TYPE_COMIC, TYPE_DEFAULT, TYPE_TOY } from "./data"
 import "./toy.scss"
 
 type PageStateProps = {
-  user: {
-    id: string
-    username: string
-    avatar: string
-  }
   toy: {
     album: Album[]
   }
@@ -43,8 +38,7 @@ interface ComponentState {
 }
 
 @connect(
-  ({ user, toy }) => ({
-    user,
+  ({ toy }) => ({
     toy
   }),
   dispatch => ({})

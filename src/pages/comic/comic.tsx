@@ -7,13 +7,7 @@ import { Picture } from "../../model/AlbumModel"
 import linePng from "../../static/img/line.jpg"
 import "./comic.scss"
 
-type PageStateProps = {
-  user: {
-    id: string
-    username: string
-    avatar: string
-  }
-}
+type PageStateProps = {}
 
 type PageDispatchProps = {}
 
@@ -35,7 +29,7 @@ interface ComponentProps {
   /* declare your component's props here */
 }
 interface ComponentState {
-  id: number
+  id: string
   title: string
   subject: string
   datas: Picture[]
@@ -46,9 +40,7 @@ interface ComponentState {
  * 照片详情
  */
 @connect(
-  ({ user }) => ({
-    user
-  }),
+  ({}) => ({}),
   dispatch => ({})
 )
 class Info extends Component<ComponentProps, ComponentState> {
