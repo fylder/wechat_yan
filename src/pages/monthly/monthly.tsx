@@ -1,7 +1,8 @@
-import { Image, Text, View } from "@tarojs/components"
+import { Block, Image, Text, View } from "@tarojs/components"
 import { connect } from "@tarojs/redux"
 import Taro, { Component, Config } from "@tarojs/taro"
 import { ComponentClass } from "react"
+import ImgLoader from "../../components/img-loader/img-loader"
 import { Picture } from "../../model/AlbumModel"
 import linePng from "../../static/img/line.jpg"
 import "./monthly.scss"
@@ -20,6 +21,8 @@ type IProps = PageStateProps & PageDispatchProps & PageOwnProps
 
 interface Monthly {
   props: IProps
+  imgLoader: ImgLoader
+  hasLoad: boolean
 }
 
 interface ComponentProps {
@@ -28,7 +31,8 @@ interface ComponentProps {
 interface ComponentState {
   id: number
   title: string
-  album: Picture[]
+  datas: Picture[]
+  imgLoadList: Picture[]
 }
 
 @connect(
@@ -48,6 +52,8 @@ class Monthly extends Component<ComponentProps, ComponentState> {
   }
   constructor(props, context) {
     super(props, context)
+    this.imgLoader = new ImgLoader(this)
+    this.hasLoad = false
   }
   componentWillReceiveProps(nextProps) {
     console.log(this.props, nextProps)
@@ -75,11 +81,30 @@ class Monthly extends Component<ComponentProps, ComponentState> {
         type: "flower"
       }
     }).then(resp => {
-      const albums: Picture[] = resp.data
+      const photos: Picture[] = resp.data
       this.setState({
-        album: albums
+        datas: photos
       })
     })
+  }
+
+  componentWillUpdate(props: any, state: any) {
+    if (state.datas && state.datas.length > 0 && !this.hasLoad) {
+      this.hasLoad = true
+      state.datas.map((item: Picture) => {
+        this.imgLoader.load(item.photo, (err, data) => {
+          const datas = this.state.datas.map(item => {
+            if (item.photo == data.src) {
+              item.loaded = true
+            }
+            return item
+          })
+          this.setState({
+            datas
+          })
+        })
+      })
+    }
   }
 
   // imageError = index => {
@@ -89,6 +114,12 @@ class Monthly extends Component<ComponentProps, ComponentState> {
   //   data[index].src = defaultImg
   //   this.setState({ album: data })
   // }
+
+  handlePicture = (src: string) => {
+    Taro.previewImage({
+      urls: [src]
+    })
+  }
 
   render() {
     let tag = linePng
@@ -104,27 +135,55 @@ class Monthly extends Component<ComponentProps, ComponentState> {
               </View>
             </View>
           </View>
-          {this.state.album.map((item: Picture, index) => {
-            return (
-              <View className="at-article__content" key={item.id}>
-                <Image className="at-article__img" src={tag} mode="widthFix" />
-                <View className="at-article__section">
-                  <Image
-                    className="at-article__img"
-                    src={item.photo}
-                    // onError={this.imageError.bind(this, index)}
-                    mode="widthFix"
-                    lazyLoad={true}
-                  />
-                  <View className="tag">{item.createdAt}</View>
-                  <View className="at-article__h3 title">{item.subject}</View>
-                  <View className="at-article__p describe">
-                    {item.describe}
+          <Block>
+            {this.state.datas.map((item: Picture, index) => {
+              return (
+                <View>
+                  <View className="at-article__content" key={item.id}>
+                    <Image
+                      className="at-article__img"
+                      src={tag}
+                      mode="widthFix"
+                    />
+                    {item.loaded && (
+                      <View className="at-article__section">
+                        <Image
+                          className="at-article__img"
+                          src={item.photo}
+                          // onError={this.imageError.bind(this, index)}
+                          mode="widthFix"
+                          lazyLoad={true}
+                          onClick={this.handlePicture.bind(this, item.photo)}
+                        />
+                        <View className="tag">{item.createdAt}</View>
+                        <View className="at-article__h3 title">
+                          {item.subject}
+                        </View>
+                        <View className="at-article__p describe">
+                          {item.describe}
+                        </View>
+                      </View>
+                    )}
                   </View>
                 </View>
-              </View>
-            )
-          })}
+              )
+            })}
+          </Block>
+          {/*  引入图片预加载组件  */}
+          <Block>
+            {this.state.datas.map((item: Picture, index) => {
+              return (
+                <Image
+                  key={index}
+                  src={item.photo}
+                  data-src={item.photo}
+                  onLoad={this.imgLoader._imgOnLoad.bind(this.imgLoader)}
+                  onError={this.imgLoader._imgOnLoadError.bind(this.imgLoader)}
+                  style="width:0;height:0;opacity:0"
+                />
+              )
+            })}
+          </Block>
         </View>
       </View>
     )
