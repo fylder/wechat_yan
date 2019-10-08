@@ -57,7 +57,7 @@ class Category extends Component<ComponentProps, ComponentState> {
       album: [],
       cover:
         tags === "cosplay"
-          ? "http://m.qpic.cn/psb?/V13MxeJc3V1qtK/VB95QahxYRCY85HadkYjbnQoUhyrhW69FsTDUJ0Uc5Y!/b/dL4AAAAAAAAA&bo=YAlABmAJQAYRBzA!&rf=viewer_4"
+          ? "http://photo.fylder.me/photo_1568057246317.jpg?imageMogr2/auto-orient/thumbnail/!480x480r/blur/1x0/quality/75"
           : "http://spider.ws.126.net/6b1df938dab6a363b5a475c4e9e21345.jpeg"
     }
     Taro.setNavigationBarTitle({ title })
@@ -92,9 +92,7 @@ class Category extends Component<ComponentProps, ComponentState> {
 
   itemClick = (item: Album) => {
     Taro.navigateTo({
-      url: `/pages/comic/comic?id=${item.id}&title=${item.name}&subject=${
-        item.subject
-      }`
+      url: `/pages/comic/comic?id=${item.id}&title=${item.name}&subject=${item.subject}`
     })
   }
 
