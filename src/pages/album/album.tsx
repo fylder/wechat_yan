@@ -97,7 +97,7 @@ class Info extends Component<ComponentProps, ComponentState> {
           <View className="info-card">
             <View className="at-row at-row__align--center">
               <View className="info-index" />
-              <View className="at-col">
+              <View className="at-col info-font">
                 <Text>{this.state.title}</Text>
               </View>
             </View>
@@ -105,32 +105,82 @@ class Info extends Component<ComponentProps, ComponentState> {
           <View className="at-row at-row__justify--center">
             <View className="at-col at-col-11">
               <View className="at-row at-row--wrap">
-                {this.state.datas.map((item: Album, index: number) => {
-                  return (
-                    <View className="at-col at-col-6" key={item.id}>
-                      <View
-                        className="album-lay"
-                        onClick={this.handleItemClick.bind(
-                          this,
-                          item.id,
-                          item.name,
-                          item.subject
-                        )}
-                      >
-                        <View className="album-card">
-                          <Image
-                            className="album-img"
-                            src={item.cover}
-                            onError={this.imageError.bind(this, index)}
-                            mode="aspectFill"
-                            lazyLoad={true}
-                          />
-                          <View className="album-title">{item.name}</View>
-                        </View>
-                      </View>
-                    </View>
-                  )
-                })}
+                {/* 左边 */}
+                <View className="at-col at-col-6 card-ahh">
+                  {this.state.datas != undefined ? (
+                    this.state.datas
+                      .filter((item: Album, index: number) => {
+                        console.log(item.id)
+                        return index % 2 === 0
+                      })
+                      .map((item: Album, index: number) => {
+                        return (
+                          <View className="at-col at-col-12" key={item.id}>
+                            <View
+                              className="album-lay"
+                              onClick={this.handleItemClick.bind(
+                                this,
+                                item.id,
+                                item.name,
+                                item.subject
+                              )}
+                            >
+                              <View className="album-card">
+                                <Image
+                                  className="album-img"
+                                  src={item.cover}
+                                  onError={this.imageError.bind(this, index)}
+                                  mode="aspectFill"
+                                  lazyLoad={true}
+                                />
+                                <View className="album-title">{item.name}</View>
+                              </View>
+                            </View>
+                          </View>
+                        )
+                      })
+                  ) : (
+                    <View />
+                  )}
+                </View>
+                {/* 右边 */}
+                <View className="at-col at-col-6">
+                  {this.state.datas != undefined ? (
+                    this.state.datas
+                      .filter((item: Album, index: number) => {
+                        console.log(item.id)
+                        return index % 2 === 1
+                      })
+                      .map((item: Album, index: number) => {
+                        return (
+                          <View className="at-col at-col-12" key={item.id}>
+                            <View
+                              className="album-lay"
+                              onClick={this.handleItemClick.bind(
+                                this,
+                                item.id,
+                                item.name,
+                                item.subject
+                              )}
+                            >
+                              <View className="album-card">
+                                <Image
+                                  className="album-img"
+                                  src={item.cover}
+                                  onError={this.imageError.bind(this, index)}
+                                  mode="aspectFill"
+                                  lazyLoad={true}
+                                />
+                                <View className="album-title">{item.name}</View>
+                              </View>
+                            </View>
+                          </View>
+                        )
+                      })
+                  ) : (
+                    <View />
+                  )}
+                </View>
               </View>
             </View>
           </View>
