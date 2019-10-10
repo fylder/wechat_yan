@@ -4,12 +4,11 @@ import { TOY_LIST } from "../constants/actionType"
  * @param state
  * @param action
  */
-export default function toy(state = {}, action) {
+export default function toy(state = { album: [] }, action) {
   switch (action.type) {
     case TOY_LIST:
       return {
         ...state,
-        // album: "response.data"
         album: action.album
       }
     default:

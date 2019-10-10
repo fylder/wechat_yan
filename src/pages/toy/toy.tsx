@@ -32,7 +32,6 @@ interface ComponentProps {
 }
 interface ComponentState {
   id: number
-  title: string
   datas: any
   album: Album[]
 }
@@ -54,26 +53,11 @@ class Toy extends Component<ComponentProps, ComponentState> {
   config: Config = {
     navigationBarTitleText: "小玩意"
   }
+
   constructor(props, context) {
     super(props, context)
     props.dispatch(getList())
   }
-  componentWillReceiveProps(nextProps) {
-    console.log(this.props, nextProps)
-  }
-
-  componentWillMount() {
-    const title = "小玩意"
-
-    this.setState({
-      title
-    })
-  }
-  componentWillUnmount() {}
-
-  componentDidShow() {}
-
-  componentDidHide() {}
 
   imageError = index => {
     const defaultImg =
@@ -95,10 +79,13 @@ class Toy extends Component<ComponentProps, ComponentState> {
     })
   }
 
+  //2019-07-07T19:02:37.000Z
+  getTime = (timeStr: string): string => {
+    var date = new Date(timeStr)
+    return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`
+  }
+
   render() {
-    this.setState({
-      album: this.props.toy.album
-    })
     return (
       <View>
         <View className="index">
@@ -124,7 +111,7 @@ class Toy extends Component<ComponentProps, ComponentState> {
                             TYPE_DEFAULT
                           )}
                         >
-                          <View className="toy-card">fylder</View>
+                          <View className="toy-card toy-fylder">fylder</View>
                         </View>
                       </View>
                       <View className="at-col-6 toy-item-right">
@@ -137,7 +124,7 @@ class Toy extends Component<ComponentProps, ComponentState> {
                               TYPE_TOY
                             )}
                           >
-                            <View className="toy-card">模型</View>
+                            <View className="toy-card toy-m">模型</View>
                           </View>
                         </View>
                         <View className="at-col-12 toy-item-bottom">
@@ -149,7 +136,7 @@ class Toy extends Component<ComponentProps, ComponentState> {
                               TYPE_COMIC
                             )}
                           >
-                            <View className="toy-card">动漫</View>
+                            <View className="toy-card toy-comic">动漫</View>
                           </View>
                         </View>
                       </View>
@@ -160,7 +147,7 @@ class Toy extends Component<ComponentProps, ComponentState> {
             </View>
           </View>
           <View className="item_lay">
-            {this.state.album.map((item: Album) => {
+            {this.props.toy.album.map((item: Album) => {
               return (
                 <View
                   className="item_lay_container"
@@ -182,7 +169,7 @@ class Toy extends Component<ComponentProps, ComponentState> {
                     lazyLoad={true}
                   />
                   <View className="at-article__info item_lay_info">
-                    2019-08-04
+                    {this.getTime(item.createdAt)}
                   </View>
                 </View>
               )

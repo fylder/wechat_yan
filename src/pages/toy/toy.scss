@@ -35,7 +35,6 @@ $item-active:rgba(240, 50, 161, 0.308);
     display: flex;
     justify-content: center;
     align-items: center;
-    background: #e91e62;
     box-shadow: 0.05rem 0.2rem 0.6rem rgb(218, 218, 218);
     border-radius: 0.5rem;
 
@@ -51,6 +50,19 @@ $item-active:rgba(240, 50, 161, 0.308);
     }
   }
 }
+
+.toy-fylder {
+  background: #e91e62 url("http://photo.fylder.me/photo_1570669051403.jpg?imageMogr2/auto-orient/thumbnail/!180x180r/blur/14x7/quality/75");
+}
+
+.toy-m {
+  background: #e91e62 url("http://photo.fylder.me/photo_1568054596884.jpg?imageMogr2/auto-orient/thumbnail/!120x120r/blur/14x7/quality/75");
+}
+
+.toy-comic {
+  background: #e91e62 url("http://photo.fylder.me/photo_1568057315030.jpg?imageMogr2/auto-orient/thumbnail/!120x120r/blur/14x7/quality/75");
+}
+
 
 .lay {
   .lay_bg {
