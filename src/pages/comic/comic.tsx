@@ -6,6 +6,7 @@ import ImgLoader from "../../components/img-loader/img-loader"
 import { Picture } from "../../model/AlbumModel"
 import linePng from "../../static/img/line.jpg"
 import "./comic.scss"
+import { AtToast } from "taro-ui"
 
 type PageStateProps = {}
 
@@ -58,12 +59,7 @@ class Info extends Component<ComponentProps, ComponentState> {
     super(props, context)
     this.imgLoader = new ImgLoader(this)
     this.hasLoad = false
-  }
-  componentWillReceiveProps(nextProps) {
-    console.log(this.props, nextProps)
-  }
 
-  componentWillMount() {
     const id = this.$router.params.id
     const title = this.$router.params.title
     const subject = this.$router.params.subject
@@ -71,16 +67,26 @@ class Info extends Component<ComponentProps, ComponentState> {
       Taro.setNavigationBarTitle({ title })
     }
 
-    this.setState({
+    this.state = {
       id,
       title,
-      subject
-    })
+      subject,
+      datas: [],
+      imgLoadList: []
+    }
+  }
+  componentWillReceiveProps(nextProps) {
+    console.log(this.props, nextProps)
+  }
+
+  componentWillMount() {
+    Taro.showNavigationBarLoading()
     Taro.request({
-      url: "https://wechat.fylder.me:8022/wechat/picture/" + id,
+      url: "https://wechat.fylder.me:8022/wechat/picture/" + this.state.id,
       method: "GET",
       mode: "cors"
     }).then(res => {
+      Taro.hideNavigationBarLoading()
       this.setState({
         datas: res.data
       })

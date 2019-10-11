@@ -80,7 +80,7 @@ class Toy extends Component<ComponentProps, ComponentState> {
   }
 
   //2019-07-07T19:02:37.000Z
-  getTime = (timeStr: string): string => {
+  getDate = (timeStr: string): string => {
     var date = new Date(timeStr)
     return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`
   }
@@ -169,7 +169,7 @@ class Toy extends Component<ComponentProps, ComponentState> {
                     lazyLoad={true}
                   />
                   <View className="at-article__info item_lay_info">
-                    {this.getTime(item.createdAt)}
+                    {this.getDate(item.createdAt)}
                   </View>
                 </View>
               )

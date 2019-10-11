@@ -54,26 +54,20 @@ class Monthly extends Component<ComponentProps, ComponentState> {
     super(props, context)
     this.imgLoader = new ImgLoader(this)
     this.hasLoad = false
-  }
-  componentWillReceiveProps(nextProps) {
-    console.log(this.props, nextProps)
+    this.state = {
+      id: 0,
+      title: "今月份的花束",
+      datas: [],
+      imgLoadList: []
+    }
   }
 
   componentWillMount() {
-    const title = "今月份的花束"
     this.getMonthlyAlbum()
-
-    this.setState({
-      title
-    })
   }
-  componentWillUnmount() {}
-
-  componentDidShow() {}
-
-  componentDidHide() {}
 
   getMonthlyAlbum = () => {
+    Taro.showNavigationBarLoading()
     Taro.request({
       url: "https://wechat.fylder.me:8022/wechat/picture/type",
       method: "POST",
@@ -81,9 +75,9 @@ class Monthly extends Component<ComponentProps, ComponentState> {
         type: "flower"
       }
     }).then(resp => {
-      const photos: Picture[] = resp.data
+      Taro.hideNavigationBarLoading()
       this.setState({
-        datas: photos
+        datas: resp.data
       })
     })
   }
@@ -121,6 +115,12 @@ class Monthly extends Component<ComponentProps, ComponentState> {
     })
   }
 
+  //2019-07-07T19:02:37.000Z
+  getDate = (timeStr: string): string => {
+    var date = new Date(timeStr)
+    return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`
+  }
+
   render() {
     let tag = linePng
 
@@ -155,7 +155,9 @@ class Monthly extends Component<ComponentProps, ComponentState> {
                           lazyLoad={true}
                           onClick={this.handlePicture.bind(this, item.photo)}
                         />
-                        <View className="tag">{item.createdAt}</View>
+                        <View className="tag">
+                          {this.getDate(item.createdAt)}
+                        </View>
                         <View className="at-article__h3 title">
                           {item.subject}
                         </View>

@@ -55,10 +55,12 @@ class Article extends Component<ComponentProps, ComponentState> {
   }
 
   getArticle = () => {
+    Taro.showNavigationBarLoading()
     Taro.request({
       url: `https://wechat.fylder.me:8022/wechat/article/${this.state.id}`,
       method: "GET"
     }).then(res => {
+      Taro.hideNavigationBarLoading()
       this.setState({
         article: res.data
       })

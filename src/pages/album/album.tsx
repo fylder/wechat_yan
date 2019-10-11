@@ -44,22 +44,25 @@ class Info extends Component<ComponentProps, ComponentState> {
   }
   constructor(props, context) {
     super(props, context)
+    const type = this.$router.params.type
+    this.state = {
+      type,
+      title: "fylder",
+      datas: []
+    }
   }
   componentWillReceiveProps(nextProps) {
     console.log(this.props, nextProps)
   }
 
   componentWillMount() {
-    const type = this.$router.params.type
-    this.setState({
-      type,
-      title: "fylder"
-    })
+    Taro.showNavigationBarLoading()
     Taro.request({
       url: "https://wechat.fylder.me:8022/wechat/album",
       method: "GET",
       mode: "cors"
     }).then(res => {
+      Taro.hideNavigationBarLoading()
       this.setState({
         datas: res.data
       })

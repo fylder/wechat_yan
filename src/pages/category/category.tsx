@@ -69,13 +69,9 @@ class Category extends Component<ComponentProps, ComponentState> {
   componentWillMount() {
     this.getAlbum()
   }
-  componentWillUnmount() {}
-
-  componentDidShow() {}
-
-  componentDidHide() {}
 
   getAlbum = () => {
+    Taro.showNavigationBarLoading()
     Taro.request({
       url: "https://wechat.fylder.me:8022/wechat/album/tag",
       method: "POST",
@@ -84,6 +80,7 @@ class Category extends Component<ComponentProps, ComponentState> {
         tags: this.state.tags
       }
     }).then(res => {
+      Taro.hideNavigationBarLoading()
       this.setState({
         album: res.data
       })
@@ -94,6 +91,12 @@ class Category extends Component<ComponentProps, ComponentState> {
     Taro.navigateTo({
       url: `/pages/comic/comic?id=${item.id}&title=${item.name}&subject=${item.subject}`
     })
+  }
+
+  //2019-07-07T19:02:37.000Z
+  getDate = (timeStr: string): string => {
+    var date = new Date(timeStr)
+    return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`
   }
 
   render() {
@@ -124,7 +127,7 @@ class Category extends Component<ComponentProps, ComponentState> {
                   lazyLoad={true}
                 />
                 <View className="at-article__info item_lay_info">
-                  {item.createdAt}
+                  {this.getDate(item.createdAt)}
                 </View>
               </View>
             )

@@ -35,9 +35,9 @@ class Archives extends Component<ComponentProps, ComponentState> {
   }
   constructor(props, context) {
     super(props, context)
-    this.setState({
-      archives: undefined
-    })
+    this.state = {
+      archives: []
+    }
   }
 
   componentWillMount() {
@@ -49,10 +49,12 @@ class Archives extends Component<ComponentProps, ComponentState> {
   }
 
   getArticle = () => {
+    Taro.showNavigationBarLoading()
     Taro.request({
       url: "https://wechat.fylder.me:8022/wechat/article",
       method: "GET"
     }).then(res => {
+      Taro.hideNavigationBarLoading()
       this.setState({
         archives: res.data
       })
@@ -63,6 +65,12 @@ class Archives extends Component<ComponentProps, ComponentState> {
     Taro.navigateTo({
       url: `/pages/article/article?id=${item.id}`
     })
+  }
+
+  //2019-07-07T19:02:37.000Z
+  getDate = (timeStr: string): string => {
+    var date = new Date(timeStr)
+    return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`
   }
 
   render() {
@@ -97,7 +105,7 @@ class Archives extends Component<ComponentProps, ComponentState> {
                   lazyLoad={true}
                 />
                 <View className="at-article__info item_lay_info">
-                  {item.createdAt}
+                  {this.getDate(item.createdAt)}
                 </View>
               </View>
             )
