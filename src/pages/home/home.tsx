@@ -102,9 +102,13 @@ interface ComponentState {
 )
 class Home extends Component<ComponentProps, ComponentState> {
   config: Config = {
-    navigationBarTitleText: "首页",
+    navigationBarTitleText: "带着毛驴去兜风",
     enablePullDownRefresh: true,
     backgroundTextStyle: "dark"
+  }
+  constructor(props, context) {
+    super(props, context)
+    Taro.setNavigationBarTitle({ title: "带着毛驴去兜风" })
   }
 
   componentWillReceiveProps(nextProps) {

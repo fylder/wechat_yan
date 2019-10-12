@@ -28,6 +28,9 @@ interface ComponentState {
   archives: any | undefined
 }
 
+/**
+ * 随笔
+ */
 @connect(({}) => ({}))
 class Archives extends Component<ComponentProps, ComponentState> {
   config: Config = {
@@ -104,7 +107,7 @@ class Archives extends Component<ComponentProps, ComponentState> {
                   mode="aspectFill"
                   lazyLoad={true}
                 />
-                <View className="at-article__info item_lay_info">
+                <View className="at-article__info item_lay_info font-content-small">
                   {this.getDate(item.createdAt)}
                 </View>
               </View>

@@ -29,6 +29,9 @@ interface ComponentState {
   article: ArchivesModel | undefined
 }
 
+/**
+ * blog详情页
+ */
 @connect(({}) => ({}))
 class Article extends Component<ComponentProps, ComponentState> {
   config: Config = {

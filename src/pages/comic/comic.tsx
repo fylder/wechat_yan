@@ -6,7 +6,6 @@ import ImgLoader from "../../components/img-loader/img-loader"
 import { Picture } from "../../model/AlbumModel"
 import linePng from "../../static/img/line.jpg"
 import "./comic.scss"
-import { AtToast } from "taro-ui"
 
 type PageStateProps = {}
 
