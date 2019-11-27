@@ -69,7 +69,7 @@ class Monthly extends Component<ComponentProps, ComponentState> {
   getMonthlyAlbum = () => {
     Taro.showNavigationBarLoading()
     Taro.request({
-      url: "https://wechat.fylder.me:8022/wechat/picture/type",
+      url: "https://wechat.fylder.me:8022/wechat/picture/type/latest",
       method: "POST",
       data: {
         type: "flower"
