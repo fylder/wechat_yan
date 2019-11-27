@@ -5484,6 +5484,11 @@ mixin-deep@^1.2.0:
     for-in "^1.0.2"
     is-extendable "^1.0.1"
 
+mixin-deep@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.npm.taobao.org/mixin-deep/download/mixin-deep-2.0.1.tgz#9a6946bef4a368401b784970ae3caaaa6bab02fa"
+  integrity sha1-mmlGvvSjaEAbeElwrjyqqmurAvo=
+
 mixin-object@^2.0.1:
   version "2.0.1"
   resolved "https://registry.npm.taobao.org/mixin-object/download/mixin-object-2.0.1.tgz#4fb949441dab182540f1fe035ba60e1947a5e57e"
