@@ -1,31 +1,31 @@
-import { Image, View } from "@tarojs/components"
-import { connect } from "@tarojs/redux"
-import Taro, { Component, Config } from "@tarojs/taro"
-import { ComponentClass } from "react"
-import "./archives.scss"
-import { ArchivesModel } from "./model"
+import { Image, View } from "@tarojs/components";
+import { connect } from "@tarojs/redux";
+import Taro, { Component, Config } from "@tarojs/taro";
+import { ComponentClass } from "react";
+import "./archives.scss";
+import { ArchivesModel } from "./model";
 
-type PageStateProps = {}
+type PageStateProps = {};
 
-type PageDispatchProps = {}
+type PageDispatchProps = {};
 
 type PageOwnProps = {
-  dispatch(type: any): Promise<any>
-}
+  dispatch(type: any): Promise<any>;
+};
 
-type PageState = {}
+type PageState = {};
 
-type IProps = PageStateProps & PageDispatchProps & PageOwnProps
+type IProps = PageStateProps & PageDispatchProps & PageOwnProps;
 
 interface Archives {
-  props: IProps
+  props: IProps;
 }
 
 interface ComponentProps {
   /* declare your component's props here */
 }
 interface ComponentState {
-  archives: any | undefined
+  archives: any | undefined;
 }
 
 /**
@@ -35,50 +35,50 @@ interface ComponentState {
 class Archives extends Component<ComponentProps, ComponentState> {
   config: Config = {
     navigationBarTitleText: "随笔"
-  }
+  };
   constructor(props, context) {
-    super(props, context)
+    super(props, context);
     this.state = {
       archives: []
-    }
+    };
   }
 
   componentWillMount() {
-    this.getArticle()
+    this.getArticle();
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log(this.props, nextProps)
+    console.log(this.props, nextProps);
   }
 
   getArticle = () => {
-    Taro.showNavigationBarLoading()
+    Taro.showNavigationBarLoading();
     Taro.request({
       url: "https://wechat.fylder.me:8022/wechat/article",
       method: "GET"
     }).then(res => {
-      Taro.hideNavigationBarLoading()
+      Taro.hideNavigationBarLoading();
       this.setState({
         archives: res.data
-      })
-    })
-  }
+      });
+    });
+  };
 
   itemClick = (item: ArchivesModel) => {
     Taro.navigateTo({
       url: `/pages/article/article?id=${item.id}`
-    })
-  }
+    });
+  };
 
   //2019-07-07T19:02:37.000Z
   getDate = (timeStr: string): string => {
-    var date = new Date(timeStr)
-    return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`
-  }
+    var date = new Date(timeStr);
+    return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
+  };
 
   render() {
     return (
-      <View>
+      <View className="lay">
         <View className="header_lay">
           <Image
             className="header_img"
@@ -91,7 +91,7 @@ class Archives extends Component<ComponentProps, ComponentState> {
         </View>
 
         <View className="item_lay">
-          {this.state.archives.map((item: ArchivesModel) => {
+          {this.state.archives.map((item: ArchivesModel, index: number) => {
             return (
               <View
                 className="item_lay_container"
@@ -111,12 +111,12 @@ class Archives extends Component<ComponentProps, ComponentState> {
                   {this.getDate(item.createdAt)}
                 </View>
               </View>
-            )
+            );
           })}
         </View>
       </View>
-    )
+    );
   }
 }
 
-export default Archives as ComponentClass<PageOwnProps, PageState>
+export default Archives as ComponentClass<PageOwnProps, PageState>;

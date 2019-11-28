@@ -1,156 +1,110 @@
-$grid-item-active:rgba(50, 196, 240, 0.308);
-$item-active:rgba(240, 50, 161, 0.308);
-
-.header_lay {
-  width: 100%;
-  height: 10rem;
-  display: flex;
-
-  .header_img {
-    width: 100%;
-    height: 10rem;
-    z-index: 1;
-    position: absolute;
-    -webkit-filter: blur(8px);
-    filter: blur(8px);
-  }
-
-  .subject-lay {
-    z-index: 2;
-    width: 100%;
-    height: 10rem;
-    position: absolute;
-    justify-content: center;
-    align-items: center;
-    display: flex;
-
-    .subject-font {
-      color: white;
-      font-size: 36rpx;
-    }
-  }
-}
-
-
-.toy-item-lay {
-  height: 12rem;
-  border-radius: 1rem;
-  background: #f2f2f2;
-}
-
-.toy-item-left {
-  // background: #e91e62;
-}
-
-.toy-item-right {
-
-  .toy-item-top {
-    height: 6rem;
-    // background: #2a75a7;
-  }
-
-  .toy-item-bottom {
-    height: 6rem;
-    // background: #598fb3;
-  }
-}
-
-.toy-type {
-  $padding: 0.4rem;
-  height: 100%;
-  color: white;
-  padding: $padding;
-
-  .toy-card {
-    height: calc(100% - #{$padding * 2});
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: #e91e62;
-    box-shadow: 0.05rem 0.2rem 0.6rem rgb(218, 218, 218);
-    border-radius: 0.5rem;
-
-    transition-duration: 0.5s;
-    transition-timing-function: ease-out;
-    /* 动画变幻速度 ease:减速(默认)  linear:匀速  ease-in:加速 ease-out:减速  ease-in-out:先加速后减速 */
-    transition-delay: 0s;
-    /* 动画延迟 */
-    transition: all 0.2s ease-in-out 0s;
-
-    &:active {
-      background-color: $grid-item-active;
-    }
-  }
-}
+$item-active:rgba(248, 211, 228, 0.904);
 
 .lay {
-  .lay_bg {
-    position: relative;
 
-    .lay_img {
-      width: 100%;
-      // height: 26rem;
-      height: 11.2rem;
-    }
-  }
-
-  .lay_fg {
-    position: absolute;
+  .header_lay {
     width: 100%;
-    top: 10rem;
-
-    .lay_search {
-      position: relative;
-      height: 2.4rem;
-      width: 100%;
-      // box-shadow: 0.05rem 0.2rem 0.6rem rgb(218, 218, 218);
-
-      .lay_font {
-        color: #AAAAAA;
-      }
-    }
-
-    .lay_container {
-      margin-top: 1rem;
-
-      .lay_container_grid {
-        background: linear-gradient(rgba(255, 192, 203, 0), pink);
-        color: white !important;
-      }
-    }
-  }
-}
-
-.item_lay {
-  margin: 0.5rem 1rem 1rem;
-
-  .item_lay_container {
-    margin: 1rem 0 0.5rem;
+    height: 10rem;
+    display: flex;
     position: relative;
-    box-shadow: 0.15rem 0.6rem 1.2rem rgb(218, 218, 218);
+    z-index: 1;
 
-    transition-duration: 0.5s;
-    transition-timing-function: ease-out;
-    /* 动画变幻速度 ease:减速(默认)  linear:匀速  ease-in:加速 ease-out:减速  ease-in-out:先加速后减速 */
-    transition-delay: 0s;
-    /* 动画延迟 */
-    transition: all 0.2s ease-in-out 0s;
-
-    &:active {
-      background-color: $item-active;
-    }
-
-    .item_lay_title {
-      padding: 1rem 0 0.5rem;
-    }
-
-    .item_lay_img {
+    .header_img {
       width: 100%;
       height: 10rem;
+      z-index: 1;
+      position: absolute;
+      -webkit-filter: blur(8px);
+      filter: blur(8px);
     }
 
-    .item_lay_info {
-      padding: 0.5rem 0 0.5rem;
+    .subject-lay {
+      z-index: 2;
+      width: 100%;
+      height: 8rem;
+      position: absolute;
+      justify-content: center;
+      align-items: center;
+      display: flex;
+
+      .subject-font {
+        color: white;
+        font-size: 36rpx;
+      }
+    }
+  }
+
+  .item_lay {
+    width: 100%;
+    top: 6rem;
+    position: absolute;
+    z-index: 2;
+
+    .item_lay_container {
+      margin: 1rem 1rem 0.2rem;
+      background-color: #ffffff;
+      position: relative;
+      border-radius: 0.2rem;
+
+      // box-shadow: 0.15rem 0.6rem 1.2rem rgb(218, 218, 218);
+      box-shadow: 0.15rem 0.6rem 1.2rem rgba(201, 201, 201, 0.849), 0.15rem 0.6rem 0.5rem rgba(243, 70, 113, 0.116);
+
+      transition-duration: 0.5s;
+      transition-timing-function: ease-out;
+      /* 动画变幻速度 ease:减速(默认)  linear:匀速  ease-in:加速 ease-out:减速  ease-in-out:先加速后减速 */
+      transition-delay: 0s;
+      /* 动画延迟 */
+      transition: all 0.2s ease-in-out 0s;
+
+      &:active {
+        background-color: $item-active;
+      }
+
+      .item_lay_title {
+        padding: 1rem 0 0.5rem;
+      }
+
+      .item_lay_img {
+        width: 100%;
+        height: 10rem;
+      }
+
+      .item_lay_info {
+        padding: 0.5rem 0 0.5rem;
+      }
+    }
+
+    .item_lay_container_head {
+      margin: 1rem 1rem 0.5rem;
+      background-color: #ffffff;
+      position: relative;
+      border-radius: 1rem 1rem 0rem 0rem;
+      // box-shadow: 0.15rem 0.6rem 1.2rem rgb(218, 218, 218);
+      box-shadow: 0.15rem 0.6rem 1.2rem rgba(201, 201, 201, 0.849), 0.15rem 0.6rem 0.5rem rgba(243, 70, 113, 0.116);
+
+      transition-duration: 0.5s;
+      transition-timing-function: ease-out;
+      /* 动画变幻速度 ease:减速(默认)  linear:匀速  ease-in:加速 ease-out:减速  ease-in-out:先加速后减速 */
+      transition-delay: 0s;
+      /* 动画延迟 */
+      transition: all 0.2s ease-in-out 0s;
+
+      &:active {
+        background-color: $item-active;
+      }
+
+      .item_lay_title {
+        padding: 1rem 0 0.5rem;
+      }
+
+      .item_lay_img {
+        width: 100%;
+        height: 10rem;
+      }
+
+      .item_lay_info {
+        padding: 0.5rem 0 0.5rem;
+      }
     }
   }
 }

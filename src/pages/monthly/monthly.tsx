@@ -1,38 +1,38 @@
-import { Block, Image, Text, View } from "@tarojs/components"
-import { connect } from "@tarojs/redux"
-import Taro, { Component, Config } from "@tarojs/taro"
-import { ComponentClass } from "react"
-import ImgLoader from "../../components/img-loader/img-loader"
-import { Picture } from "../../model/AlbumModel"
-import linePng from "../../static/img/line.jpg"
-import "./monthly.scss"
+import { Block, Image, Text, View } from "@tarojs/components";
+import { connect } from "@tarojs/redux";
+import Taro, { Component, Config } from "@tarojs/taro";
+import { ComponentClass } from "react";
+import ImgLoader from "../../components/img-loader/img-loader";
+import { Picture } from "../../model/AlbumModel";
+import linePng from "../../static/img/line.jpg";
+import "./monthly.scss";
 
-type PageStateProps = {}
+type PageStateProps = {};
 
-type PageDispatchProps = {}
+type PageDispatchProps = {};
 
 type PageOwnProps = {
-  dispatch(type: any): Promise<any>
-}
+  dispatch(type: any): Promise<any>;
+};
 
-type PageState = {}
+type PageState = {};
 
-type IProps = PageStateProps & PageDispatchProps & PageOwnProps
+type IProps = PageStateProps & PageDispatchProps & PageOwnProps;
 
 interface Monthly {
-  props: IProps
-  imgLoader: ImgLoader
-  hasLoad: boolean
+  props: IProps;
+  imgLoader: ImgLoader;
+  hasLoad: boolean;
 }
 
 interface ComponentProps {
   /* declare your component's props here */
 }
 interface ComponentState {
-  id: number
-  title: string
-  datas: Picture[]
-  imgLoadList: Picture[]
+  id: number;
+  title: string;
+  datas: Picture[];
+  imgLoadList: Picture[];
 }
 
 @connect(
@@ -49,55 +49,56 @@ class Monthly extends Component<ComponentProps, ComponentState> {
    */
   config: Config = {
     navigationBarTitleText: "fylder"
-  }
+  };
   constructor(props, context) {
-    super(props, context)
-    this.imgLoader = new ImgLoader(this)
-    this.hasLoad = false
+    super(props, context);
+    this.imgLoader = new ImgLoader(this);
+    this.hasLoad = false;
     this.state = {
       id: 0,
       title: "今月份的花束",
       datas: [],
       imgLoadList: []
-    }
+    };
   }
 
   componentWillMount() {
-    this.getMonthlyAlbum()
+    this.getMonthlyAlbum();
   }
 
   getMonthlyAlbum = () => {
-    Taro.showNavigationBarLoading()
+    Taro.showNavigationBarLoading();
     Taro.request({
       url: "https://wechat.fylder.me:8022/wechat/picture/type/latest",
       method: "POST",
       data: {
         type: "flower"
+        // type: "show"
       }
     }).then(resp => {
-      Taro.hideNavigationBarLoading()
+      Taro.hideNavigationBarLoading();
       this.setState({
         datas: resp.data
-      })
-    })
-  }
+      });
+    });
+  };
 
   componentWillUpdate(props: any, state: any) {
     if (state.datas && state.datas.length > 0 && !this.hasLoad) {
-      this.hasLoad = true
+      this.hasLoad = true;
       state.datas.map((item: Picture) => {
         this.imgLoader.load(item.photo, (err, data) => {
           const datas = this.state.datas.map(item => {
             if (item.photo == data.src) {
-              item.loaded = true
+              item.loaded = true;
             }
-            return item
-          })
+            return item;
+          });
           this.setState({
             datas
-          })
-        })
-      })
+          });
+        });
+      });
     }
   }
 
@@ -112,17 +113,17 @@ class Monthly extends Component<ComponentProps, ComponentState> {
   handlePicture = (src: string) => {
     Taro.previewImage({
       urls: [src]
-    })
-  }
+    });
+  };
 
   //2019-07-07T19:02:37.000Z
   getDate = (timeStr: string): string => {
-    var date = new Date(timeStr)
-    return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`
-  }
+    var date = new Date(timeStr);
+    return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
+  };
 
   render() {
-    let tag = linePng
+    let tag = linePng;
 
     return (
       <View>
@@ -138,37 +139,39 @@ class Monthly extends Component<ComponentProps, ComponentState> {
           <Block>
             {this.state.datas.map((item: Picture, index) => {
               return (
-                <View>
-                  <View className="at-article__content" key={item.id}>
-                    <Image
-                      className="at-article__img"
-                      src={tag}
-                      mode="widthFix"
-                    />
-                    {item.loaded && (
-                      <View className="at-article__section">
-                        <Image
-                          className="at-article__img"
-                          src={item.photo}
-                          // onError={this.imageError.bind(this, index)}
-                          mode="widthFix"
-                          lazyLoad={true}
-                          onClick={this.handlePicture.bind(this, item.photo)}
-                        />
-                        <View className="tag">
-                          {this.getDate(item.createdAt)}
-                        </View>
-                        <View className="at-article__h3 title">
-                          {item.subject}
-                        </View>
-                        <View className="at-article__p describe">
-                          {item.describe}
+                <View className="at-article__content" key={item.id}>
+                  <Image
+                    className="at-article__img"
+                    src={tag}
+                    mode="widthFix"
+                  />
+                  {item.loaded && (
+                    <View className="at-article__section">
+                      <View className="m_card">
+                        <View className="card_tag">{item.subject}</View>
+                        <View className="card_item">
+                          <View className="card_info">
+                            <View className="at-article__h3 title">
+                              {item.describe}
+                            </View>
+                            <View className="at-article__p describe">
+                              {this.getDate(item.createdAt)}
+                            </View>
+                          </View>
+                          <Image
+                            className="at-article__img card_img"
+                            src={item.photo}
+                            // onError={this.imageError.bind(this, index)}
+                            mode="widthFix"
+                            lazyLoad={true}
+                            onClick={this.handlePicture.bind(this, item.photo)}
+                          />
                         </View>
                       </View>
-                    )}
-                  </View>
+                    </View>
+                  )}
                 </View>
-              )
+              );
             })}
           </Block>
           {/*  引入图片预加载组件  */}
@@ -183,13 +186,13 @@ class Monthly extends Component<ComponentProps, ComponentState> {
                   onError={this.imgLoader._imgOnLoadError.bind(this.imgLoader)}
                   style="width:0;height:0;opacity:0"
                 />
-              )
+              );
             })}
           </Block>
         </View>
       </View>
-    )
+    );
   }
 }
 
-export default Monthly as ComponentClass<PageOwnProps, PageState>
+export default Monthly as ComponentClass<PageOwnProps, PageState>;

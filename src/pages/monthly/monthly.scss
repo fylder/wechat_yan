@@ -37,4 +37,43 @@ $color-primary: #e91e63;
 
 .describe {
   // margin: 0.2rem 0.4rem 0.2rem;
+  margin: 0;
+}
+
+.m_card {
+
+  .card_tag {
+    width: fit-content;
+    height: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 0.5rem;
+    margin: 0 0 0 1.5rem;
+    color: #ffffff;
+    font-size: small;
+    border-radius: 0.2rem;
+    background-color: $color-primary;
+    box-shadow: 0.15rem 0.2rem 0.2rem rgba(243, 70, 113, 0.466);
+    position: relative;
+    z-index: 2;
+    top: 1.4rem;
+  }
+
+  .card_item {
+    margin: 0 1rem;
+    box-shadow: 0.15rem 0.3rem 1.2rem rgba(201, 201, 201, 0.849), 0.15rem 0.3rem 0.5rem rgba(243, 70, 113, 0.116);
+    position: relative;
+    z-index: 1;
+
+    .card_info {
+      padding: 1rem 0 0;
+    }
+
+    .card_img {
+      width: 100%;
+      object-fit: contain;
+    }
+  }
+
 }
