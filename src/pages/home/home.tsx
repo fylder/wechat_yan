@@ -238,6 +238,34 @@ class Home extends Component<ComponentProps, ComponentState> {
                     return (
                       <View className="at-col at-col-6" key={item.id}>
                         <View
+                          className="album_item_lay"
+                          onClick={this.props.handleComicClick.bind(
+                            this,
+                            item.id,
+                            item.name,
+                            item.subject
+                          )}
+                        >
+                          <Image
+                            className="album_item_img"
+                            src={item.cover}
+                            mode="aspectFill"
+                            lazyLoad={true}
+                          />
+                          <View className="album_item_container">
+                            <View className="album_item_detail">
+                              {item.name}
+                            </View>
+                          </View>
+                        </View>
+                      </View>
+                    );
+                  })}
+
+                  {/* {this.state.covers.map((item: Album, index: number) => {
+                    return (
+                      <View className="at-col at-col-6" key={item.id}>
+                        <View
                           className="cover_item_lay"
                           onClick={this.props.handleComicClick.bind(
                             this,
@@ -261,7 +289,7 @@ class Home extends Component<ComponentProps, ComponentState> {
                         </View>
                       </View>
                     );
-                  })}
+                  })} */}
                 </View>
               </View>
             </View>

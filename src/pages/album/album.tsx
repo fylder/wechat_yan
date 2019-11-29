@@ -1,33 +1,33 @@
-import { Image, Text, View } from "@tarojs/components"
-import { connect } from "@tarojs/redux"
-import Taro, { Component, Config } from "@tarojs/taro"
-import { ComponentClass } from "react"
-import { Album } from "../../store/model/data.d"
-import "./album.scss"
+import { Image, Text, View } from "@tarojs/components";
+import { connect } from "@tarojs/redux";
+import Taro, { Component, Config } from "@tarojs/taro";
+import { ComponentClass } from "react";
+import { Album } from "../../store/model/data.d";
+import "./album.scss";
 
-type PageStateProps = {}
+type PageStateProps = {};
 
-type PageDispatchProps = {}
+type PageDispatchProps = {};
 
 type PageOwnProps = {
-  dispatch(type: any): Promise<any>
-}
+  dispatch(type: any): Promise<any>;
+};
 
-type PageState = {}
+type PageState = {};
 
-type IProps = PageStateProps & PageDispatchProps & PageOwnProps
+type IProps = PageStateProps & PageDispatchProps & PageOwnProps;
 
 interface Info {
-  props: IProps
+  props: IProps;
 }
 
 interface ComponentProps {
   /* declare your component's props here */
 }
 interface ComponentState {
-  type: string
-  title: string
-  datas: Album[]
+  type: string;
+  title: string;
+  datas: Album[];
 }
 
 @connect(({}) => ({}))
@@ -41,32 +41,29 @@ class Info extends Component<ComponentProps, ComponentState> {
    */
   config: Config = {
     navigationBarTitleText: "fylder' 相册"
-  }
+  };
   constructor(props, context) {
-    super(props, context)
-    const type = this.$router.params.type
+    super(props, context);
+    const type = this.$router.params.type;
     this.state = {
       type,
       title: "fylder",
       datas: []
-    }
-  }
-  componentWillReceiveProps(nextProps) {
-    console.log(this.props, nextProps)
+    };
   }
 
   componentWillMount() {
-    Taro.showNavigationBarLoading()
+    Taro.showNavigationBarLoading();
     Taro.request({
       url: "https://wechat.fylder.me:8022/wechat/album",
       method: "GET",
       mode: "cors"
     }).then(res => {
-      Taro.hideNavigationBarLoading()
+      Taro.hideNavigationBarLoading();
       this.setState({
         datas: res.data
-      })
-    })
+      });
+    });
   }
   componentWillUnmount() {}
 
@@ -76,17 +73,17 @@ class Info extends Component<ComponentProps, ComponentState> {
 
   imageError = index => {
     const defaultImg =
-      "http://img5.mtime.cn/pi/2019/03/30/100155.92232373_1000X1000.jpg"
-    const data = this.state.datas
-    data[index].cover = defaultImg
-    this.setState({ datas: data })
-  }
+      "http://img5.mtime.cn/pi/2019/03/30/100155.92232373_1000X1000.jpg";
+    const data = this.state.datas;
+    data[index].cover = defaultImg;
+    this.setState({ datas: data });
+  };
 
   handleItemClick = (id: number, title: string, subject: string) => {
     Taro.navigateTo({
       url: `/pages/comic/comic?id=${id}&title=${title}&subject=${subject}`
-    })
-  }
+    });
+  };
   render() {
     return (
       <View>
@@ -113,8 +110,8 @@ class Info extends Component<ComponentProps, ComponentState> {
                   {this.state.datas != undefined ? (
                     this.state.datas
                       .filter((item: Album, index: number) => {
-                        console.log(item.id)
-                        return index % 2 === 0
+                        console.log(item.id);
+                        return index % 2 === 0;
                       })
                       .map((item: Album, index: number) => {
                         return (
@@ -140,7 +137,7 @@ class Info extends Component<ComponentProps, ComponentState> {
                               </View>
                             </View>
                           </View>
-                        )
+                        );
                       })
                   ) : (
                     <View />
@@ -151,8 +148,8 @@ class Info extends Component<ComponentProps, ComponentState> {
                   {this.state.datas != undefined ? (
                     this.state.datas
                       .filter((item: Album, index: number) => {
-                        console.log(item.id)
-                        return index % 2 === 1
+                        console.log(item.id);
+                        return index % 2 === 1;
                       })
                       .map((item: Album, index: number) => {
                         return (
@@ -178,7 +175,7 @@ class Info extends Component<ComponentProps, ComponentState> {
                               </View>
                             </View>
                           </View>
-                        )
+                        );
                       })
                   ) : (
                     <View />
@@ -189,8 +186,8 @@ class Info extends Component<ComponentProps, ComponentState> {
           </View>
         </View>
       </View>
-    )
+    );
   }
 }
 
-export default Info as ComponentClass<PageOwnProps, PageState>
+export default Info as ComponentClass<PageOwnProps, PageState>;
