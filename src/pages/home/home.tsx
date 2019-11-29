@@ -1,36 +1,37 @@
-import { Image, Swiper, SwiperItem, View } from "@tarojs/components"
-import { connect } from "@tarojs/redux"
-import Taro, { Component, Config } from "@tarojs/taro"
-import { ComponentClass } from "react"
-import { AtIcon } from "taro-ui"
-import { image_data, item_datas } from "./data"
-import "./home.scss"
+import { Image, Swiper, SwiperItem, View } from "@tarojs/components";
+import { connect } from "@tarojs/redux";
+import Taro, { Component, Config } from "@tarojs/taro";
+import { ComponentClass } from "react";
+import { AtIcon } from "taro-ui";
+import { Album } from "../../store/model/data.d";
+import { image_data, item_datas } from "./data";
+import "./home.scss";
 
-type PageStateProps = {}
+type PageStateProps = {};
 
 type PageDispatchProps = {
-  handleTypeItemClick: () => void
-  handleComicClick: () => void
-  handleMoreClick: () => void
-}
+  handleTypeItemClick: () => void;
+  handleComicClick: () => void;
+  handleMoreClick: () => void;
+};
 
-type PageOwnProps = { dispatch(type: any): Promise<any> }
+type PageOwnProps = { dispatch(type: any): Promise<any> };
 
-type PageState = {}
+type PageState = {};
 
-type IProps = PageStateProps & PageDispatchProps & PageOwnProps
+type IProps = PageStateProps & PageDispatchProps & PageOwnProps;
 
 interface Home {
-  props: IProps
+  props: IProps;
 }
 interface ComponentProps {
   /* declare your component's props here */
 }
 interface ComponentState {
-  type: string
-  title: string
-  covers
-  isRefresh: boolean
+  type: string;
+  title: string;
+  covers: Album[];
+  isRefresh: boolean;
 }
 
 @connect(
@@ -42,61 +43,61 @@ interface ComponentState {
           //随笔
           Taro.navigateTo({
             url: "/pages/archives/archives"
-          })
-          break
+          });
+          break;
         }
         case 1: {
           //随手拍
           Taro.navigateTo({
             url: "/pages/album/album?type="
-          })
-          break
+          });
+          break;
         }
         case 2: {
           //小玩意
           Taro.navigateTo({
             url: "/pages/toy/toy"
-          })
-          break
+          });
+          break;
         }
         case 3: {
           //漫展
           Taro.navigateTo({
             url: `/pages/category/category?title=${"漫展"}&tags=${"cosplay"}`
-          })
-          break
+          });
+          break;
         }
         case 4: {
           //今月份
           Taro.navigateTo({
             url: "/pages/monthly/monthly"
-          })
-          break
+          });
+          break;
         }
         case 5: {
           //来一杯续命吧
           Taro.navigateTo({
             url: `/pages/comic/comic?id=${10}&title=${"这个夏天喝过的奶茶"}&subject=${"来一杯续命吧"}`
-          })
-          break
+          });
+          break;
         }
         default: {
           Taro.navigateTo({
             url: "/pages/album/album?type="
-          })
-          break
+          });
+          break;
         }
       }
     },
     handleComicClick(id: number, title: string, subject: string) {
       Taro.navigateTo({
         url: `/pages/comic/comic?id=${id}&title=${title}&subject=${subject}`
-      })
+      });
     },
     handleMoreClick() {
       Taro.navigateTo({
         url: "/pages/album/album?type="
-      })
+      });
     }
   })
 )
@@ -105,37 +106,37 @@ class Home extends Component<ComponentProps, ComponentState> {
     navigationBarTitleText: "带着毛驴去兜风",
     enablePullDownRefresh: true,
     backgroundTextStyle: "dark"
-  }
+  };
   constructor(props, context) {
-    super(props, context)
-    Taro.setNavigationBarTitle({ title: "带着毛驴去兜风" })
+    super(props, context);
+    Taro.setNavigationBarTitle({ title: "带着毛驴去兜风" });
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log(this.props, nextProps)
+    console.log(this.props, nextProps);
   }
 
   componentWillMount() {
-    this.getAlbum()
+    this.getAlbum();
   }
 
   onShareAppMessage(res) {
     if (res.from === "button") {
       // 来自页面内转发按钮
-      console.log(res.target)
+      console.log(res.target);
     }
     return {
       title: "带着毛驴去兜风",
       path: "/pages/home/home"
-    }
+    };
   }
 
   onPullDownRefresh() {
     if (!this.state.isRefresh) {
-      this.getAlbum()
+      this.getAlbum();
       this.setState({
         isRefresh: true
-      })
+      });
     }
   }
 
@@ -147,13 +148,13 @@ class Home extends Component<ComponentProps, ComponentState> {
         size: 6
       }
     }).then(res => {
-      Taro.stopPullDownRefresh()
+      Taro.stopPullDownRefresh();
       this.setState({
         covers: res.data,
         isRefresh: false
-      })
-    })
-  }
+      });
+    });
+  };
 
   render() {
     return (
@@ -168,7 +169,6 @@ class Home extends Component<ComponentProps, ComponentState> {
           </View>
           <View className="lay_fg">
             <View className="lay_container">
-              {/* <View className="at-article__h3 grid_title">fylder</View> */}
               <View className="at-row at-row--wrap grid_lay">
                 {item_datas.map((item, index) => {
                   return (
@@ -190,7 +190,7 @@ class Home extends Component<ComponentProps, ComponentState> {
                         {item.value}
                       </View>
                     </View>
-                  )
+                  );
                 })}
               </View>
               <Swiper
@@ -212,31 +212,33 @@ class Home extends Component<ComponentProps, ComponentState> {
                         mode="widthFix"
                       />
                     </SwiperItem>
-                  )
+                  );
                 })}
               </Swiper>
 
               <View className="second_lay">
-                <View className="at-row">
-                  <View className="at-col at-col-10">
+                <View className="at-row second_lay_head">
+                  <View className="at-col at-col-9 tag_lay">
                     <View className="at-row at-row__align--center">
                       <View className="recent_tag" />
                       <View className="at-col recent_news">最新相册</View>
                     </View>
                   </View>
-                  <View
-                    className="at-col at-col-2 recent_more"
-                    onClick={this.props.handleMoreClick.bind(this)}
-                  >
-                    更多
+                  <View className="at-col at-col-3 recent_more_lay">
+                    <View
+                      className="recent_more"
+                      onClick={this.props.handleMoreClick.bind(this)}
+                    >
+                      更多
+                    </View>
                   </View>
                 </View>
-                <View className="at-row at-row--wrap">
-                  {this.state.covers.map((item, index) => {
+                <View className="at-row at-row--wrap second_lay_list">
+                  {this.state.covers.map((item: Album, index: number) => {
                     return (
                       <View className="at-col at-col-6" key={item.id}>
                         <View
-                          className="first_item_lay"
+                          className="cover_item_lay"
                           onClick={this.props.handleComicClick.bind(
                             this,
                             item.id,
@@ -245,7 +247,7 @@ class Home extends Component<ComponentProps, ComponentState> {
                           )}
                         >
                           <Image
-                            className="first_item_img"
+                            className="cover_item_img"
                             src={item.cover}
                             mode="aspectFill"
                             lazyLoad={true}
@@ -258,7 +260,7 @@ class Home extends Component<ComponentProps, ComponentState> {
                           </View>
                         </View>
                       </View>
-                    )
+                    );
                   })}
                 </View>
               </View>
@@ -266,7 +268,7 @@ class Home extends Component<ComponentProps, ComponentState> {
           </View>
         </View>
       </View>
-    )
+    );
   }
 }
 
@@ -277,4 +279,4 @@ class Home extends Component<ComponentProps, ComponentState> {
 //
 // #endregion
 
-export default Home as ComponentClass<PageOwnProps, PageState>
+export default Home as ComponentClass<PageOwnProps, PageState>;
