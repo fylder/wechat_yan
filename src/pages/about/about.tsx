@@ -1,32 +1,32 @@
-import { Image, Text, View } from "@tarojs/components"
-import { connect } from "@tarojs/redux"
-import Taro, { Component, Config } from "@tarojs/taro"
-import { ComponentClass } from "react"
-import "./about.scss"
+import { Image, Text, View } from "@tarojs/components";
+import { connect } from "@tarojs/redux";
+import Taro, { Component, Config } from "@tarojs/taro";
+import { ComponentClass } from "react";
+import "./about.scss";
 
-type PageStateProps = {}
+type PageStateProps = {};
 
-type PageDispatchProps = {}
+type PageDispatchProps = {};
 
 type PageOwnProps = {
-  dispatch(type: any): Promise<any>
-}
+  dispatch(type: any): Promise<any>;
+};
 
-type PageState = {}
+type PageState = {};
 
-type IProps = PageStateProps & PageDispatchProps & PageOwnProps
+type IProps = PageStateProps & PageDispatchProps & PageOwnProps;
 
 interface About {
-  props: IProps
+  props: IProps;
 }
 
 interface ComponentProps {
   /* declare your component's props here */
 }
 interface ComponentState {
-  type: string
-  title: string
-  datas
+  type: string;
+  title: string;
+  datas;
 }
 
 @connect(({}) => ({}))
@@ -40,13 +40,7 @@ class About extends Component<ComponentProps, ComponentState> {
    */
   config: Config = {
     navigationBarTitleText: "fylder"
-  }
-  constructor(props, context) {
-    super(props, context)
-  }
-  componentWillReceiveProps(nextProps) {
-    console.log(this.props, nextProps)
-  }
+  };
 
   componentWillMount() {}
 
@@ -114,7 +108,7 @@ class About extends Component<ComponentProps, ComponentState> {
           </View>
         </View>
       </View>
-    )
+    );
   }
 }
 
@@ -125,4 +119,4 @@ class About extends Component<ComponentProps, ComponentState> {
 //
 // #endregion
 
-export default About as ComponentClass<PageOwnProps, PageState>
+export default About as ComponentClass<PageOwnProps, PageState>;

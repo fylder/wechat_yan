@@ -5,7 +5,11 @@ import { ComponentClass } from "react";
 import { Album } from "../../store/model/data.d";
 import "./album.scss";
 
-type PageStateProps = {};
+type PageStateProps = {
+  album: {
+    album: Album[];
+  };
+};
 
 type PageDispatchProps = {};
 
@@ -30,7 +34,9 @@ interface ComponentState {
   datas: Album[];
 }
 
-@connect(({}) => ({}))
+@connect(({ album }) => ({
+  album
+}))
 class Info extends Component<ComponentProps, ComponentState> {
   /**
    * 指定config的类型声明为: Taro.Config
@@ -54,6 +60,7 @@ class Info extends Component<ComponentProps, ComponentState> {
 
   componentWillMount() {
     Taro.showNavigationBarLoading();
+    // this.props.dispatch(getList());
     Taro.request({
       url: "https://wechat.fylder.me:8022/wechat/album",
       method: "GET",
@@ -65,11 +72,6 @@ class Info extends Component<ComponentProps, ComponentState> {
       });
     });
   }
-  componentWillUnmount() {}
-
-  componentDidShow() {}
-
-  componentDidHide() {}
 
   imageError = index => {
     const defaultImg =
@@ -85,6 +87,7 @@ class Info extends Component<ComponentProps, ComponentState> {
     });
   };
   render() {
+    // console.log(`album:${this.props.album.album.length}`);
     return (
       <View>
         <Image
@@ -109,8 +112,7 @@ class Info extends Component<ComponentProps, ComponentState> {
                 <View className="at-col at-col-6 card-ahh">
                   {this.state.datas != undefined ? (
                     this.state.datas
-                      .filter((item: Album, index: number) => {
-                        console.log(item.id);
+                      .filter((_item: Album, index: number) => {
                         return index % 2 === 0;
                       })
                       .map((item: Album, index: number) => {
@@ -147,8 +149,7 @@ class Info extends Component<ComponentProps, ComponentState> {
                 <View className="at-col at-col-6">
                   {this.state.datas != undefined ? (
                     this.state.datas
-                      .filter((item: Album, index: number) => {
-                        console.log(item.id);
+                      .filter((_item: Album, index: number) => {
                         return index % 2 === 1;
                       })
                       .map((item: Album, index: number) => {

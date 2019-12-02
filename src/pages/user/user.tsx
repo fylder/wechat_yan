@@ -1,35 +1,35 @@
-import { Text, View } from "@tarojs/components"
-import { connect } from "@tarojs/redux"
-import Taro, { Component, Config } from "@tarojs/taro"
-import { ComponentClass } from "react"
-import { AtAvatar, AtButton } from "taro-ui"
-import { detail, exit } from "../../actions/userAction"
-import "./user.scss"
+import { Text, View } from "@tarojs/components";
+import { connect } from "@tarojs/redux";
+import Taro, { Component, Config } from "@tarojs/taro";
+import { ComponentClass } from "react";
+import { AtAvatar, AtButton } from "taro-ui";
+import { detail, exit } from "../../actions/userAction";
+import "./user.scss";
 
 type PageStateProps = {
   user: {
-    id: string
-    username: string
-    avatar: string
-  }
-}
+    id: string;
+    username: string;
+    avatar: string;
+  };
+};
 
 type PageDispatchProps = {
-  handleLogin: () => void
-  handleClickItem: (position: number) => void
-  handleExit: () => void
-}
+  handleLogin: () => void;
+  handleClickItem: (position: number) => void;
+  handleExit: () => void;
+};
 
 type PageOwnProps = {
-  dispatch(type: any): Promise<any>
-}
+  dispatch(type: any): Promise<any>;
+};
 
-type PageState = {}
+type PageState = {};
 
-type IProps = PageStateProps & PageDispatchProps & PageOwnProps
+type IProps = PageStateProps & PageDispatchProps & PageOwnProps;
 
 interface User {
-  props: IProps
+  props: IProps;
 }
 
 @connect(
@@ -39,14 +39,14 @@ interface User {
   dispatch => ({
     handleLogin() {
       Taro.getUserInfo().then(result => {
-        const nickName = result.userInfo.nickName
-        const avatarUrl = result.userInfo.avatarUrl
-        dispatch(detail("1", nickName, avatarUrl))
-      })
+        const nickName = result.userInfo.nickName;
+        const avatarUrl = result.userInfo.avatarUrl;
+        dispatch(detail("1", nickName, avatarUrl));
+      });
     },
 
     handleExit() {
-      dispatch(exit())
+      dispatch(exit());
     }
   })
 )
@@ -60,23 +60,14 @@ class User extends Component {
    */
   config: Config = {
     navigationBarTitleText: "用户信息"
-  }
+  };
   constructor(props, context) {
-    super(props, context)
-    this.state = { id: 0 }
+    super(props, context);
+    this.state = { id: 0 };
   }
-  componentWillReceiveProps(nextProps) {
-    console.log(this.props, nextProps)
-  }
-
-  componentWillUnmount() {}
-
-  componentDidShow() {}
-
-  componentDidHide() {}
 
   render() {
-    let infoContent
+    let infoContent;
     if (this.props.user.username && this.props.user.username.length > 0) {
       infoContent = (
         <View className="index">
@@ -101,7 +92,7 @@ class User extends Component {
             注销
           </AtButton>
         </View>
-      )
+      );
     } else {
       infoContent = (
         <View className="index">
@@ -125,9 +116,9 @@ class User extends Component {
             登录
           </AtButton>
         </View>
-      )
+      );
     }
-    return <View>{infoContent}</View>
+    return <View>{infoContent}</View>;
   }
 }
 
@@ -138,4 +129,4 @@ class User extends Component {
 //
 // #endregion
 
-export default User as ComponentClass<PageOwnProps, PageState>
+export default User as ComponentClass<PageOwnProps, PageState>;

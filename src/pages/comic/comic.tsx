@@ -1,39 +1,39 @@
-import { Block, Image, Text, View } from "@tarojs/components"
-import { connect } from "@tarojs/redux"
-import Taro, { Component, Config } from "@tarojs/taro"
-import { ComponentClass } from "react"
-import ImgLoader from "../../components/img-loader/img-loader"
-import { Picture } from "../../model/AlbumModel"
-import linePng from "../../static/img/line.jpg"
-import "./comic.scss"
+import { Block, Image, Text, View } from "@tarojs/components";
+import { connect } from "@tarojs/redux";
+import Taro, { Component, Config } from "@tarojs/taro";
+import { ComponentClass } from "react";
+import ImgLoader from "../../components/img-loader/img-loader";
+import { Picture } from "../../model/AlbumModel";
+import linePng from "../../static/img/line.jpg";
+import "./comic.scss";
 
-type PageStateProps = {}
+type PageStateProps = {};
 
-type PageDispatchProps = {}
+type PageDispatchProps = {};
 
 type PageOwnProps = {
-  dispatch(type: any): Promise<any>
-}
+  dispatch(type: any): Promise<any>;
+};
 
-type PageState = {}
+type PageState = {};
 
-type IProps = PageStateProps & PageDispatchProps & PageOwnProps
+type IProps = PageStateProps & PageDispatchProps & PageOwnProps;
 
 interface Info {
-  props: IProps
-  imgLoader: ImgLoader
-  hasLoad: boolean
+  props: IProps;
+  imgLoader: ImgLoader;
+  hasLoad: boolean;
 }
 
 interface ComponentProps {
   /* declare your component's props here */
 }
 interface ComponentState {
-  id: string
-  title: string
-  subject: string
-  datas: Picture[]
-  imgLoadList: Picture[]
+  id: string;
+  title: string;
+  subject: string;
+  datas: Picture[];
+  imgLoadList: Picture[];
 }
 
 /**
@@ -53,17 +53,17 @@ class Info extends Component<ComponentProps, ComponentState> {
    */
   config: Config = {
     navigationBarTitleText: "fylder"
-  }
+  };
   constructor(props, context) {
-    super(props, context)
-    this.imgLoader = new ImgLoader(this)
-    this.hasLoad = false
+    super(props, context);
+    this.imgLoader = new ImgLoader(this);
+    this.hasLoad = false;
 
-    const id = this.$router.params.id
-    const title = this.$router.params.title
-    const subject = this.$router.params.subject
+    const id = this.$router.params.id;
+    const title = this.$router.params.title;
+    const subject = this.$router.params.subject;
     if (subject) {
-      Taro.setNavigationBarTitle({ title })
+      Taro.setNavigationBarTitle({ title });
     }
 
     this.state = {
@@ -72,42 +72,39 @@ class Info extends Component<ComponentProps, ComponentState> {
       subject,
       datas: [],
       imgLoadList: []
-    }
-  }
-  componentWillReceiveProps(nextProps) {
-    console.log(this.props, nextProps)
+    };
   }
 
   componentWillMount() {
-    Taro.showNavigationBarLoading()
+    Taro.showNavigationBarLoading();
     Taro.request({
       url: "https://wechat.fylder.me:8022/wechat/picture/" + this.state.id,
       method: "GET",
       mode: "cors"
     }).then(res => {
-      Taro.hideNavigationBarLoading()
+      Taro.hideNavigationBarLoading();
       this.setState({
         datas: res.data
-      })
-    })
+      });
+    });
   }
 
   componentWillUpdate(props: any, state: any) {
     if (state.datas && state.datas.length > 0 && !this.hasLoad) {
-      this.hasLoad = true
+      this.hasLoad = true;
       state.datas.map((item: Picture) => {
         this.imgLoader.load(item.photo, (err, data) => {
           const datas = this.state.datas.map(item => {
             if (item.photo == data.src) {
-              item.loaded = true
+              item.loaded = true;
             }
-            return item
-          })
+            return item;
+          });
           this.setState({
             datas
-          })
-        })
-      })
+          });
+        });
+      });
     }
   }
 
@@ -119,20 +116,20 @@ class Info extends Component<ComponentProps, ComponentState> {
 
   imageError = index => {
     const defaultImg =
-      "http://img5.mtime.cn/pi/2019/03/30/100155.92232373_1000X1000.jpg"
-    const data = this.state.datas
-    data[index].photo = defaultImg
-    this.setState({ datas: data })
-  }
+      "http://img5.mtime.cn/pi/2019/03/30/100155.92232373_1000X1000.jpg";
+    const data = this.state.datas;
+    data[index].photo = defaultImg;
+    this.setState({ datas: data });
+  };
 
   handlePicture = (src: string) => {
     Taro.previewImage({
       urls: [src]
-    })
-  }
+    });
+  };
 
   render() {
-    let tag = linePng
+    let tag = linePng;
 
     return (
       <View>
@@ -170,7 +167,7 @@ class Info extends Component<ComponentProps, ComponentState> {
                     )}
                   </View>
                 </View>
-              )
+              );
             })}
           </Block>
           {/*  引入图片预加载组件  */}
@@ -185,12 +182,12 @@ class Info extends Component<ComponentProps, ComponentState> {
                   onError={this.imgLoader._imgOnLoadError.bind(this.imgLoader)}
                   style="width:0;height:0;opacity:0"
                 />
-              )
+              );
             })}
           </Block>
         </View>
       </View>
-    )
+    );
   }
 }
 
@@ -201,4 +198,4 @@ class Info extends Component<ComponentProps, ComponentState> {
 //
 // #endregion
 
-export default Info as ComponentClass<PageOwnProps, PageState>
+export default Info as ComponentClass<PageOwnProps, PageState>;

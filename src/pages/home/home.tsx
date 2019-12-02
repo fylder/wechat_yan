@@ -112,10 +112,6 @@ class Home extends Component<ComponentProps, ComponentState> {
     Taro.setNavigationBarTitle({ title: "带着毛驴去兜风" });
   }
 
-  componentWillReceiveProps(nextProps) {
-    console.log(this.props, nextProps);
-  }
-
   componentWillMount() {
     this.getAlbum();
   }

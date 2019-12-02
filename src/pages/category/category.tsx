@@ -1,38 +1,39 @@
-import { Image, View } from "@tarojs/components"
-import { connect } from "@tarojs/redux"
-import Taro, { Component, Config } from "@tarojs/taro"
-import { ComponentClass } from "react"
-import { Album } from "../../model/AlbumModel"
-import "./category.scss"
+import { Image, View } from "@tarojs/components";
+import { connect } from "@tarojs/redux";
+import Taro, { Component, Config } from "@tarojs/taro";
+import { ComponentClass } from "react";
+import { Album } from "../../model/AlbumModel";
+import "./category.scss";
+import { getDate } from "../../tools/time";
 
 type PageStateProps = {
   category: {
-    album: Album[]
-  }
-}
+    album: Album[];
+  };
+};
 
-type PageDispatchProps = {}
+type PageDispatchProps = {};
 
 type PageOwnProps = {
-  dispatch(type: any): Promise<any>
-}
+  dispatch(type: any): Promise<any>;
+};
 
-type PageState = {}
+type PageState = {};
 
-type IProps = PageStateProps & PageDispatchProps & PageOwnProps
+type IProps = PageStateProps & PageDispatchProps & PageOwnProps;
 
 interface Category {
-  props: IProps
+  props: IProps;
 }
 
 interface ComponentProps {
   /* declare your component's props here */
 }
 interface ComponentState {
-  title: string
-  tags: string
-  album: Album[]
-  cover: string
+  title: string;
+  tags: string;
+  album: Album[];
+  cover: string;
 }
 
 @connect(
@@ -44,13 +45,13 @@ interface ComponentState {
 class Category extends Component<ComponentProps, ComponentState> {
   config: Config = {
     navigationBarTitleText: "小玩意"
-  }
+  };
 
   constructor(props, context) {
-    super(props, context)
+    super(props, context);
     const title =
-      this.$router.params.title === undefined ? "" : this.$router.params.title
-    const tags = this.$router.params.tags
+      this.$router.params.title === undefined ? "" : this.$router.params.title;
+    const tags = this.$router.params.tags;
     this.state = {
       title,
       tags,
@@ -59,19 +60,16 @@ class Category extends Component<ComponentProps, ComponentState> {
         tags === "cosplay"
           ? "http://photo.fylder.me/photo_1568057246317.jpg?imageMogr2/auto-orient/thumbnail/!480x480r/blur/1x0/quality/75"
           : "http://spider.ws.126.net/6b1df938dab6a363b5a475c4e9e21345.jpeg"
-    }
-    Taro.setNavigationBarTitle({ title })
-  }
-  componentWillReceiveProps(nextProps) {
-    console.log(this.props, nextProps)
+    };
+    Taro.setNavigationBarTitle({ title });
   }
 
   componentWillMount() {
-    this.getAlbum()
+    this.getAlbum();
   }
 
   getAlbum = () => {
-    Taro.showNavigationBarLoading()
+    Taro.showNavigationBarLoading();
     Taro.request({
       url: "https://wechat.fylder.me:8022/wechat/album/tag",
       method: "POST",
@@ -80,24 +78,18 @@ class Category extends Component<ComponentProps, ComponentState> {
         tags: this.state.tags
       }
     }).then(res => {
-      Taro.hideNavigationBarLoading()
+      Taro.hideNavigationBarLoading();
       this.setState({
         album: res.data
-      })
-    })
-  }
+      });
+    });
+  };
 
   itemClick = (item: Album) => {
     Taro.navigateTo({
       url: `/pages/comic/comic?id=${item.id}&title=${item.name}&subject=${item.subject}`
-    })
-  }
-
-  //2019-07-07T19:02:37.000Z
-  getDate = (timeStr: string): string => {
-    var date = new Date(timeStr)
-    return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`
-  }
+    });
+  };
 
   render() {
     return (
@@ -127,15 +119,15 @@ class Category extends Component<ComponentProps, ComponentState> {
                   lazyLoad={true}
                 />
                 <View className="at-article__info item_lay_info font-content-small">
-                  {this.getDate(item.createdAt)}
+                  {getDate(item.createdAt)}
                 </View>
               </View>
-            )
+            );
           })}
         </View>
       </View>
-    )
+    );
   }
 }
 
-export default Category as ComponentClass<PageOwnProps, PageState>
+export default Category as ComponentClass<PageOwnProps, PageState>;

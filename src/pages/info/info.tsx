@@ -1,27 +1,27 @@
-import { View } from "@tarojs/components"
-import { connect } from "@tarojs/redux"
-import Taro, { Component, Config } from "@tarojs/taro"
-import { ComponentClass } from "react"
-import { AtAvatar, AtButton } from "taro-ui"
-import "./info.scss"
+import { View } from "@tarojs/components";
+import { connect } from "@tarojs/redux";
+import Taro, { Component, Config } from "@tarojs/taro";
+import { ComponentClass } from "react";
+import { AtAvatar, AtButton } from "taro-ui";
+import "./info.scss";
 
-type PageStateProps = {}
+type PageStateProps = {};
 
 type PageDispatchProps = {
-  handleInfo: () => void
-  handleClickItem: (type: string) => void
-}
+  handleInfo: () => void;
+  handleClickItem: (type: string) => void;
+};
 
 type PageOwnProps = {
-  dispatch(type: any): Promise<any>
-}
+  dispatch(type: any): Promise<any>;
+};
 
-type PageState = {}
+type PageState = {};
 
-type IProps = PageStateProps & PageDispatchProps & PageOwnProps
+type IProps = PageStateProps & PageDispatchProps & PageOwnProps;
 
 interface Info {
-  props: IProps
+  props: IProps;
 }
 
 @connect(
@@ -30,12 +30,12 @@ interface Info {
     handleInfo() {
       Taro.navigateTo({
         url: "/pages/about/about"
-      })
+      });
     },
     handleClickItem(type: string) {
       Taro.navigateTo({
         url: "/pages/album/album?type=" + type
-      })
+      });
     }
   })
 )
@@ -49,24 +49,15 @@ class Info extends Component {
    */
   config: Config = {
     navigationBarTitleText: "fylder"
-  }
+  };
   constructor(props, context) {
-    super(props, context)
-    this.state = { id: 0 }
+    super(props, context);
+    this.state = { id: 0 };
   }
-  componentWillReceiveProps(nextProps) {
-    console.log(this.props, nextProps)
-  }
-
-  componentWillUnmount() {}
-
-  componentDidShow() {}
-
-  componentDidHide() {}
 
   render() {
     const albumSrc =
-      "http://img5.mtime.cn/pi/2019/03/30/100155.92232373_1000X1000.jpg"
+      "http://img5.mtime.cn/pi/2019/03/30/100155.92232373_1000X1000.jpg";
 
     return (
       <View className="index">
@@ -124,7 +115,7 @@ class Info extends Component {
           骑行
         </AtButton>
       </View>
-    )
+    );
   }
 }
 
@@ -135,4 +126,4 @@ class Info extends Component {
 //
 // #endregion
 
-export default Info as ComponentClass<PageOwnProps, PageState>
+export default Info as ComponentClass<PageOwnProps, PageState>;

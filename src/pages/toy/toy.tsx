@@ -1,39 +1,40 @@
-import { Image, View } from "@tarojs/components"
-import { connect } from "@tarojs/redux"
-import Taro, { Component, Config } from "@tarojs/taro"
-import { ComponentClass } from "react"
-import { getList } from "../../actions/toyAction"
-import { Album } from "../../model/AlbumModel"
-import { TYPE_COMIC, TYPE_DEFAULT, TYPE_TOY } from "./data"
-import "./toy.scss"
+import { Image, View } from "@tarojs/components";
+import { connect } from "@tarojs/redux";
+import Taro, { Component, Config } from "@tarojs/taro";
+import { ComponentClass } from "react";
+import { getList } from "../../actions/toyAction";
+import { Album } from "../../model/AlbumModel";
+import { TYPE_COMIC, TYPE_DEFAULT, TYPE_TOY } from "./data";
+import "./toy.scss";
+import { getDate } from "../../tools/time";
 
 type PageStateProps = {
   toy: {
-    album: Album[]
-  }
-}
+    album: Album[];
+  };
+};
 
-type PageDispatchProps = {}
+type PageDispatchProps = {};
 
 type PageOwnProps = {
-  dispatch(type: any): Promise<any>
-}
+  dispatch(type: any): Promise<any>;
+};
 
-type PageState = {}
+type PageState = {};
 
-type IProps = PageStateProps & PageDispatchProps & PageOwnProps
+type IProps = PageStateProps & PageDispatchProps & PageOwnProps;
 
 interface Toy {
-  props: IProps
+  props: IProps;
 }
 
 interface ComponentProps {
   /* declare your component's props here */
 }
 interface ComponentState {
-  id: number
-  datas: any
-  album: Album[]
+  id: number;
+  datas: any;
+  album: Album[];
 }
 
 @connect(
@@ -52,38 +53,32 @@ class Toy extends Component<ComponentProps, ComponentState> {
    */
   config: Config = {
     navigationBarTitleText: "小玩意"
-  }
+  };
 
-  constructor(props, context) {
-    super(props, context)
-    props.dispatch(getList())
+  componentWillMount() {
+    console.log("toy componentWillMount");
+    this.props.dispatch(getList());
   }
 
   imageError = index => {
     const defaultImg =
-      "http://img5.mtime.cn/pi/2019/03/30/100155.92232373_1000X1000.jpg"
-    const data = this.state.datas
-    data[index].src = defaultImg
-    this.setState({ datas: data })
-  }
+      "http://img5.mtime.cn/pi/2019/03/30/100155.92232373_1000X1000.jpg";
+    const data = this.state.datas;
+    data[index].src = defaultImg;
+    this.setState({ datas: data });
+  };
 
   itemClick = (id: number, title: string, subject: string) => {
     Taro.navigateTo({
       url: `/pages/comic/comic?id=${id}&title=${title}&subject=${subject}`
-    })
-  }
+    });
+  };
 
   categoryItemClick = (title: string, tags: string) => {
     Taro.navigateTo({
       url: `/pages/category/category?title=${title}&tags=${tags}`
-    })
-  }
-
-  //2019-07-07T19:02:37.000Z
-  getDate = (timeStr: string): string => {
-    var date = new Date(timeStr)
-    return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`
-  }
+    });
+  };
 
   render() {
     return (
@@ -169,16 +164,16 @@ class Toy extends Component<ComponentProps, ComponentState> {
                     lazyLoad={true}
                   />
                   <View className="at-article__info item_lay_info font-content-small">
-                    {this.getDate(item.createdAt)}
+                    {getDate(item.createdAt)}
                   </View>
                 </View>
-              )
+              );
             })}
           </View>
         </View>
       </View>
-    )
+    );
   }
 }
 
-export default Toy as ComponentClass<PageOwnProps, PageState>
+export default Toy as ComponentClass<PageOwnProps, PageState>;

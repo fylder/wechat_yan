@@ -6,6 +6,7 @@ import ImgLoader from "../../components/img-loader/img-loader";
 import { Picture } from "../../model/AlbumModel";
 import linePng from "../../static/img/line.jpg";
 import "./monthly.scss";
+import { getDate } from "../../tools/time";
 
 type PageStateProps = {};
 
@@ -73,7 +74,6 @@ class Monthly extends Component<ComponentProps, ComponentState> {
       method: "POST",
       data: {
         type: "flower"
-        // type: "show"
       }
     }).then(resp => {
       Taro.hideNavigationBarLoading();
@@ -116,12 +116,6 @@ class Monthly extends Component<ComponentProps, ComponentState> {
     });
   };
 
-  //2019-07-07T19:02:37.000Z
-  getDate = (timeStr: string): string => {
-    var date = new Date(timeStr);
-    return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
-  };
-
   render() {
     let tag = linePng;
 
@@ -155,7 +149,7 @@ class Monthly extends Component<ComponentProps, ComponentState> {
                               {item.describe}
                             </View>
                             <View className="at-article__p describe">
-                              {this.getDate(item.createdAt)}
+                              {getDate(item.createdAt)}
                             </View>
                           </View>
                           <Image
