@@ -152,7 +152,8 @@ class Info extends Component<ComponentProps, ComponentState> {
                       src={tag}
                       mode="widthFix"
                     />
-                    {item.loaded && (
+                    {/* taro version:1.3.7 item不能更新 2019-12-09 11:37 */}
+                    {this.state.datas[index].loaded && (
                       <View className="at-article__section">
                         <View className="at-article__h3">{item.subject}</View>
                         <Image

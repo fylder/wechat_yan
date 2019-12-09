@@ -139,7 +139,7 @@ class Monthly extends Component<ComponentProps, ComponentState> {
                     src={tag}
                     mode="widthFix"
                   />
-                  {item.loaded && (
+                  {this.state.datas[index].loaded && (
                     <View className="at-article__section">
                       <View className="m_card">
                         <View className="card_tag">{item.subject}</View>
