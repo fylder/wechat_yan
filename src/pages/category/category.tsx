@@ -87,7 +87,7 @@ class Category extends Component<ComponentProps, ComponentState> {
 
   itemClick = (item: Album) => {
     Taro.navigateTo({
-      url: `/pages/comic/comic?id=${item.id}&title=${item.name}&subject=${item.subject}`
+      url: `/pages/comic/comic?id=${item.id}&title=${item.name}&subject=${item.subject}&cover=${item.cover}`
     });
   };
 

@@ -68,9 +68,9 @@ class Toy extends Component<ComponentProps, ComponentState> {
     this.setState({ datas: data });
   };
 
-  itemClick = (id: number, title: string, subject: string) => {
+  itemClick = (id: number, title: string, subject: string, cover: string) => {
     Taro.navigateTo({
-      url: `/pages/comic/comic?id=${id}&title=${title}&subject=${subject}`
+      url: `/pages/comic/comic?id=${id}&title=${title}&subject=${subject}&cover=${cover}`
     });
   };
 
@@ -150,8 +150,9 @@ class Toy extends Component<ComponentProps, ComponentState> {
                   onClick={this.itemClick.bind(
                     this,
                     item.id,
+                    item.name,
                     item.subject,
-                    item.name
+                    item.cover
                   )}
                 >
                   <View className="at-article__h3 item_lay_title">

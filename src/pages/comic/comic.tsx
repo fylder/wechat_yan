@@ -4,6 +4,7 @@ import Taro, { Component, Config } from "@tarojs/taro";
 import { ComponentClass } from "react";
 import ImgLoader from "../../components/img-loader/img-loader";
 import { Picture } from "../../model/AlbumModel";
+import head_bg from "../../static/img/head_title_bg.svg";
 import linePng from "../../static/img/line.jpg";
 import "./comic.scss";
 
@@ -32,6 +33,7 @@ interface ComponentState {
   id: string;
   title: string;
   subject: string;
+  cover: string;
   datas: Picture[];
   imgLoadList: Picture[];
 }
@@ -62,6 +64,7 @@ class Info extends Component<ComponentProps, ComponentState> {
     const id = this.$router.params.id;
     const title = this.$router.params.title;
     const subject = this.$router.params.subject;
+    const cover = this.$router.params.cover;
     if (subject) {
       Taro.setNavigationBarTitle({ title });
     }
@@ -70,6 +73,7 @@ class Info extends Component<ComponentProps, ComponentState> {
       id,
       title,
       subject,
+      cover,
       datas: [],
       imgLoadList: []
     };
@@ -134,14 +138,46 @@ class Info extends Component<ComponentProps, ComponentState> {
     return (
       <View>
         <View className="index">
-          <View className="info-card">
+          <View className="headn_lay">
+            <View className="head_card">
+              <Image
+                className="at-article__img head_img fade_in"
+                src={this.state.cover}
+                mode="aspectFill"
+              />
+              <View className="head_lay">
+                {/* <View className="head_title">
+                  <Text>ahh</Text>
+                </View> */}
+              </View>
+            </View>
+            <View className="content_lay">
+              <View className="content_padding_lay" />
+              <View className="subject_head">
+                <View className="head_subject_img_lay">
+                  <Image
+                    className="at-article__img head_subject_img"
+                    src={head_bg}
+                    mode="widthFix"
+                  />
+                </View>
+                <View className="head_subject_title">
+                  <Text className="head_subject_title_font">
+                    {this.state.subject}
+                  </Text>
+                </View>
+              </View>
+              <View className="content_footer_lay" />
+            </View>
+          </View>
+          {/* <View className="info-card">
             <View className="at-row at-row__align--center">
               <View className="info-index" />
               <View className="at-col">
                 <Text>{this.state.subject}</Text>
               </View>
             </View>
-          </View>
+          </View> */}
           <Block>
             {this.state.datas.map((item: Picture, index) => {
               return (
@@ -155,15 +191,26 @@ class Info extends Component<ComponentProps, ComponentState> {
                     {/* taro version:1.3.7 item不能更新 2019-12-09 11:37 */}
                     {this.state.datas[index].loaded && (
                       <View className="at-article__section">
-                        <View className="at-article__h3">{item.subject}</View>
-                        <Image
-                          className="at-article__img fade_in"
-                          src={item.photo}
-                          onError={this.imageError.bind(this, index)}
-                          mode="widthFix"
-                          lazyLoad={true}
-                          onClick={this.handlePicture.bind(this, item.photo)}
-                        />
+                        <View className="card_item">
+                          {item.describe === "" ||
+                          item.describe === undefined ? (
+                            <View />
+                          ) : (
+                            <View className="card_info">
+                              <View className="at-article__h3 title">
+                                {item.describe}
+                              </View>
+                            </View>
+                          )}
+                          <Image
+                            className="at-article__img fade_in"
+                            src={item.photo}
+                            onError={this.imageError.bind(this, index)}
+                            mode="widthFix"
+                            lazyLoad={true}
+                            onClick={this.handlePicture.bind(this, item.photo)}
+                          />
+                        </View>
                       </View>
                     )}
                   </View>

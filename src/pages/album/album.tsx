@@ -81,9 +81,14 @@ class Info extends Component<ComponentProps, ComponentState> {
     this.setState({ datas: data });
   };
 
-  handleItemClick = (id: number, title: string, subject: string) => {
+  handleItemClick = (
+    id: number,
+    title: string,
+    subject: string,
+    cover: string
+  ) => {
     Taro.navigateTo({
-      url: `/pages/comic/comic?id=${id}&title=${title}&subject=${subject}`
+      url: `/pages/comic/comic?id=${id}&title=${title}&subject=${subject}&cover=${cover}`
     });
   };
   render() {
@@ -124,7 +129,8 @@ class Info extends Component<ComponentProps, ComponentState> {
                                 this,
                                 item.id,
                                 item.name,
-                                item.subject
+                                item.subject,
+                                item.cover
                               )}
                             >
                               <View className="album-card">
@@ -161,7 +167,8 @@ class Info extends Component<ComponentProps, ComponentState> {
                                 this,
                                 item.id,
                                 item.name,
-                                item.subject
+                                item.subject,
+                                item.cover
                               )}
                             >
                               <View className="album-card">

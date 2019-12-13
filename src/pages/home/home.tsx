@@ -77,7 +77,7 @@ interface ComponentState {
         case 5: {
           //来一杯续命吧
           Taro.navigateTo({
-            url: `/pages/comic/comic?id=${10}&title=${"这个夏天喝过的奶茶"}&subject=${"来一杯续命吧"}`
+            url: `/pages/comic/comic?id=${10}&title=${"这个夏天喝过的奶茶"}&subject=${"来一杯续命吧"}&cover=${"http://photo.fylder.me/photo_1568054888322.jpg?imageMogr2/auto-orient/thumbnail/!1080x1080r/blur/1x0/quality/75"}`
           });
           break;
         }
@@ -89,9 +89,14 @@ interface ComponentState {
         }
       }
     },
-    handleComicClick(id: number, title: string, subject: string) {
+    handleComicClick(
+      id: number,
+      title: string,
+      subject: string,
+      cover: string
+    ) {
       Taro.navigateTo({
-        url: `/pages/comic/comic?id=${id}&title=${title}&subject=${subject}`
+        url: `/pages/comic/comic?id=${id}&title=${title}&subject=${subject}&cover=${cover}`
       });
     },
     handleMoreClick() {
@@ -239,7 +244,8 @@ class Home extends Component<ComponentProps, ComponentState> {
                             this,
                             item.id,
                             item.name,
-                            item.subject
+                            item.subject,
+                            item.cover
                           )}
                         >
                           <Image

@@ -1,4 +1,5 @@
 $color-primary: #e91e63;
+$color-white:#ffffff;
 
 @keyframes fadeIn {
   0% {
@@ -10,8 +11,95 @@ $color-primary: #e91e63;
   }
 }
 
-.btn {
-  margin: 1rem;
+.index {
+  background-color: rgb(255, 255, 255);
+}
+
+.headn_lay {
+
+  .head_card {
+    width: 100%;
+    height: 12rem;
+    background: $color-white;
+    z-index: 1;
+    position: absolute;
+
+    .head_img {
+      z-index: 0;
+      height: 12rem;
+      width: 100%;
+      position: relative;
+      -webkit-filter: blur(8px);
+      filter: blur(8px);
+    }
+
+    .head_lay {
+      height: 12rem;
+      z-index: 1;
+      top: -12rem;
+      position: relative;
+      display: flex;
+      align-items: center;
+
+      .head_title {
+        position: relative;
+        margin-left: 0.2rem;
+
+      }
+    }
+  }
+
+  .content_lay {
+    width: 100%;
+    // background-image: image("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDgwLjA5MyIgaGVpZ2h0PSI2NjEuNDg1IiB2aWV3Qm94PSIwIDAgMTA4MC4wOTMgNjYxLjQ4NSI+PGRlZnM+PHN0eWxlPi5he2ZpbGw6I2ZmZjt9PC9zdHlsZT48L2RlZnM+PHBhdGggY2xhc3M9ImEiIGQ9Ik0yMjMwLDgwNC40NzJzLjExOCwyMjYuNDIxLTIzOS42LDIyOS4wMzQtNjQxLjM3MywwLTY0MS4zNzMsMC0xOTguNTA5LTMuODE3LTE5OC45MjksMTkyLjAxNiwwLDI0MC40MzYsMCwyNDAuNDM2SDIyMzBaIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtMTE0OS45MDcgLTgwNC40NzIpIi8+PC9zdmc+");
+    z-index: 2;
+    position: relative;
+
+    .content_padding_lay {
+      height: 4rem;
+    }
+
+    .subject_head {
+      height: 8rem;
+
+      .head_subject_img_lay {
+        position: relative;
+
+        .head_subject_img {
+          height: 8rem;
+          width: 100%;
+          z-index: 3;
+          position: relative;
+        }
+      }
+
+      .head_subject_title {
+
+        height: 4rem;
+        width: fit-content;
+        position: relative;
+        z-index: 4;
+        top: -4rem;
+        display: flex;
+        align-items: center;
+
+        .head_subject_title_font {
+          color: #040C14;
+          font-size: 42rpx;
+          margin-left: 2rem;
+        }
+      }
+    }
+
+    .content_footer_lay {
+      height: 1rem;
+      width: 100%;
+      background: #ffffff;
+      // z-index: 4;
+      // position: relative;
+    }
+  }
+
 }
 
 .info-card {
@@ -26,7 +114,22 @@ $color-primary: #e91e63;
   }
 }
 
-
 .fade_in {
   animation: fadeIn 1s both;
+}
+
+.title {
+  margin-top: 1rem;
+  white-space: pre-line;
+}
+
+.card_item {
+  margin: 0 1rem;
+  box-shadow: 0.15rem 0.3rem 1.2rem rgba(201, 201, 201, 0.849), 0.15rem 0.3rem 0.5rem rgba(243, 70, 113, 0.116);
+  position: relative;
+  z-index: 1;
+
+  .card_info {
+    padding: 0.2rem 0 0;
+  }
 }

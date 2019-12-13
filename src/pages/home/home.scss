@@ -147,6 +147,7 @@ $second_padding: 0.75rem;
 
 // 最新相册
 $album_tag_height: 5.7rem;
+// $album_tag_height: 6.2rem;
 $album_tag_width: 1.2rem;
 $album_tag_size: 24rpx;
 
@@ -157,9 +158,11 @@ $album_tag_size: 24rpx;
   .album_item_img {
     width: calc(100% - #{$album_tag_width});
     height: calc(#{$album_tag_height} + 0.5rem);
+    // height: calc(#{$album_tag_height} + 0.4rem);
     z-index: 0;
     position: relative;
     border-radius: 0.4rem;
+    // border-radius: 0.4rem 0 0 0.4rem;
     box-shadow: -0.1rem 0.2rem 0.6rem rgb(218, 218, 218);
   }
 
@@ -175,6 +178,7 @@ $album_tag_size: 24rpx;
     background-color: #ffffff;
     box-shadow: 0.05rem 0.2rem 0.6rem rgb(218, 218, 218);
     border-radius: 0rem 0.5rem 0.5rem 0rem;
+    // border-radius: 0rem 0.4rem 0.4rem 0rem;
 
     .album_item_detail {
       width: fit-content;
