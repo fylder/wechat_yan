@@ -201,7 +201,7 @@ class Home extends Component<ComponentProps, ComponentState> {
                 vertical={false}
                 circular={true}
                 interval={3000}
-                indicatorDots={true}
+                indicatorDots={false}
                 autoplay={true}
               >
                 {image_data.map((item, index) => {
@@ -210,7 +210,7 @@ class Home extends Component<ComponentProps, ComponentState> {
                       <Image
                         src={item.image}
                         className="swiper-img"
-                        mode="widthFix"
+                        mode="aspectFill"
                       />
                     </SwiperItem>
                   );

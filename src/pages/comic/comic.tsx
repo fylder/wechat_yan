@@ -24,6 +24,7 @@ interface Info {
   props: IProps;
   imgLoader: ImgLoader;
   hasLoad: boolean;
+  hasCoverLoad: boolean;
 }
 
 interface ComponentProps {
@@ -34,8 +35,10 @@ interface ComponentState {
   title: string;
   subject: string;
   cover: string;
+  coverLoadUrl: string;
   datas: Picture[];
   imgLoadList: Picture[];
+  coverLoad: boolean;
 }
 
 /**
@@ -60,6 +63,7 @@ class Info extends Component<ComponentProps, ComponentState> {
     super(props, context);
     this.imgLoader = new ImgLoader(this);
     this.hasLoad = false;
+    this.hasCoverLoad = false;
 
     const id = this.$router.params.id;
     const title = this.$router.params.title;
@@ -74,8 +78,10 @@ class Info extends Component<ComponentProps, ComponentState> {
       title,
       subject,
       cover,
+      coverLoadUrl: "",
       datas: [],
-      imgLoadList: []
+      imgLoadList: [],
+      coverLoad: false
     };
   }
 
@@ -94,7 +100,15 @@ class Info extends Component<ComponentProps, ComponentState> {
   }
 
   componentWillUpdate(props: any, state: any) {
-    if (state.datas && state.datas.length > 0 && !this.hasLoad) {
+    if (state.cover && state.cover.length > 0 && !this.hasCoverLoad) {
+      this.hasCoverLoad = true;
+      this.imgLoader.load(state.cover, (err, data) => {
+        this.setState({
+          coverLoadUrl: state.src,
+          coverLoad: true
+        });
+      });
+    } else if (state.datas && state.datas.length > 0 && !this.hasLoad) {
       this.hasLoad = true;
       state.datas.map((item: Picture) => {
         this.imgLoader.load(item.photo, (err, data) => {
@@ -140,11 +154,25 @@ class Info extends Component<ComponentProps, ComponentState> {
         <View className="index">
           <View className="headn_lay">
             <View className="head_card">
-              <Image
-                className="at-article__img head_img fade_in"
-                src={this.state.cover}
-                mode="aspectFill"
-              />
+              <Block>
+                {this.state.coverLoad && (
+                  <Image
+                    className="at-article__img head_img fade_in"
+                    src={this.state.cover}
+                    mode="aspectFill"
+                  />
+                )}
+              </Block>
+              {/*  引入图片预加载组件  */}
+              <Block>
+                <Image
+                  src={this.state.cover}
+                  data-src={this.state.cover}
+                  onLoad={this.imgLoader._imgOnLoad.bind(this.imgLoader)}
+                  onError={this.imgLoader._imgOnLoadError.bind(this.imgLoader)}
+                  style="width:0;height:0;opacity:0"
+                />
+              </Block>
               <View className="head_lay">
                 {/* <View className="head_title">
                   <Text>ahh</Text>
