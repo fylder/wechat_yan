@@ -164,7 +164,8 @@ class Home extends Component<ComponentProps, ComponentState> {
           <View className="lay_bg">
             <Image
               className="lay_img"
-              src="http://img5.mtime.cn/pi/2019/05/29/083826.86010876_1000X1000.jpg"
+              // src="https://img3.doubanio.com/view/photo/l/public/p2562920541.webp"
+              src="https://img1.doubanio.com/view/photo/l/public/p2562920538.webp"
               mode="aspectFill"
             />
           </View>
