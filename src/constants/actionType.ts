@@ -8,3 +8,6 @@ export const TOY_LIST = "TOY_LIST";
 
 //album
 export const ALBUM_LIST = "ALBUM_LIST";
+
+//photo
+export const PHOTO_LIST = "PHOTO_LIST";

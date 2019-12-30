@@ -173,7 +173,7 @@ class Monthly extends Component<ComponentProps, ComponentState> {
             {this.state.datas.map((item: Picture, index) => {
               return (
                 <Image
-                  key={index}
+                  key={item.id}
                   src={item.photo}
                   data-src={item.photo}
                   onLoad={this.imgLoader._imgOnLoad.bind(this.imgLoader)}

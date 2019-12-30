@@ -2,13 +2,19 @@ import { Block, Image, Text, View } from "@tarojs/components";
 import { connect } from "@tarojs/redux";
 import Taro, { Component, Config } from "@tarojs/taro";
 import { ComponentClass } from "react";
+import { getList } from "../../actions/photoAction";
 import ImgLoader from "../../components/img-loader/img-loader";
 import { Picture } from "../../model/AlbumModel";
+import { Photo } from "../../model/PhotoModel";
 import head_bg from "../../static/img/head_title_bg.svg";
 import linePng from "../../static/img/line.jpg";
 import "./comic.scss";
 
-type PageStateProps = {};
+type PageStateProps = {
+  photo: {
+    photos: Array<Photo>;
+  };
+};
 
 type PageDispatchProps = {};
 
@@ -42,10 +48,10 @@ interface ComponentState {
 }
 
 /**
- * 照片详情
+ * 相册照片详情
  */
 @connect(
-  ({}) => ({}),
+  ({ photo }) => ({ photo }),
   dispatch => ({})
 )
 class Info extends Component<ComponentProps, ComponentState> {
@@ -68,7 +74,16 @@ class Info extends Component<ComponentProps, ComponentState> {
     const id = this.$router.params.id;
     const title = this.$router.params.title;
     const subject = this.$router.params.subject;
-    const cover = this.$router.params.cover;
+    let cover = this.$router.params.cover;
+
+    if (cover === undefined) {
+      cover = "";
+    } else {
+      //参数传递会过滤`?`
+      const imgStyle =
+        "?imageMogr2/auto-orient/thumbnail/!480x480r/blur/1x0/quality/75";
+      cover = cover.split("?")[0] + imgStyle;
+    }
     if (subject) {
       Taro.setNavigationBarTitle({ title });
     }
@@ -86,17 +101,18 @@ class Info extends Component<ComponentProps, ComponentState> {
   }
 
   componentWillMount() {
-    Taro.showNavigationBarLoading();
-    Taro.request({
-      url: "https://wechat.fylder.me:8022/wechat/picture/" + this.state.id,
-      method: "GET",
-      mode: "cors"
-    }).then(res => {
-      Taro.hideNavigationBarLoading();
-      this.setState({
-        datas: res.data
-      });
-    });
+    let photoList = this.props.photo.photos;
+
+    let hasData = false;
+    for (let item of photoList) {
+      if (item.id == this.state.id) {
+        hasData = true;
+        break;
+      }
+    }
+    if (!hasData) {
+      this.props.dispatch(getList(this.state.id));
+    }
   }
 
   componentWillUpdate(props: any, state: any) {
@@ -148,6 +164,15 @@ class Info extends Component<ComponentProps, ComponentState> {
 
   render() {
     let tag = linePng;
+    const photoList: Array<Photo> = this.props.photo.photos;
+    for (let item of photoList) {
+      if (item.id === this.state.id) {
+        this.setState({
+          datas: item.pictures
+        });
+        break;
+      }
+    }
 
     return (
       <View>
@@ -207,41 +232,38 @@ class Info extends Component<ComponentProps, ComponentState> {
             </View>
           </View> */}
           <Block>
-            {this.state.datas.map((item: Picture, index) => {
+            {this.state.datas.map((item: Picture, index: number) => {
               return (
-                <View>
-                  <View className="at-article__content" key={item.id}>
-                    <Image
-                      className="at-article__img"
-                      src={tag}
-                      mode="widthFix"
-                    />
-                    {/* taro version:1.3.7 item不能更新 2019-12-09 11:37 */}
-                    {this.state.datas[index].loaded && (
-                      <View className="at-article__section">
-                        <View className="card_item">
-                          {item.describe === "" ||
-                          item.describe === undefined ? (
-                            <View />
-                          ) : (
-                            <View className="card_info">
-                              <View className="at-article__h3 title">
-                                {item.describe}
-                              </View>
+                <View className="at-article__content" key={item.id}>
+                  <Image
+                    className="at-article__img"
+                    src={tag}
+                    mode="widthFix"
+                  />
+                  {/* taro version:1.3.7 item不能更新 2019-12-09 11:37 */}
+                  {this.state.datas[index].loaded && (
+                    <View className="at-article__section">
+                      <View className="card_item">
+                        {item.describe === "" || item.describe === undefined ? (
+                          <View />
+                        ) : (
+                          <View className="card_info">
+                            <View className="at-article__h3 title">
+                              {item.describe}
                             </View>
-                          )}
-                          <Image
-                            className="at-article__img fade_in"
-                            src={item.photo}
-                            onError={this.imageError.bind(this, index)}
-                            mode="widthFix"
-                            lazyLoad={true}
-                            onClick={this.handlePicture.bind(this, item.photo)}
-                          />
-                        </View>
+                          </View>
+                        )}
+                        <Image
+                          className="at-article__img fade_in"
+                          src={item.photo}
+                          onError={this.imageError.bind(this, index)}
+                          mode="widthFix"
+                          lazyLoad={true}
+                          onClick={this.handlePicture.bind(this, item.photo)}
+                        />
                       </View>
-                    )}
-                  </View>
+                    </View>
+                  )}
                 </View>
               );
             })}
@@ -251,7 +273,7 @@ class Info extends Component<ComponentProps, ComponentState> {
             {this.state.datas.map((item: Picture, index) => {
               return (
                 <Image
-                  key={index}
+                  key={item.id}
                   src={item.photo}
                   data-src={item.photo}
                   onLoad={this.imgLoader._imgOnLoad.bind(this.imgLoader)}

@@ -10,10 +10,15 @@ export const sendList = album => {
 
 export const getList = () => {
   return async (dispatch: any) => {
+    Taro.showNavigationBarLoading();
     const resp = await Taro.request({
       url: "https://wechat.fylder.me:8022/wechat/album",
-      method: "GET"
+      method: "GET",
+      mode: "cors"
     });
-    dispatch(sendList(resp.data));
+    setTimeout(() => {
+      Taro.hideNavigationBarLoading();
+      dispatch(sendList(resp.data));
+    }, 500);
   };
 };

@@ -2,6 +2,7 @@ import { Image, Text, View } from "@tarojs/components";
 import { connect } from "@tarojs/redux";
 import Taro, { Component, Config } from "@tarojs/taro";
 import { ComponentClass } from "react";
+import { getList } from "../../actions/albumAction";
 import { Album } from "../../store/model/data.d";
 import "./album.scss";
 
@@ -59,18 +60,10 @@ class Info extends Component<ComponentProps, ComponentState> {
   }
 
   componentWillMount() {
-    Taro.showNavigationBarLoading();
-    // this.props.dispatch(getList());
-    Taro.request({
-      url: "https://wechat.fylder.me:8022/wechat/album",
-      method: "GET",
-      mode: "cors"
-    }).then(res => {
-      Taro.hideNavigationBarLoading();
-      this.setState({
-        datas: res.data
-      });
-    });
+    const albumList = this.props.album.album;
+    if (albumList.length < 1) {
+      this.props.dispatch(getList());
+    }
   }
 
   imageError = index => {
@@ -92,7 +85,10 @@ class Info extends Component<ComponentProps, ComponentState> {
     });
   };
   render() {
-    // console.log(`album:${this.props.album.album.length}`);
+    const albumList = this.props.album.album;
+    this.setState({
+      datas: albumList
+    });
     return (
       <View>
         <Image

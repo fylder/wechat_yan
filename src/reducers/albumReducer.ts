@@ -7,7 +7,6 @@ import { ALBUM_LIST } from "../constants/actionType";
 export default function album(state = { album: [] }, action) {
   switch (action.type) {
     case ALBUM_LIST:
-      console.log(`reducer:${ALBUM_LIST}`);
       return {
         ...state,
         album: action.album
