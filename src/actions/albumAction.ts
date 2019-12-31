@@ -16,9 +16,7 @@ export const getList = () => {
       method: "GET",
       mode: "cors"
     });
-    setTimeout(() => {
-      Taro.hideNavigationBarLoading();
-      dispatch(sendList(resp.data));
-    }, 500);
+    Taro.hideNavigationBarLoading();
+    dispatch(sendList(resp.data));
   };
 };
