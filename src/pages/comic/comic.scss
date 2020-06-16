@@ -1,5 +1,7 @@
 $color-primary: #e91e63;
 $color-white:#ffffff;
+$img-height:400px;
+$lay-height:160px;
 
 @keyframes fadeIn {
   0% {
@@ -19,14 +21,14 @@ $color-white:#ffffff;
 
   .head_card {
     width: 100%;
-    height: 12rem;
+    height: $img-height;
     background: $color-white;
     z-index: 1;
     position: absolute;
 
     .head_img {
       z-index: 0;
-      height: 12rem;
+      height: $img-height;
       width: 100%;
       position: relative;
       -webkit-filter: blur(8px);
@@ -34,16 +36,16 @@ $color-white:#ffffff;
     }
 
     .head_lay {
-      height: 12rem;
+      height: $img-height;
       z-index: 1;
-      top: -12rem;
+      top: -$img-height;
       position: relative;
       display: flex;
       align-items: center;
 
       .head_title {
         position: relative;
-        margin-left: 0.2rem;
+        margin-left: 8px;
 
       }
     }
@@ -56,17 +58,17 @@ $color-white:#ffffff;
     position: relative;
 
     .content_padding_lay {
-      height: 4rem;
+      height: $lay-height;
     }
 
     .subject_head {
-      height: 8rem;
+      height: 280px;
 
       .head_subject_img_lay {
         position: relative;
 
         .head_subject_img {
-          height: 8rem;
+          height: 280px;
           width: 100%;
           z-index: 3;
           position: relative;
@@ -75,24 +77,24 @@ $color-white:#ffffff;
 
       .head_subject_title {
 
-        height: 4rem;
+        height: $lay-height;
         width: fit-content;
         position: relative;
         z-index: 4;
-        top: -4rem;
+        top: -$lay-height;
         display: flex;
         align-items: center;
 
         .head_subject_title_font {
           color: #040C14;
           font-size: 42rpx;
-          margin-left: 2rem;
+          margin-left: 48px;
         }
       }
     }
 
     .content_footer_lay {
-      height: 1rem;
+      height: 24px;
       width: 100%;
       background: #ffffff;
       // z-index: 4;
@@ -103,14 +105,14 @@ $color-white:#ffffff;
 }
 
 .info-card {
-  margin: 0.4rem;
-  padding: 0.5rem;
+  margin: 12px;
+  padding: 16px;
 
   .info-index {
     background: $color-primary;
-    width: 0.1rem;
-    height: 1rem;
-    margin-right: 0.2rem;
+    width: 4px;
+    height: 24px;
+    margin-right: 8px;
   }
 }
 
@@ -119,17 +121,17 @@ $color-white:#ffffff;
 }
 
 .title {
-  margin-top: 1rem;
+  margin-top: 24px;
   white-space: pre-line;
 }
 
 .card_item {
-  margin: 0 1rem;
-  box-shadow: 0.15rem 0.3rem 1.2rem rgba(201, 201, 201, 0.849), 0.15rem 0.3rem 0.5rem rgba(243, 70, 113, 0.116);
+  margin: 0 24px;
+  box-shadow: 2px 8px 20px rgba(201, 201, 201, 0.849), 2px 8px 16px rgba(243, 70, 113, 0.116);
   position: relative;
   z-index: 1;
 
   .card_info {
-    padding: 0.2rem 0 0;
+    padding: 8px 0 0;
   }
 }

@@ -165,7 +165,8 @@ class Home extends Component<ComponentProps, ComponentState> {
             <Image
               className="lay_img"
               // src="https://img3.doubanio.com/view/photo/l/public/p2562920541.webp"
-              src="https://img1.doubanio.com/view/photo/l/public/p2562920538.webp"
+              // src="https://img1.doubanio.com/view/photo/l/public/p2562920538.webp"
+              src="http://photo.fylder.me/photo_1592322731248.jpg"
               mode="aspectFill"
             />
           </View>
@@ -196,7 +197,7 @@ class Home extends Component<ComponentProps, ComponentState> {
                 })}
               </View>
               <Swiper
-                className="swiper-lay"
+                className="swiper_lay"
                 indicatorColor="#999"
                 indicatorActiveColor="#333"
                 vertical={false}

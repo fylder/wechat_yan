@@ -1,33 +1,34 @@
 $item-active:rgba(248, 211, 228, 0.904);
+$lay-height:320px;
 
 .lay {
 
   .header_lay {
     width: 100%;
-    height: 10rem;
+    height: $lay-height;
     display: flex;
     position: relative;
     z-index: 1;
 
     .header_img {
       width: 100%;
-      height: 10rem;
+      height: $lay-height;
       z-index: 1;
       position: absolute;
       -webkit-filter: blur(8px);
       filter: blur(8px);
     }
 
-    .subject-lay {
+    .subject_lay {
       z-index: 2;
       width: 100%;
-      height: 8rem;
+      height: 280px;
       position: absolute;
       justify-content: center;
       align-items: center;
       display: flex;
 
-      .subject-font {
+      .subject_font {
         color: white;
         font-size: 36rpx;
       }
@@ -36,18 +37,17 @@ $item-active:rgba(248, 211, 228, 0.904);
 
   .item_lay {
     width: 100%;
-    top: 6rem;
+    top: 240px;
     position: absolute;
     z-index: 2;
 
     .item_lay_container {
-      margin: 1rem 1rem 0.2rem;
+      margin: 24px 24px 6px;
       background-color: #ffffff;
       position: relative;
-      border-radius: 0.2rem;
+      border-radius: 6px;
 
-      // box-shadow: 0.15rem 0.6rem 1.2rem rgb(218, 218, 218);
-      box-shadow: 0.15rem 0.6rem 1.2rem rgba(201, 201, 201, 0.849), 0.15rem 0.6rem 0.5rem rgba(243, 70, 113, 0.116);
+      box-shadow: 4px 16px 24px rgba(201, 201, 201, 0.849), 4px 16px 12px rgba(243, 70, 113, 0.116);
 
       transition-duration: 0.5s;
       transition-timing-function: ease-out;
@@ -61,50 +61,21 @@ $item-active:rgba(248, 211, 228, 0.904);
       }
 
       .item_lay_title {
-        padding: 1rem 0 0.5rem;
+        padding: 24px 0 8px;
       }
 
       .item_lay_img {
         width: 100%;
-        height: 10rem;
+        height: $lay-height;
       }
 
       .item_lay_info {
-        padding: 0.5rem 0 0.5rem;
+        padding: 8px 0 8px;
+        font-size: 24px;
+        color: #888888;
       }
     }
 
-    .item_lay_container_head {
-      margin: 1rem 1rem 0.5rem;
-      background-color: #ffffff;
-      position: relative;
-      border-radius: 1rem 1rem 0rem 0rem;
-      // box-shadow: 0.15rem 0.6rem 1.2rem rgb(218, 218, 218);
-      box-shadow: 0.15rem 0.6rem 1.2rem rgba(201, 201, 201, 0.849), 0.15rem 0.6rem 0.5rem rgba(243, 70, 113, 0.116);
 
-      transition-duration: 0.5s;
-      transition-timing-function: ease-out;
-      /* 动画变幻速度 ease:减速(默认)  linear:匀速  ease-in:加速 ease-out:减速  ease-in-out:先加速后减速 */
-      transition-delay: 0s;
-      /* 动画延迟 */
-      transition: all 0.2s ease-in-out 0s;
-
-      &:active {
-        background-color: $item-active;
-      }
-
-      .item_lay_title {
-        padding: 1rem 0 0.5rem;
-      }
-
-      .item_lay_img {
-        width: 100%;
-        height: 10rem;
-      }
-
-      .item_lay_info {
-        padding: 0.5rem 0 0.5rem;
-      }
-    }
   }
 }

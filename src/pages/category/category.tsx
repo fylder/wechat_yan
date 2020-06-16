@@ -118,7 +118,7 @@ class Category extends Component<ComponentProps, ComponentState> {
                   mode="aspectFill"
                   lazyLoad={true}
                 />
-                <View className="at-article__info item_lay_info font-content-small">
+                <View className="at-article__info item_lay_info">
                   {getDate(item.createdAt)}
                 </View>
               </View>

@@ -92,16 +92,16 @@ class Info extends Component<ComponentProps, ComponentState> {
     return (
       <View>
         <Image
-          className="index-img"
+          className="index_img"
           src="http://spider.ws.126.net/6b1df938dab6a363b5a475c4e9e21345.jpeg"
           onError={this.imageError.bind(this, 1)}
           mode="aspectFill"
         />
         <View className="index">
-          <View className="info-card">
+          <View className="info_card">
             <View className="at-row at-row__align--center">
-              <View className="info-index" />
-              <View className="at-col info-font">
+              <View className="info_index" />
+              <View className="at-col info_font">
                 <Text>{this.state.title}</Text>
               </View>
             </View>
@@ -110,7 +110,7 @@ class Info extends Component<ComponentProps, ComponentState> {
             <View className="at-col at-col-11">
               <View className="at-row at-row--wrap">
                 {/* 左边 */}
-                <View className="at-col at-col-6 card-ahh">
+                <View className="at-col at-col-6 card_ahh">
                   {this.state.datas != undefined ? (
                     this.state.datas
                       .filter((_item: Album, index: number) => {
@@ -120,7 +120,7 @@ class Info extends Component<ComponentProps, ComponentState> {
                         return (
                           <View className="at-col at-col-12" key={item.id}>
                             <View
-                              className="album-lay"
+                              className="album_lay"
                               onClick={this.handleItemClick.bind(
                                 this,
                                 item.id,
@@ -129,15 +129,15 @@ class Info extends Component<ComponentProps, ComponentState> {
                                 item.cover
                               )}
                             >
-                              <View className="album-card">
+                              <View className="album_card">
                                 <Image
-                                  className="album-img"
+                                  className="album_img"
                                   src={item.cover}
                                   onError={this.imageError.bind(this, index)}
                                   mode="aspectFill"
                                   lazyLoad={true}
                                 />
-                                <View className="album-title">{item.name}</View>
+                                <View className="album_title">{item.name}</View>
                               </View>
                             </View>
                           </View>
@@ -158,7 +158,7 @@ class Info extends Component<ComponentProps, ComponentState> {
                         return (
                           <View className="at-col at-col-12" key={item.id}>
                             <View
-                              className="album-lay"
+                              className="album_lay"
                               onClick={this.handleItemClick.bind(
                                 this,
                                 item.id,
@@ -167,15 +167,15 @@ class Info extends Component<ComponentProps, ComponentState> {
                                 item.cover
                               )}
                             >
-                              <View className="album-card">
+                              <View className="album_card">
                                 <Image
-                                  className="album-img"
+                                  className="album_img"
                                   src={item.cover}
                                   onError={this.imageError.bind(this, index)}
                                   mode="aspectFill"
                                   lazyLoad={true}
                                 />
-                                <View className="album-title">{item.name}</View>
+                                <View className="album_title">{item.name}</View>
                               </View>
                             </View>
                           </View>

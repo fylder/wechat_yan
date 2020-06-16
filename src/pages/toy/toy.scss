@@ -2,8 +2,8 @@ $grid-item-active:rgba(50, 196, 240, 0.308);
 $item-active:rgba(240, 50, 161, 0.308);
 
 .toy-item-lay {
-  height: 12rem;
-  border-radius: 1rem;
+  height: 320px;
+  border-radius: 24px;
   background: #f2f2f2;
 }
 
@@ -14,18 +14,18 @@ $item-active:rgba(240, 50, 161, 0.308);
 .toy-item-right {
 
   .toy-item-top {
-    height: 6rem;
+    height: 160px;
     // background: #2a75a7;
   }
 
   .toy-item-bottom {
-    height: 6rem;
+    height: 160px;
     // background: #598fb3;
   }
 }
 
 .toy-type {
-  $padding: 0.4rem;
+  $padding: 8px;
   height: 100%;
   color: white;
   padding: $padding;
@@ -35,8 +35,9 @@ $item-active:rgba(240, 50, 161, 0.308);
     display: flex;
     justify-content: center;
     align-items: center;
-    box-shadow: 0.05rem 0.2rem 0.6rem rgb(218, 218, 218);
-    border-radius: 0.5rem;
+    box-shadow: 4px 6px 16px rgb(218, 218, 218);
+    border-radius: 12px;
+    font-size: 28px;
 
     transition-duration: 0.5s;
     transition-timing-function: ease-out;
@@ -70,21 +71,19 @@ $item-active:rgba(240, 50, 161, 0.308);
 
     .lay_img {
       width: 100%;
-      // height: 26rem;
-      height: 11.2rem;
+      height: 300px;
     }
   }
 
   .lay_fg {
     position: absolute;
     width: 100%;
-    top: 10rem;
+    top: 280px;
 
     .lay_search {
       position: relative;
-      height: 2.4rem;
+      height: 64px;
       width: 100%;
-      // box-shadow: 0.05rem 0.2rem 0.6rem rgb(218, 218, 218);
 
       .lay_font {
         color: #AAAAAA;
@@ -92,7 +91,7 @@ $item-active:rgba(240, 50, 161, 0.308);
     }
 
     .lay_container {
-      margin-top: 1rem;
+      margin-top: 24px;
 
       .lay_container_grid {
         background: linear-gradient(rgba(255, 192, 203, 0), pink);
@@ -103,12 +102,12 @@ $item-active:rgba(240, 50, 161, 0.308);
 }
 
 .item_lay {
-  margin: 6.1rem 1rem 1rem;
+  margin: 170px 24px 24px;
 
   .item_lay_container {
-    margin: 1rem 0 0.5rem;
+    margin: 24px 0 12px;
     position: relative;
-    box-shadow: 0.15rem 0.6rem 1.2rem rgb(218, 218, 218);
+    box-shadow: 4px 16px 24px rgb(218, 218, 218);
 
     transition-duration: 0.5s;
     transition-timing-function: ease-out;
@@ -122,16 +121,18 @@ $item-active:rgba(240, 50, 161, 0.308);
     }
 
     .item_lay_title {
-      padding: 1rem 0 0.5rem;
+      padding: 24px 0 12px;
     }
 
     .item_lay_img {
       width: 100%;
-      height: 10rem;
+      height: 280px;
     }
 
     .item_lay_info {
-      padding: 0.5rem 0 0.5rem;
+      padding: 12px 0 12px;
+      font-size: 24px;
+      color: #888888;
     }
   }
 }

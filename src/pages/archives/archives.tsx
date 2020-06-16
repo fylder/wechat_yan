@@ -76,8 +76,8 @@ class Archives extends Component<ComponentProps, ComponentState> {
             src="http://b275.photo.store.qq.com/psb?/V13MxeJc2qpf92/A92lmM5FnNd6k.tL2pCLVw1EEVYJz*2BR3LUsf3DHo8!/b/dIvt8qNCBgAA&bo=IAMWAkAGKwQBCHE!&rf=viewer_4"
             mode="aspectFill"
           />
-          <View className="subject-lay">
-            <View className="at-article__h3 subject-font">fylder' 随笔</View>
+          <View className="subject_lay">
+            <View className="at-article__h3 subject_font">fylder' 随笔</View>
           </View>
         </View>
 
@@ -98,7 +98,7 @@ class Archives extends Component<ComponentProps, ComponentState> {
                   mode="aspectFill"
                   lazyLoad={true}
                 />
-                <View className="at-article__info item_lay_info font-content-small">
+                <View className="at-article__info item_lay_info">
                   {getDate(item.createdAt)}
                 </View>
               </View>
