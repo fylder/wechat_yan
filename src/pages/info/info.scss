@@ -3,7 +3,7 @@ $info-color:#2ca6bc;
 $white:#FFFFFF;
 
 .btn {
-  margin: 1rem;
+  margin: 24px;
 }
 
 .info-btn {
@@ -12,11 +12,11 @@ $white:#FFFFFF;
 }
 
 .info-lay {
-  margin: 0.01rem;
+  margin: 2px;
 }
 
 .info-lay-description {
-  margin-top: 0.02rem;
+  margin-top: 2px;
 }
 
 .info-font {
@@ -24,8 +24,8 @@ $white:#FFFFFF;
 }
 
 .info-card {
-  margin: 0.4rem;
-  padding: 1rem;
+  margin: 12px;
+  padding: 24px;
   // background: $color-primary;
-  box-shadow: 0.2rem 0.2rem 0.4rem rgb(233, 161, 161);
+  box-shadow: 6px 6px 12px rgb(233, 161, 161);
 }

@@ -1,15 +1,17 @@
-export const image_data = [
+export const image_swiper_datas = [
   {
     image:
-      "http://b275.photo.store.qq.com/psb?/V13MxeJc2qpf92/A92lmM5FnNd6k.tL2pCLVw1EEVYJz*2BR3LUsf3DHo8!/b/dIvt8qNCBgAA&bo=IAMWAkAGKwQBCHE!&rf=viewer_4"
+      "http://photo.fylder.me/photo_1568056971973.jpg?imageMogr2/auto-orient/thumbnail/!1080x1080r/quality/75"
   },
   {
-    image: "http://img5.mtime.cn/pi/2016/11/28/142338.99942641_1000X1000.jpg"
+    image:
+      "http://photo.fylder.me/photo_1567992692227.jpg?imageMogr2/auto-orient/thumbnail/!1080x1080r/quality/75"
   },
   {
-    image: "http://img5.mtime.cn/pi/2019/03/30/100155.92232373_1000X1000.jpg"
+    image:
+      "http://photo.fylder.me/photo_1568056782728.jpg?imageMogr2/auto-orient/thumbnail/!1080x1080r/quality/75"
   }
-]
+];
 
 export const item_datas = [
   { id: 1, value: "随笔", icon: "kabao" },
@@ -18,4 +20,4 @@ export const item_datas = [
   { id: 4, value: "漫展", icon: "rili" },
   { id: 5, value: "今月份", icon: "xiaoxizhongxin" },
   { id: 6, value: "(゜-゜)つロ 干杯", icon: "dingdan" }
-]
+];

@@ -20,12 +20,12 @@ $card_title:#555555;
   }
 
   .info_font {
-    font-size: 42rpx;
+    font-size: 42px;
   }
 }
 
 .album_lay {
-  padding: 20px 8px;
+  padding: 36px 24px;
 }
 
 .album_card {
@@ -65,9 +65,17 @@ $card_title:#555555;
 
 .index_img {
   width: 100%;
-  height: 320px;
+  height: 360px;
 }
 
-.card_ahh {
-  padding-top: 48px;
+$card_padding:32px;
+$card_top:64px; //错位差
+
+// 左右留白
+.card_left {
+  padding: $card_top 0 12px $card_padding;
+}
+
+.card_right {
+  padding: 0 $card_padding 12px 0;
 }

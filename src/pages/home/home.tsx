@@ -4,7 +4,7 @@ import Taro, { Component, Config } from "@tarojs/taro";
 import { ComponentClass } from "react";
 import { AtIcon } from "taro-ui";
 import { Album } from "../../store/model/data.d";
-import { image_data, item_datas } from "./data";
+import { image_swiper_datas, item_datas } from "./data";
 import "./home.scss";
 
 type PageStateProps = {};
@@ -206,12 +206,12 @@ class Home extends Component<ComponentProps, ComponentState> {
                 indicatorDots={false}
                 autoplay={true}
               >
-                {image_data.map((item, index) => {
+                {image_swiper_datas.map((item, index) => {
                   return (
-                    <SwiperItem key={index} className="swiper-item">
+                    <SwiperItem key={index} className="swiper_item">
                       <Image
                         src={item.image}
-                        className="swiper-img"
+                        className="swiper_img"
                         mode="aspectFill"
                       />
                     </SwiperItem>

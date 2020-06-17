@@ -107,10 +107,10 @@ class Info extends Component<ComponentProps, ComponentState> {
             </View>
           </View>
           <View className="at-row at-row__justify--center">
-            <View className="at-col at-col-11">
+            <View className="at-col at-col-12">
               <View className="at-row at-row--wrap">
                 {/* 左边 */}
-                <View className="at-col at-col-6 card_ahh">
+                <View className="at-col at-col-6 card_left">
                   {this.state.datas != undefined ? (
                     this.state.datas
                       .filter((_item: Album, index: number) => {
@@ -148,7 +148,7 @@ class Info extends Component<ComponentProps, ComponentState> {
                   )}
                 </View>
                 {/* 右边 */}
-                <View className="at-col at-col-6">
+                <View className="at-col at-col-6 card_right">
                   {this.state.datas != undefined ? (
                     this.state.datas
                       .filter((_item: Album, index: number) => {

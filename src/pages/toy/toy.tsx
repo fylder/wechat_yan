@@ -96,7 +96,7 @@ class Toy extends Component<ComponentProps, ComponentState> {
               <View className="at-row at-row__align--center lay_search">
                 <View className="at-row at-row__justify--center">
                   <View className="at-col at-col-10">
-                    <View className="at-row at-row__justify--center toy-item-lay">
+                    <View className="at-row at-row__justify--center toy_item_lay">
                       <View className="at-col-6 toy-item-left">
                         <View
                           className="toy-type"
@@ -164,7 +164,7 @@ class Toy extends Component<ComponentProps, ComponentState> {
                     mode="aspectFill"
                     lazyLoad={true}
                   />
-                  <View className="at-article__info item_lay_info font-content-small">
+                  <View className="at-article__info item_lay_info">
                     {getDate(item.createdAt)}
                   </View>
                 </View>

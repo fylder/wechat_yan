@@ -126,7 +126,7 @@ class Monthly extends Component<ComponentProps, ComponentState> {
             <View className="at-row at-row__align--center">
               <View className="info-index" />
               <View className="at-col">
-                <Text>{this.state.title}</Text>
+                <Text className="info_title">{this.state.title}</Text>
               </View>
             </View>
           </View>

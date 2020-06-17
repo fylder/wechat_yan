@@ -2,21 +2,22 @@ $at-grid-text-color:#ffffff;
 $grid-title:#666666;
 $grid-font:#666666;
 $grid-item-active:rgba(50, 196, 240, 0.308);
-$head_height:320px;
+$head_height:360px;
 
 
 .swiper_lay {
-  height: 300px;
+  height: 380px;
   width: 100%;
+  margin: 8px 0;
 
-  .swiper-item {
+  .swiper_item {
 
-    .swiper-img {
-      margin: 12px 5% 12px;
+    .swiper_img {
+      margin: 28px 5%;
       width: 90%;
-      height: 280px;
-      border-radius: 4px;
-      box-shadow: 1px 1px 12px rgb(177, 177, 177);
+      height: 320px;
+      border-radius: 8px;
+      box-shadow: 4px 4px 12px rgb(177, 177, 177);
     }
   }
 }
@@ -90,7 +91,7 @@ $head_height:320px;
 }
 
 $second_margin_top: 4px;
-$second_padding: 10px;
+$second_padding: 24px;
 
 .second_lay {
   padding: 16px 2% 16px;
@@ -150,12 +151,12 @@ $second_padding: 10px;
 }
 
 // 最新相册
-$album_tag_height: 160px;
-$album_tag_width: 36px;
-$album_tag_font_size: 22px;
+$album_tag_height: 200px; //图片大小
+$album_tag_width: 42px; //侧边宽度
+$album_tag_font_size: 25px; //侧边文字大小
 
 .album_item_lay {
-  margin: 18px 18px;
+  margin: 24px 24px;
   display: flex;
 
   .album_item_img {
@@ -190,7 +191,7 @@ $album_tag_font_size: 22px;
 }
 
 .recent_tag {
-  width: 6px;
+  width: 8px;
   height: 36px;
   background: #e91e63;
 }
