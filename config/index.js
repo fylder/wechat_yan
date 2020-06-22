@@ -30,6 +30,7 @@ const config = {
   defineConstants: {},
   copy: {
     patterns: [
+      { from: "src/sitemap.json", to: "dist/sitemap.json" },
       {
         from: "src/components/wemark", // wemark 所在位置
         to: "dist/components/wemark"
@@ -91,11 +92,11 @@ const config = {
       }
     }
   }
-}
+};
 
 module.exports = function(merge) {
   if (process.env.NODE_ENV === "development") {
-    return merge({}, config, require("./dev"))
+    return merge({}, config, require("./dev"));
   }
-  return merge({}, config, require("./prod"))
-}
+  return merge({}, config, require("./prod"));
+};
