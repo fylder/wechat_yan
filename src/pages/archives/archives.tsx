@@ -2,9 +2,9 @@ import { Image, View } from "@tarojs/components";
 import { connect } from "@tarojs/redux";
 import Taro, { Component, Config } from "@tarojs/taro";
 import { ComponentClass } from "react";
+import { getDate } from "../../tools/time";
 import "./archives.scss";
 import { ArchivesModel } from "./model";
-import { getDate } from "../../tools/time";
 
 type PageStateProps = {};
 

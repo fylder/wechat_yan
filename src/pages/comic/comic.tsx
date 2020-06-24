@@ -223,9 +223,9 @@ class Info extends Component<ComponentProps, ComponentState> {
               <View className="content_footer_lay" />
             </View>
           </View>
-          {/* <View className="info-card">
+          {/* <View className="info_card">
             <View className="at-row at-row__align--center">
-              <View className="info-index" />
+              <View className="info_index" />
               <View className="at-col">
                 <Text>{this.state.subject}</Text>
               </View>
@@ -244,6 +244,7 @@ class Info extends Component<ComponentProps, ComponentState> {
                   {this.state.datas[index].loaded && (
                     <View className="at-article__section">
                       <View className="card_item">
+                        {/* 照片描述信息 */}
                         {item.describe === "" || item.describe === undefined ? (
                           <View />
                         ) : (
@@ -254,7 +255,8 @@ class Info extends Component<ComponentProps, ComponentState> {
                           </View>
                         )}
                         <Image
-                          className="at-article__img fade_in"
+                          className="at-article__img card_img fade_in"
+                          // className="fade_in"
                           src={item.photo}
                           onError={this.imageError.bind(this, index)}
                           mode="widthFix"

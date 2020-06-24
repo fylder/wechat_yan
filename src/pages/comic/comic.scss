@@ -104,11 +104,11 @@ $lay-height:160px;
 
 }
 
-.info-card {
+.info_card {
   margin: 12px;
   padding: 16px;
 
-  .info-index {
+  .info_index {
     background: $color-primary;
     width: 4px;
     height: 24px;
@@ -133,5 +133,10 @@ $lay-height:160px;
 
   .card_info {
     padding: 8px 0 0;
+  }
+
+  .card_img {
+    width: 100%;
+    object-fit: contain;
   }
 }
