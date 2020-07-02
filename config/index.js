@@ -1,3 +1,5 @@
+var path = require("path");
+
 const config = {
   projectName: "yan",
   date: "2019-6-11",
@@ -9,63 +11,72 @@ const config = {
   },
   sourceRoot: "src",
   outputRoot: "dist",
-  plugins: {
-    babel: {
-      sourceMap: true,
-      presets: [
-        [
-          "env",
-          {
-            modules: false
-          }
-        ]
-      ],
-      plugins: [
-        "transform-decorators-legacy",
-        "transform-class-properties",
-        "transform-object-rest-spread"
+  babel: {
+    sourceMap: true,
+    presets: [
+      [
+        "env",
+        {
+          modules: false
+        }
       ]
-    }
-  },
-  defineConstants: {},
-  copy: {
-    patterns: [
-      { from: "src/sitemap.json", to: "dist/sitemap.json" },
-      {
-        from: "src/components/wemark", // wemark 所在位置
-        to: "dist/components/wemark"
-      }
     ],
-    options: {}
+    plugins: [
+      "transform-decorators-legacy",
+      "transform-class-properties",
+      "transform-object-rest-spread",
+      [
+        "transform-runtime",
+        {
+          helpers: false,
+          polyfill: false,
+          regenerator: true,
+          moduleName: "babel-runtime"
+        }
+      ]
+    ]
   },
-  weapp: {
-    compile: {
-      exclude: ["src/components/wemark/remarkable.js"]
+  plugins: ["@tarojs/plugin-sass", "@tarojs/plugin-uglify"],
+  defineConstants: {},
+  mini: {
+    copy: {
+      patterns: [
+        { from: "src/sitemap.json", to: "dist/sitemap.json" },
+        {
+          from: "src/components/wemark", // wemark 所在位置
+          to: "dist/components/wemark"
+        }
+      ],
+      options: {}
     },
-    module: {
-      postcss: {
-        autoprefixer: {
-          enable: true,
-          config: {
-            browsers: ["last 3 versions", "Android >= 4.1", "ios >= 8"]
-          }
-        },
-        pxtransform: {
-          enable: true,
-          config: {}
-        },
-        url: {
-          enable: true,
-          config: {
-            limit: 10240 // 设定转换尺寸上限
-          }
-        },
-        cssModules: {
-          enable: false, // 默认为 false，如需使用 css modules 功能，则设为 true
-          config: {
-            namingPattern: "module", // 转换模式，取值为 global/module
-            generateScopedName: "[name]__[local]___[hash:base64:5]"
-          }
+    compile: {
+      exclude: [
+        path.resolve(__dirname, "..", "src/components/wemark/remarkable.js")
+      ]
+    },
+
+    postcss: {
+      // autoprefixer: {
+      //   enable: true,
+      //   config: {
+      //     browsers: ["last 3 versions", "Android >= 4.1", "ios >= 8"]
+      //   }
+      // },
+      pxtransform: {
+        enable: true,
+        config: {}
+      },
+      url: {
+        enable: true,
+        config: {
+          limit: 10240 // 设定转换尺寸上限
+        }
+      },
+      cssModules: {
+        enable: false, // 默认为 false，如需使用 css modules 功能，则设为 true
+        config: {
+          namingPattern: "module", // 转换模式，取值为 global/module
+          generateScopedName: "[name]__[local]___[hash:base64:5]"
         }
       }
     }
