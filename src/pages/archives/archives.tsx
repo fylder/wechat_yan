@@ -34,9 +34,6 @@ interface ComponentState {
  */
 @connect(({}) => ({}))
 class Archives extends Component<ComponentProps, ComponentState> {
-  config: Config = {
-    navigationBarTitleText: "随笔"
-  };
   constructor(props, context) {
     super(props, context);
     this.state = {
@@ -47,7 +44,9 @@ class Archives extends Component<ComponentProps, ComponentState> {
   componentWillMount() {
     this.getArticle();
   }
-
+  config: Config = {
+    navigationBarTitleText: "随笔"
+  };
   getArticle = () => {
     Taro.showNavigationBarLoading();
     Taro.request({

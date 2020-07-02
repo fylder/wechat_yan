@@ -1,7 +1,6 @@
 import { Image, Swiper, SwiperItem, View } from "@tarojs/components";
 import { connect } from "@tarojs/redux";
 import Taro, { Component, Config } from "@tarojs/taro";
-import { ComponentClass } from "react";
 import { AtIcon } from "taro-ui";
 import { Album } from "../../store/model/data.d";
 import { image_swiper_datas, item_datas } from "./data";
@@ -107,11 +106,6 @@ interface ComponentState {
   })
 )
 class Home extends Component<ComponentProps, ComponentState> {
-  config: Config = {
-    navigationBarTitleText: "带着毛驴去兜风",
-    enablePullDownRefresh: true,
-    backgroundTextStyle: "dark"
-  };
   constructor(props, context) {
     super(props, context);
     Taro.setNavigationBarTitle({ title: "带着毛驴去兜风" });
@@ -120,6 +114,12 @@ class Home extends Component<ComponentProps, ComponentState> {
   componentWillMount() {
     this.getAlbum();
   }
+
+  config: Config = {
+    navigationBarTitleText: "带着毛驴去兜风",
+    enablePullDownRefresh: true,
+    backgroundTextStyle: "dark"
+  };
 
   onShareAppMessage(res) {
     if (res.from === "button") {
@@ -311,4 +311,4 @@ class Home extends Component<ComponentProps, ComponentState> {
 //
 // #endregion
 
-export default Home as ComponentClass<PageOwnProps, PageState>;
+export default Home;

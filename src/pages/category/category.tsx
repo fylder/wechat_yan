@@ -43,10 +43,6 @@ interface ComponentState {
   dispatch => ({})
 )
 class Category extends Component<ComponentProps, ComponentState> {
-  config: Config = {
-    navigationBarTitleText: "小玩意"
-  };
-
   constructor(props, context) {
     super(props, context);
     const title =
@@ -67,6 +63,10 @@ class Category extends Component<ComponentProps, ComponentState> {
   componentWillMount() {
     this.getAlbum();
   }
+  
+  config: Config = {
+    navigationBarTitleText: "小玩意"
+  };
 
   getAlbum = () => {
     Taro.showNavigationBarLoading();

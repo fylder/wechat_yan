@@ -34,12 +34,6 @@ interface ComponentState {
  */
 @connect(({}) => ({}))
 class Article extends Component<ComponentProps, ComponentState> {
-  config: Config = {
-    navigationBarTitleText: "fylder",
-    usingComponents: {
-      wemark: "../../components/wemark/wemark"
-    }
-  };
   constructor(props, context) {
     super(props, context);
     const id = this.$router.params.id;
@@ -52,7 +46,12 @@ class Article extends Component<ComponentProps, ComponentState> {
   componentWillMount() {
     this.getArticle();
   }
-
+  config: Config = {
+    navigationBarTitleText: "fylder",
+    usingComponents: {
+      wemark: "../../components/wemark/wemark"
+    }
+  };
   getArticle = () => {
     Taro.showNavigationBarLoading();
     Taro.request({

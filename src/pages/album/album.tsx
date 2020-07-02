@@ -46,9 +46,7 @@ class Info extends Component<ComponentProps, ComponentState> {
    * 对于像 navigationBarTextStyle: 'black' 这样的推导出的类型是 string
    * 提示和声明 navigationBarTextStyle: 'black' | 'white' 类型冲突, 需要显示声明类型
    */
-  config: Config = {
-    navigationBarTitleText: "fylder' 相册"
-  };
+
   constructor(props, context) {
     super(props, context);
     const type = this.$router.params.type;
@@ -65,6 +63,10 @@ class Info extends Component<ComponentProps, ComponentState> {
       this.props.dispatch(getList());
     }
   }
+
+  config: Config = {
+    navigationBarTitleText: "fylder' 相册"
+  };
 
   imageError = index => {
     const defaultImg =
