@@ -60,9 +60,10 @@ interface ComponentState {
           break;
         }
         case 3: {
-          //漫展
+          //slog
           Taro.navigateTo({
-            url: `/pages/category/category?title=${"漫展"}&tags=${"cosplay"}`
+            // url: `/pages/category/category?title=${"漫展"}&tags=${"cosplay"}`
+            url: "/pages/slog/slog"
           });
           break;
         }
@@ -77,6 +78,13 @@ interface ComponentState {
           //来一杯续命吧
           Taro.navigateTo({
             url: `/pages/comic/comic?id=${10}&title=${"这个夏天喝过的奶茶"}&subject=${"来一杯续命吧"}&cover=${"http://photo.fylder.me/photo_1568054888322.jpg?imageMogr2/auto-orient/thumbnail/!1080x1080r/blur/1x0/quality/75"}`
+          });
+          break;
+        }
+        case 6: {
+          //slog
+          Taro.navigateTo({
+            url: "/pages/slog/slog"
           });
           break;
         }
@@ -183,7 +191,7 @@ class Home extends Component<ComponentProps, ComponentState> {
                       <View className="grid_lay_img">
                         <AtIcon
                           className="grid_img"
-                          prefixClass="tao"
+                          prefixClass="wechat"
                           value={item.icon}
                           size="32"
                           color="#888888"

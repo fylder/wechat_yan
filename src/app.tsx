@@ -38,7 +38,9 @@ class App extends Component {
       "pages/toy/toy",
       "pages/category/category",
       "pages/archives/archives",
-      "pages/article/article"
+      "pages/article/article",
+      "pages/slog/slog",
+      "pages/slog/vlog/vlog"
     ],
     window: {
       backgroundTextStyle: "light",

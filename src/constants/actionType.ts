@@ -11,3 +11,6 @@ export const ALBUM_LIST = "ALBUM_LIST";
 
 //photo
 export const PHOTO_LIST = "PHOTO_LIST";
+
+//slog
+export const SLOG_LIST = "SLOG_LIST";
