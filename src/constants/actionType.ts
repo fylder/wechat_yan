@@ -14,3 +14,6 @@ export const PHOTO_LIST = "PHOTO_LIST";
 
 //slog
 export const SLOG_LIST = "SLOG_LIST";
+
+//article
+export const ARTICLE_LIST = "ARTICLE_LIST";

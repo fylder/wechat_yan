@@ -2,11 +2,15 @@ import { Image, View } from "@tarojs/components";
 import { connect } from "@tarojs/redux";
 import Taro, { Component, Config } from "@tarojs/taro";
 import { ComponentClass } from "react";
+import { getList } from "../../actions/articleAction";
+import { ARTICLE_LIST } from "../../constants/actionType";
+import { ArticleModel } from "../../store/model/data.d";
 import { getDate } from "../../tools/time";
 import "./archives.scss";
-import { ArchivesModel } from "./model";
 
-type PageStateProps = {};
+type PageStateProps = {
+  article: { article: ArticleModel[] };
+};
 
 type PageDispatchProps = {};
 
@@ -26,41 +30,72 @@ interface ComponentProps {
   /* declare your component's props here */
 }
 interface ComponentState {
-  archives: any | undefined;
+  datas: ArticleModel[];
+  isRefresh: boolean;
 }
 
 /**
  * 随笔
  */
-@connect(({}) => ({}))
+@connect(
+  ({ article }) => ({
+    article
+  }),
+  dispatch => ({})
+)
 class Archives extends Component<ComponentProps, ComponentState> {
   constructor(props, context) {
     super(props, context);
+    Taro.setNavigationBarTitle({ title: "随笔" });
     this.state = {
-      archives: []
+      datas: [],
+      isRefresh: false
     };
   }
 
   componentWillMount() {
-    this.getArticle();
+    const articleList = this.props.article.article;
+    if (articleList.length < 1) {
+      this.setState({
+        isRefresh: true
+      });
+      // 获取数据
+      this.props.dispatch(getList(false));
+    } else {
+      // 直接从缓存获取
+      this.setState({
+        datas: articleList
+      });
+    }
+  }
+
+  //props状态改变触发器
+  componentWillReceiveProps(nextProps: any) {
+    const {
+      article: { article, action }
+    } = nextProps;
+    if (action && action === ARTICLE_LIST && this.state.isRefresh) {
+      Taro.stopPullDownRefresh();
+      this.setState({
+        datas: article,
+        isRefresh: false
+      });
+    }
   }
   config: Config = {
-    navigationBarTitleText: "随笔"
-  };
-  getArticle = () => {
-    Taro.showNavigationBarLoading();
-    Taro.request({
-      url: "https://wechat.fylder.me:8022/wechat/article",
-      method: "GET"
-    }).then(res => {
-      Taro.hideNavigationBarLoading();
-      this.setState({
-        archives: res.data
-      });
-    });
+    enablePullDownRefresh: true
   };
 
-  itemClick = (item: ArchivesModel) => {
+  onPullDownRefresh() {
+    if (!this.state.isRefresh) {
+      this.props.dispatch(getList(true));
+      this.setState({
+        isRefresh: true
+      });
+    }
+  }
+
+  itemClick = (item: ArticleModel) => {
     Taro.navigateTo({
       url: `/pages/article/article?id=${item.id}`
     });
@@ -81,7 +116,7 @@ class Archives extends Component<ComponentProps, ComponentState> {
         </View>
 
         <View className="item_lay">
-          {this.state.archives.map((item: ArchivesModel, index: number) => {
+          {this.state.datas.map((item: ArticleModel, index: number) => {
             return (
               <View
                 className="item_lay_container"

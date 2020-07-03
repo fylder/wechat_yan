@@ -2,7 +2,7 @@ import { Image, Text, Video, View } from "@tarojs/components";
 import { connect } from "@tarojs/redux";
 import Taro, { Component, Config } from "@tarojs/taro";
 import { ComponentClass } from "react";
-import { getList, refreshList } from "../../actions/slogAction";
+import { getList } from "../../actions/slogAction";
 import { SLOG_LIST } from "../../constants/actionType";
 import { SlogModel } from "../../store/model/data.d";
 import { getDate } from "../../tools/time";
@@ -35,6 +35,9 @@ interface ComponentState {
   isRefresh: boolean;
 }
 
+/**
+ * slog
+ */
 @connect(
   ({ slog }) => ({
     slog
@@ -44,13 +47,13 @@ interface ComponentState {
 class Slog extends Component<ComponentProps, ComponentState> {
   constructor(props, context) {
     super(props, context);
+    Taro.setNavigationBarTitle({ title: "slog" });
     this.state = {
       cover:
         "http://photo.fylder.me/photo_1593740273874.jpg?imageMogr2/auto-orient/thumbnail/!480x480r/quality/75",
       datas: [],
       isRefresh: false
     };
-    Taro.setNavigationBarTitle({ title: "slog" });
   }
 
   componentWillMount() {
@@ -60,7 +63,7 @@ class Slog extends Component<ComponentProps, ComponentState> {
         isRefresh: true
       });
       // 获取数据
-      this.props.dispatch(getList());
+      this.props.dispatch(getList(false));
     } else {
       // 直接从缓存获取
       this.setState({
@@ -74,7 +77,6 @@ class Slog extends Component<ComponentProps, ComponentState> {
     const {
       slog: { slog, action }
     } = nextProps;
-    console.dir(nextProps);
     if (action && action === SLOG_LIST && this.state.isRefresh) {
       Taro.stopPullDownRefresh();
       this.setState({
@@ -90,7 +92,7 @@ class Slog extends Component<ComponentProps, ComponentState> {
 
   onPullDownRefresh() {
     if (!this.state.isRefresh) {
-      this.props.dispatch(refreshList());
+      this.props.dispatch(getList(true));
       this.setState({
         isRefresh: true
       });

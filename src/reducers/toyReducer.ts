@@ -1,4 +1,4 @@
-import { TOY_LIST } from "../constants/actionType"
+import { TOY_LIST } from "../constants/actionType";
 /**
  * 一个function对应一个action
  * @param state
@@ -9,9 +9,10 @@ export default function toy(state = { album: [] }, action) {
     case TOY_LIST:
       return {
         ...state,
-        album: action.album
-      }
+        album: action.album,
+        action: TOY_LIST
+      };
     default:
-      return state
+      return state;
   }
 }

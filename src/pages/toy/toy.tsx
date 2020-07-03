@@ -3,10 +3,11 @@ import { connect } from "@tarojs/redux";
 import Taro, { Component, Config } from "@tarojs/taro";
 import { ComponentClass } from "react";
 import { getList } from "../../actions/toyAction";
+import { TOY_LIST } from "../../constants/actionType";
 import { Album } from "../../model/AlbumModel";
+import { getDate } from "../../tools/time";
 import { TYPE_COMIC, TYPE_DEFAULT, TYPE_TOY } from "./data";
 import "./toy.scss";
-import { getDate } from "../../tools/time";
 
 type PageStateProps = {
   toy: {
@@ -32,9 +33,8 @@ interface ComponentProps {
   /* declare your component's props here */
 }
 interface ComponentState {
-  id: number;
-  datas: any;
-  album: Album[];
+  datas: Album[];
+  isRefresh: boolean;
 }
 
 @connect(
@@ -44,21 +44,65 @@ interface ComponentState {
   dispatch => ({})
 )
 class Toy extends Component<ComponentProps, ComponentState> {
-  componentWillMount() {
-    console.log("toy componentWillMount");
-    this.props.dispatch(getList());
+  constructor(props, context) {
+    super(props, context);
+    Taro.setNavigationBarTitle({ title: "小玩意" });
+    this.state = {
+      datas: [],
+      isRefresh: false
+    };
   }
+
+  componentWillMount() {
+    const albumList = this.props.toy.album;
+    if (albumList.length < 1) {
+      this.setState({
+        isRefresh: true
+      });
+      // 获取数据
+      this.props.dispatch(getList(false));
+    } else {
+      // 直接从缓存获取
+      this.setState({
+        datas: albumList
+      });
+    }
+  }
+
+  //props状态改变触发器
+  componentWillReceiveProps(nextProps: any) {
+    const {
+      toy: { album, action }
+    } = nextProps;
+    if (action && action === TOY_LIST && this.state.isRefresh) {
+      Taro.stopPullDownRefresh();
+      this.setState({
+        datas: album,
+        isRefresh: false
+      });
+    }
+  }
+
   config: Config = {
-    navigationBarTitleText: "小玩意"
+    enablePullDownRefresh: true
   };
 
-  imageError = index => {
-    const defaultImg =
-      "http://img5.mtime.cn/pi/2019/03/30/100155.92232373_1000X1000.jpg";
-    const data = this.state.datas;
-    data[index].src = defaultImg;
-    this.setState({ datas: data });
-  };
+  onPullDownRefresh() {
+    if (!this.state.isRefresh) {
+      this.props.dispatch(getList(true));
+      this.setState({
+        isRefresh: true
+      });
+    }
+  }
+
+  // imageError = index => {
+  //   const defaultImg =
+  //     "http://img5.mtime.cn/pi/2019/03/30/100155.92232373_1000X1000.jpg";
+  //   const data = this.state.datas;
+  //   data[index].src = defaultImg;
+  //   this.setState({ datas: data });
+  // };
 
   itemClick = (id: number, title: string, subject: string, cover: string) => {
     Taro.navigateTo({
@@ -134,7 +178,7 @@ class Toy extends Component<ComponentProps, ComponentState> {
             </View>
           </View>
           <View className="item_lay">
-            {this.props.toy.album.map((item: Album) => {
+            {this.state.datas.map((item: Album) => {
               return (
                 <View
                   className="item_lay_container"

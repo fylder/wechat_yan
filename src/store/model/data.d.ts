@@ -33,3 +33,15 @@ export interface SlogModel {
   createdAt: string;
   updatedAt: string;
 }
+
+export interface ArticleModel {
+  id: string;
+  uid: string;
+  cover: string;
+  subject: string;
+  describe: string;
+  content: string;
+  type: string;
+  tags: string;
+  createdAt: string;
+}

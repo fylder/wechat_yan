@@ -8,7 +8,7 @@ export const sendList = slog => {
   };
 };
 
-export const getList = () => {
+export const getList = (hasRefresh: boolean) => {
   return async (dispatch: any) => {
     Taro.showNavigationBarLoading();
     const resp = await Taro.request({
@@ -16,22 +16,10 @@ export const getList = () => {
       method: "GET",
       mode: "cors"
     });
-    Taro.hideNavigationBarLoading();
-    dispatch(sendList(resp.data));
-  };
-};
-
-export const refreshList = () => {
-  return async (dispatch: any) => {
-    Taro.showNavigationBarLoading();
-    const resp = await Taro.request({
-      url: "https://wechat.fylder.me:8022/wechat/slog/show",
-      method: "GET",
-      mode: "cors"
-    });
+    const time = hasRefresh ? 1000 : 0;
     setTimeout(() => {
       Taro.hideNavigationBarLoading();
       dispatch(sendList(resp.data));
-    }, 1000);
+    }, time);
   };
 };

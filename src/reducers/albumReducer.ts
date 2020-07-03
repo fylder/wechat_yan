@@ -9,7 +9,8 @@ export default function album(state = { album: [] }, action) {
     case ALBUM_LIST:
       return {
         ...state,
-        album: action.album
+        album: action.album,
+        action: ALBUM_LIST
       };
     default:
       return state;

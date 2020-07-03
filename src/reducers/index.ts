@@ -1,5 +1,6 @@
 import { combineReducers } from "redux";
 import album from "./albumReducer";
+import article from "./articleReducer";
 import photo from "./photoReducer";
 import slog from "./slogReducer";
 import toy from "./toyReducer";
@@ -10,5 +11,6 @@ export default combineReducers({
   toy,
   album,
   photo,
-  slog
+  slog,
+  article
 });

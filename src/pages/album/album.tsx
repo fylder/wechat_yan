@@ -3,6 +3,7 @@ import { connect } from "@tarojs/redux";
 import Taro, { Component, Config } from "@tarojs/taro";
 import { ComponentClass } from "react";
 import { getList } from "../../actions/albumAction";
+import { ALBUM_LIST } from "../../constants/actionType";
 import { Album } from "../../store/model/data.d";
 import "./album.scss";
 
@@ -33,40 +34,65 @@ interface ComponentState {
   type: string;
   title: string;
   datas: Album[];
+  isRefresh: boolean;
 }
 
 @connect(({ album }) => ({
   album
 }))
 class Info extends Component<ComponentProps, ComponentState> {
-  /**
-   * 指定config的类型声明为: Taro.Config
-   *
-   * 由于 typescript 对于 object 类型推导只能推出 Key 的基本类型
-   * 对于像 navigationBarTextStyle: 'black' 这样的推导出的类型是 string
-   * 提示和声明 navigationBarTextStyle: 'black' | 'white' 类型冲突, 需要显示声明类型
-   */
-
   constructor(props, context) {
     super(props, context);
+    Taro.setNavigationBarTitle({ title: "fylder' 相册" });
     const type = this.$router.params.type;
     this.state = {
       type,
       title: "fylder",
-      datas: []
+      datas: [],
+      isRefresh: false
     };
   }
 
   componentWillMount() {
     const albumList = this.props.album.album;
     if (albumList.length < 1) {
-      this.props.dispatch(getList());
+      this.setState({
+        isRefresh: true
+      });
+      this.props.dispatch(getList(false));
+    } else {
+      // 直接从缓存获取
+      this.setState({
+        datas: albumList
+      });
+    }
+  }
+  //props状态改变触发器
+  componentWillReceiveProps(nextProps: any) {
+    const {
+      album: { album, action }
+    } = nextProps;
+    if (action && action === ALBUM_LIST && this.state.isRefresh) {
+      Taro.stopPullDownRefresh();
+      this.setState({
+        datas: album,
+        isRefresh: false
+      });
     }
   }
 
   config: Config = {
-    navigationBarTitleText: "fylder' 相册"
+    enablePullDownRefresh: true
   };
+
+  onPullDownRefresh() {
+    if (!this.state.isRefresh) {
+      this.props.dispatch(getList(true));
+      this.setState({
+        isRefresh: true
+      });
+    }
+  }
 
   imageError = index => {
     const defaultImg =
@@ -87,10 +113,6 @@ class Info extends Component<ComponentProps, ComponentState> {
     });
   };
   render() {
-    const albumList = this.props.album.album;
-    this.setState({
-      datas: albumList
-    });
     return (
       <View>
         <Image

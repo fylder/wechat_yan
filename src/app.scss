@@ -3,7 +3,13 @@ $color-brand: #e91e63;
 $color-brand-light: #ed4b82;
 $color-brand-dark: #a31545;
 
-@import "~taro-ui/dist/style/index.scss";
+// @import "~taro-ui/dist/style/index.scss";
+@import "~taro-ui/dist/style/components/flex.scss";
+@import "~taro-ui/dist/style/components/icon.scss";
+@import "~taro-ui/dist/style/components/button.scss";
+@import "~taro-ui/dist/style/components/article.scss";
+@import "~taro-ui/dist/style/components/grid.scss";
+
 @import "./static/icon/iconfont.scss";
 
 .font-title {

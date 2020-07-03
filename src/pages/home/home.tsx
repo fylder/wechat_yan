@@ -117,6 +117,7 @@ class Home extends Component<ComponentProps, ComponentState> {
   constructor(props, context) {
     super(props, context);
     Taro.setNavigationBarTitle({ title: "带着毛驴去兜风" });
+    Taro.setBackgroundTextStyle({ textStyle: "dark" });
   }
 
   componentWillMount() {
@@ -124,9 +125,7 @@ class Home extends Component<ComponentProps, ComponentState> {
   }
 
   config: Config = {
-    navigationBarTitleText: "带着毛驴去兜风",
-    enablePullDownRefresh: true,
-    backgroundTextStyle: "dark"
+    enablePullDownRefresh: true
   };
 
   onShareAppMessage(res) {

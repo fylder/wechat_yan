@@ -1,10 +1,10 @@
 import Taro from "@tarojs/taro";
-import { ALBUM_LIST } from "../constants/actionType";
+import { ARTICLE_LIST } from "../constants/actionType";
 
-export const sendList = album => {
+export const sendList = article => {
   return {
-    type: ALBUM_LIST,
-    album
+    type: ARTICLE_LIST,
+    article
   };
 };
 
@@ -12,7 +12,7 @@ export const getList = (hasRefresh: boolean) => {
   return async (dispatch: any) => {
     Taro.showNavigationBarLoading();
     const resp = await Taro.request({
-      url: "https://wechat.fylder.me:8022/wechat/album",
+      url: "https://wechat.fylder.me:8022/wechat/article",
       method: "GET",
       mode: "cors"
     });
