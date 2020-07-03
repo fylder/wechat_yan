@@ -1,4 +1,4 @@
-import { Image, Text, Video, View } from "@tarojs/components";
+import { Image, Video, View } from "@tarojs/components";
 import { connect } from "@tarojs/redux";
 import Taro, { Component, Config } from "@tarojs/taro";
 import { ComponentClass } from "react";
@@ -109,10 +109,6 @@ class Slog extends Component<ComponentProps, ComponentState> {
   };
 
   render() {
-    // const slogList = this.props.slog.slog;
-    // this.setState({
-    //   datas: slogList
-    // });
     return (
       <View>
         <View>
@@ -123,57 +119,58 @@ class Slog extends Component<ComponentProps, ComponentState> {
           />
         </View>
         <View className="item_lay">
-          {/* {slog_list.map(item => {
-            return (
-              <View
-                className="item_lay_container"
-                key={item.id}
-                onClick={this.itemClick.bind(this, item)}
-              >
-                <View className="at-article__h3 item_lay_title">
-                  {item.name}
-                </View>
-                <Image
-                  className="item_lay_img"
-                  src={item.cover}
-                  mode="aspectFill"
-                  lazyLoad={true}
-                />
-                <View className="at-article__info item_lay_info">
-                  {getDate(item.createdAt)}
-                </View>
-              </View>
-            );
-          })} */}
-
-          {this.state.datas &&
+          {/* {this.state.datas &&
+            Array.isArray(this.state.datas) &&
             this.state.datas.map((item: SlogModel) => {
               return (
-                <View className="item_lay_container" key={item.id}>
+                <View
+                  className="item_lay_container"
+                  key={item.id}
+                  onClick={this.itemClick.bind(this, item)}
+                >
                   <View className="at-article__h3 item_lay_title">
                     {item.name}
                   </View>
-                  <View className="video_lay">
-                    <Video
-                      className="video_lay_container"
-                      src={item.slog}
-                      controls={true}
-                      autoplay={false}
-                      initialTime={0}
-                      id="video"
-                      loop={false}
-                      muted={false}
-                    />
-                  </View>
+                  <Image
+                    className="item_lay_img"
+                    src={item.cover}
+                    mode="aspectFill"
+                    lazyLoad={true}
+                  />
                   <View className="at-article__info item_lay_info">
-                    <Text decode={true}>{item.describe}</Text>
-                  </View>
-                  <View className="at-article__info item_lay_date">
                     {getDate(item.createdAt)}
                   </View>
                 </View>
               );
-            })}
+            })} */}
+
+          {this.state.datas.map((item: SlogModel) => {
+            return (
+              <View className="item_lay_container" key={item.id}>
+                <View className="at-article__h3 item_lay_title">
+                  {item.name}
+                </View>
+                <View className="video_lay">
+                  <Video
+                    className="video_lay_container"
+                    src={item.slog}
+                    controls={true}
+                    autoplay={false}
+                    initialTime={0}
+                    id="video"
+                    loop={false}
+                    muted={false}
+                  />
+                </View>
+                <View className="at-article__info item_lay_info">
+                  {item.describe.replace("\\n", "\n")}
+                </View>
+                <View className="at-article__info item_lay_date">
+                  {getDate(item.createdAt)}
+                </View>
+              </View>
+            );
+          })}
         </View>
       </View>
     );

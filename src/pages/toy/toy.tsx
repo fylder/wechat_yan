@@ -4,7 +4,7 @@ import Taro, { Component, Config } from "@tarojs/taro";
 import { ComponentClass } from "react";
 import { getList } from "../../actions/toyAction";
 import { TOY_LIST } from "../../constants/actionType";
-import { Album } from "../../model/AlbumModel";
+import { Album } from "../../store/model/data.d";
 import { getDate } from "../../tools/time";
 import { TYPE_COMIC, TYPE_DEFAULT, TYPE_TOY } from "./data";
 import "./toy.scss";

@@ -4,10 +4,10 @@ import Taro, { Component, Config } from "@tarojs/taro";
 import { ComponentClass } from "react";
 import { getList } from "../../actions/photoAction";
 import ImgLoader from "../../components/img-loader/img-loader";
-import { Picture } from "../../model/AlbumModel";
 import { Photo } from "../../model/PhotoModel";
 import head_bg from "../../static/img/head_title_bg.svg";
 import linePng from "../../static/img/line.jpg";
+import { Picture } from "../../store/model/data.d";
 import "./comic.scss";
 
 type PageStateProps = {

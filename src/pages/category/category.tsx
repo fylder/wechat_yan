@@ -2,7 +2,7 @@ import { Image, View } from "@tarojs/components";
 import { connect } from "@tarojs/redux";
 import Taro, { Component, Config } from "@tarojs/taro";
 import { ComponentClass } from "react";
-import { Album } from "../../model/AlbumModel";
+import { Album } from "../../store/model/data.d";
 import "./category.scss";
 import { getDate } from "../../tools/time";
 
@@ -63,7 +63,7 @@ class Category extends Component<ComponentProps, ComponentState> {
   componentWillMount() {
     this.getAlbum();
   }
-  
+
   config: Config = {
     navigationBarTitleText: "小玩意"
   };

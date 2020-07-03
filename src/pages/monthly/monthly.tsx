@@ -3,7 +3,7 @@ import { connect } from "@tarojs/redux";
 import Taro, { Component, Config } from "@tarojs/taro";
 import { ComponentClass } from "react";
 import ImgLoader from "../../components/img-loader/img-loader";
-import { Picture } from "../../model/AlbumModel";
+import { Picture } from "../../store/model/data.d";
 import linePng from "../../static/img/line.jpg";
 import "./monthly.scss";
 import { getDate } from "../../tools/time";
@@ -30,7 +30,6 @@ interface ComponentProps {
   /* declare your component's props here */
 }
 interface ComponentState {
-  id: number;
   title: string;
   datas: Picture[];
   imgLoadList: Picture[];
@@ -41,22 +40,12 @@ interface ComponentState {
   dispatch => ({})
 )
 class Monthly extends Component<ComponentProps, ComponentState> {
-  /**
-   * 指定config的类型声明为: Taro.Config
-   *
-   * 由于 typescript 对于 object 类型推导只能推出 Key 的基本类型
-   * 对于像 navigationBarTextStyle: 'black' 这样的推导出的类型是 string
-   * 提示和声明 navigationBarTextStyle: 'black' | 'white' 类型冲突, 需要显示声明类型
-   */
-  config: Config = {
-    navigationBarTitleText: "fylder"
-  };
   constructor(props, context) {
     super(props, context);
+    Taro.setNavigationBarTitle({ title: "fylder" });
     this.imgLoader = new ImgLoader(this);
     this.hasLoad = false;
     this.state = {
-      id: 0,
       title: "今月份的花束",
       datas: [],
       imgLoadList: []
@@ -65,6 +54,25 @@ class Monthly extends Component<ComponentProps, ComponentState> {
 
   componentWillMount() {
     this.getMonthlyAlbum();
+  }
+
+  componentWillUpdate(props: any, state: any) {
+    if (state.datas && state.datas.length > 0 && !this.hasLoad) {
+      this.hasLoad = true;
+      state.datas.map((item: Picture) => {
+        this.imgLoader.load(item.photo, (err, data) => {
+          const datas = this.state.datas.map((item2: Picture) => {
+            if (item2.photo == data.src) {
+              item2.loaded = true;
+            }
+            return item2;
+          });
+          this.setState({
+            datas
+          });
+        });
+      });
+    }
   }
 
   getMonthlyAlbum = () => {
@@ -82,25 +90,6 @@ class Monthly extends Component<ComponentProps, ComponentState> {
       });
     });
   };
-
-  componentWillUpdate(props: any, state: any) {
-    if (state.datas && state.datas.length > 0 && !this.hasLoad) {
-      this.hasLoad = true;
-      state.datas.map((item: Picture) => {
-        this.imgLoader.load(item.photo, (err, data) => {
-          const datas = this.state.datas.map(item => {
-            if (item.photo == data.src) {
-              item.loaded = true;
-            }
-            return item;
-          });
-          this.setState({
-            datas
-          });
-        });
-      });
-    }
-  }
 
   // imageError = index => {
   //   const defaultImg =
