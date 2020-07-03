@@ -16,9 +16,22 @@ export const getList = () => {
       method: "GET",
       mode: "cors"
     });
+    Taro.hideNavigationBarLoading();
+    dispatch(sendList(resp.data));
+  };
+};
+
+export const refreshList = () => {
+  return async (dispatch: any) => {
+    Taro.showNavigationBarLoading();
+    const resp = await Taro.request({
+      url: "https://wechat.fylder.me:8022/wechat/slog/show",
+      method: "GET",
+      mode: "cors"
+    });
     setTimeout(() => {
       Taro.hideNavigationBarLoading();
       dispatch(sendList(resp.data));
-    }, 500);
+    }, 1000);
   };
 };

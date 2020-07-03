@@ -1,12 +1,12 @@
-import { Image, Video, View } from "@tarojs/components";
+import { Image, Text, Video, View } from "@tarojs/components";
 import { connect } from "@tarojs/redux";
 import Taro, { Component, Config } from "@tarojs/taro";
 import { ComponentClass } from "react";
-import { getList } from "../../actions/slogAction";
+import { getList, refreshList } from "../../actions/slogAction";
+import { SLOG_LIST } from "../../constants/actionType";
 import { SlogModel } from "../../store/model/data.d";
 import { getDate } from "../../tools/time";
 import "./slog.scss";
-import { SLOG_LIST } from "src/constants/actionType";
 
 type PageStateProps = {
   slog: { slog: SlogModel[] };
@@ -45,9 +45,8 @@ class Slog extends Component<ComponentProps, ComponentState> {
   constructor(props, context) {
     super(props, context);
     this.state = {
-      //   cover: "http://photo.fylder.me/photo_1568057246317.jpg?imageMogr2/auto-orient/thumbnail/!480x480r/blur/1x0/quality/75"
       cover:
-        "http://photo.fylder.me/photo_1570843879557.jpg?imageMogr2/auto-orient/thumbnail/!480x480r/blur/1x0/quality/75",
+        "http://photo.fylder.me/photo_1593740273874.jpg?imageMogr2/auto-orient/thumbnail/!480x480r/quality/75",
       datas: [],
       isRefresh: false
     };
@@ -55,9 +54,18 @@ class Slog extends Component<ComponentProps, ComponentState> {
   }
 
   componentWillMount() {
-    const albumList = this.props.slog.slog;
-    if (albumList.length < 1) {
+    const slogList = this.props.slog.slog;
+    if (slogList.length < 1) {
+      this.setState({
+        isRefresh: true
+      });
+      // 获取数据
       this.props.dispatch(getList());
+    } else {
+      // 直接从缓存获取
+      this.setState({
+        datas: slogList
+      });
     }
   }
 
@@ -66,12 +74,14 @@ class Slog extends Component<ComponentProps, ComponentState> {
     const {
       slog: { slog, action }
     } = nextProps;
-    // if (action && action === SLOG_LIST && this.state.isRefresh) {
-    //   this.setState({
-    //     datas: slog,
-    //     isRefresh: false
-    //   });
-    // }
+    console.dir(nextProps);
+    if (action && action === SLOG_LIST && this.state.isRefresh) {
+      Taro.stopPullDownRefresh();
+      this.setState({
+        datas: slog,
+        isRefresh: false
+      });
+    }
   }
 
   config: Config = {
@@ -80,7 +90,7 @@ class Slog extends Component<ComponentProps, ComponentState> {
 
   onPullDownRefresh() {
     if (!this.state.isRefresh) {
-      this.props.dispatch(getList());
+      this.props.dispatch(refreshList());
       this.setState({
         isRefresh: true
       });
@@ -97,10 +107,10 @@ class Slog extends Component<ComponentProps, ComponentState> {
   };
 
   render() {
-    const slogList = this.props.slog.slog;
-    this.setState({
-      datas: slogList
-    });
+    // const slogList = this.props.slog.slog;
+    // this.setState({
+    //   datas: slogList
+    // });
     return (
       <View>
         <View>
@@ -154,6 +164,9 @@ class Slog extends Component<ComponentProps, ComponentState> {
                     />
                   </View>
                   <View className="at-article__info item_lay_info">
+                    <Text decode={true}>{item.describe}</Text>
+                  </View>
+                  <View className="at-article__info item_lay_date">
                     {getDate(item.createdAt)}
                   </View>
                 </View>
