@@ -14,6 +14,7 @@ export const getList = (hasRefresh: boolean) => {
     const resp = await Taro.request({
       url: "https://wechat.fylder.me:8022/wechat/album/type",
       method: "POST",
+      mode: "cors",
       data: {
         type: "toy"
       }

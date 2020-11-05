@@ -13,7 +13,7 @@ export const getList = (hasRefresh: boolean) => {
     Taro.showNavigationBarLoading();
     const resp = await Taro.request({
       url: "https://wechat.fylder.me:8022/wechat/slog/show",
-      method: "GET",
+      method: "POST",
       mode: "cors"
     });
     const time = hasRefresh ? 1000 : 0;

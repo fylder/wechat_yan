@@ -14,9 +14,12 @@ export const getList = (id: string) => {
   return async (dispatch: any) => {
     Taro.showNavigationBarLoading();
     const resp = await Taro.request({
-      url: "https://wechat.fylder.me:8022/wechat/picture/" + id,
-      method: "GET",
-      mode: "cors"
+      url: "https://wechat.fylder.me:8022/wechat/picture",
+      method: "POST",
+      mode: "cors",
+      data: {
+        id
+      }
     });
     setTimeout(() => {
       Taro.hideNavigationBarLoading();

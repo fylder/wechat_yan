@@ -60,10 +60,8 @@ interface ComponentState {
           break;
         }
         case 3: {
-          //slog
           Taro.navigateTo({
-            // url: `/pages/category/category?title=${"漫展"}&tags=${"cosplay"}`
-            url: "/pages/slog/slog"
+            url: `/pages/category/category?title=${"漫展"}&tags=${"cosplay"}`
           });
           break;
         }
@@ -139,19 +137,20 @@ class Home extends Component<ComponentProps, ComponentState> {
     };
   }
 
-  onPullDownRefresh() {
+  onPullDownRefresh = () => {
     if (!this.state.isRefresh) {
       this.getAlbum();
       this.setState({
         isRefresh: true
       });
     }
-  }
+  };
 
   getAlbum = () => {
     Taro.request({
       url: "https://wechat.fylder.me:8022/wechat/album/latest",
       method: "POST",
+      mode: "cors",
       data: {
         size: 6
       }

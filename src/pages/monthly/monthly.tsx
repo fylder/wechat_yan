@@ -80,6 +80,7 @@ class Monthly extends Component<ComponentProps, ComponentState> {
     Taro.request({
       url: "https://wechat.fylder.me:8022/wechat/picture/type/latest",
       method: "POST",
+      mode: "cors",
       data: {
         type: "flower"
       }
