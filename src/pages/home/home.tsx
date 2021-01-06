@@ -156,8 +156,6 @@ class Home extends Component<ComponentProps, ComponentState> {
         size: 6
       },
       success: res => {
-        console.log("success");
-        console.log(res.data);
         Taro.stopPullDownRefresh();
         this.setState({
           data: res.data,
