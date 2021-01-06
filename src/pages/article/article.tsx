@@ -2,7 +2,7 @@ import { Image, View } from "@tarojs/components";
 import { connect } from "@tarojs/redux";
 import Taro, { Component, Config } from "@tarojs/taro";
 import { ComponentClass } from "react";
-import { ArchivesModel } from "../archives/model";
+import { ArticleModel } from "../../store/model/data";
 import "./article.scss";
 
 type PageStateProps = {};
@@ -26,7 +26,7 @@ interface ComponentProps {
 }
 interface ComponentState {
   id: string;
-  article: ArchivesModel | undefined;
+  article: ArticleModel | undefined;
 }
 
 /**
@@ -60,12 +60,13 @@ class Article extends Component<ComponentProps, ComponentState> {
       mode: "cors",
       data: {
         id: this.state.id
+      },
+      success: res => {
+        Taro.hideNavigationBarLoading();
+        this.setState({
+          article: res.data
+        });
       }
-    }).then(res => {
-      Taro.hideNavigationBarLoading();
-      this.setState({
-        article: res.data
-      });
     });
   };
 
@@ -77,7 +78,7 @@ class Article extends Component<ComponentProps, ComponentState> {
           src={this.state.article === undefined ? "" : this.state.article.cover}
           mode="aspectFill"
         />
-        <View className="mark-lay">
+        <View className="mark_lay">
           <wemark
             md={
               this.state.article === undefined ? "" : this.state.article.content

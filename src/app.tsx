@@ -2,7 +2,6 @@ import "@tarojs/async-await";
 import { Provider } from "@tarojs/redux";
 import Taro, { Component, Config } from "@tarojs/taro";
 import "./app.scss";
-import Home from "./pages/home/home";
 import configStore from "./store";
 
 // 如果需要在 h5 环境中开启 React Devtools
@@ -38,9 +37,9 @@ class App extends Component {
       "pages/toy/toy",
       "pages/category/category",
       "pages/archives/archives",
-      "pages/article/article",
-      "pages/slog/slog",
-      "pages/slog/vlog/vlog"
+      "pages/article/article"
+      // "pages/slog/slog",
+      // "pages/slog/vlog/vlog"
     ],
     window: {
       backgroundTextStyle: "light",

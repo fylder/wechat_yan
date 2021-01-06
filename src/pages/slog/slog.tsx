@@ -50,7 +50,7 @@ class Slog extends Component<ComponentProps, ComponentState> {
     Taro.setNavigationBarTitle({ title: "slog" });
     this.state = {
       cover:
-        "http://photo.fylder.me/photo_1593740273874.jpg?imageMogr2/auto-orient/thumbnail/!480x480r/quality/75",
+        "http://photo.fylder.me/cover_1598549863436.jpg?imageMogr2/auto-orient/thumbnail/!480x480r/quality/75",
       datas: [],
       isRefresh: false
     };
