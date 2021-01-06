@@ -2,8 +2,9 @@ import { Image, Swiper, SwiperItem, View } from "@tarojs/components";
 import { connect } from "@tarojs/redux";
 import Taro, { Component, Config } from "@tarojs/taro";
 import { AtIcon } from "taro-ui";
+import { HomeModel } from "../../model/HomeModel";
 import { Album } from "../../store/model/data.d";
-import { image_swiper_datas, item_datas } from "./data";
+import { item_datas } from "./data";
 import "./home.scss";
 
 type PageStateProps = {};
@@ -29,7 +30,7 @@ interface ComponentProps {
 interface ComponentState {
   type: string;
   title: string;
-  covers: Album[];
+  data: HomeModel;
   isRefresh: boolean;
 }
 
@@ -148,18 +149,39 @@ class Home extends Component<ComponentProps, ComponentState> {
 
   getAlbum = () => {
     Taro.request({
-      url: "https://wechat.fylder.me:8022/wechat/album/latest",
+      url: "https://wechat.fylder.me:8022/wechat/home/latest",
       method: "POST",
       mode: "cors",
       data: {
         size: 6
+      },
+      success: res => {
+        console.log("success");
+        console.log(res.data);
+        Taro.stopPullDownRefresh();
+        this.setState({
+          data: res.data,
+          isRefresh: false
+        });
+      },
+      fail: res => {
+        Taro.stopPullDownRefresh();
+        //默认显示图
+        this.setState({
+          data: {
+            home:
+              "http://photo.fylder.me/photo_1609920268725.jpg?imageMogr2/auto-orient/thumbnail/!480x480r/quality/75",
+            swipe: [
+              {
+                image:
+                  "http://photo.fylder.me/photo_1567992692227.jpg?imageMogr2/auto-orient/thumbnail/!480x480r/quality/75"
+              }
+            ],
+            album: []
+          },
+          isRefresh: false
+        });
       }
-    }).then(res => {
-      Taro.stopPullDownRefresh();
-      this.setState({
-        covers: res.data,
-        isRefresh: false
-      });
     });
   };
 
@@ -170,9 +192,8 @@ class Home extends Component<ComponentProps, ComponentState> {
           <View className="lay_bg">
             <Image
               className="lay_img"
-              // src="https://img3.doubanio.com/view/photo/l/public/p2562920541.webp"
-              // src="https://img1.doubanio.com/view/photo/l/public/p2562920538.webp"
-              src="http://photo.fylder.me/photo_1592322731248.jpg"
+              // src="http://photo.fylder.me/photo_1592322731248.jpg"
+              src={this.state.data.home}
               mode="aspectFill"
             />
           </View>
@@ -212,7 +233,7 @@ class Home extends Component<ComponentProps, ComponentState> {
                 indicatorDots={false}
                 autoplay={true}
               >
-                {image_swiper_datas.map((item, index) => {
+                {this.state.data.swipe.map((item, index) => {
                   return (
                     <SwiperItem key={index} className="swiper_item">
                       <Image
@@ -243,7 +264,7 @@ class Home extends Component<ComponentProps, ComponentState> {
                   </View>
                 </View>
                 <View className="at-row at-row--wrap second_lay_list">
-                  {this.state.covers.map((item: Album, index: number) => {
+                  {this.state.data.album.map((item: Album, index: number) => {
                     return (
                       <View className="at-col at-col-6" key={item.id}>
                         <View

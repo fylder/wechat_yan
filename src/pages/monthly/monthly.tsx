@@ -1,12 +1,12 @@
 import { Block, Image, Text, View } from "@tarojs/components";
 import { connect } from "@tarojs/redux";
-import Taro, { Component, Config } from "@tarojs/taro";
+import Taro, { Component } from "@tarojs/taro";
 import { ComponentClass } from "react";
 import ImgLoader from "../../components/img-loader/img-loader";
-import { Picture } from "../../store/model/data.d";
 import linePng from "../../static/img/line.jpg";
-import "./monthly.scss";
+import { Picture } from "../../store/model/data.d";
 import { getDate } from "../../tools/time";
+import "./monthly.scss";
 
 type PageStateProps = {};
 

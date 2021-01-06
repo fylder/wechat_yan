@@ -46,3 +46,7 @@ export interface ArticleModel {
   tags: string;
   createdAt: string;
 }
+
+export interface SwipeModel {
+  image: string;
+}
