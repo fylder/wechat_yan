@@ -3,8 +3,8 @@ import { connect } from "@tarojs/redux";
 import Taro, { Component, Config } from "@tarojs/taro";
 import { ComponentClass } from "react";
 import { Album } from "../../store/model/data.d";
-import "./category.scss";
 import { getDate } from "../../tools/time";
+import "./category.scss";
 
 type PageStateProps = {
   category: {
@@ -54,8 +54,8 @@ class Category extends Component<ComponentProps, ComponentState> {
       album: [],
       cover:
         tags === "cosplay"
-          ? "http://photo.fylder.me/photo_1568057246317.jpg?imageMogr2/auto-orient/thumbnail/!480x480r/blur/1x0/quality/75"
-          : "http://spider.ws.126.net/6b1df938dab6a363b5a475c4e9e21345.jpeg"
+          ? "http://photo.fylder.me/photo_1598549784319.jpg?imageMogr2/auto-orient/thumbnail/!480x480r/blur/1x0/quality/75"
+          : "http://photo.fylder.me/photo_1604458379649.jpg?imageMogr2/auto-orient/thumbnail/!1080x1080r/blur/1x0/quality/75"
     };
     Taro.setNavigationBarTitle({ title });
   }

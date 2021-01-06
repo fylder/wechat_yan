@@ -1,4 +1,4 @@
-import { Image, View, Video } from "@tarojs/components";
+import { Image, Video, View } from "@tarojs/components";
 import { connect } from "@tarojs/redux";
 import Taro, { Component } from "@tarojs/taro";
 import { ComponentClass } from "react";
@@ -45,8 +45,8 @@ class Slog extends Component<ComponentProps, ComponentState> {
     const cover = this.$router.params.cover;
     const name = this.$router.params.name;
     this.state = {
-      //   cover: "http://photo.fylder.me/photo_1568057246317.jpg?imageMogr2/auto-orient/thumbnail/!480x480r/blur/1x0/quality/75"
-      cover: "http://spider.ws.126.net/6b1df938dab6a363b5a475c4e9e21345.jpeg",
+      cover:
+        "http://photo.fylder.me/photo_1604458379649.jpg?imageMogr2/auto-orient/thumbnail/!1080x1080r/blur/1x0/quality/75",
       slog: slog,
       slog_cover: cover,
       name: name

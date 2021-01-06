@@ -117,7 +117,7 @@ class Info extends Component<ComponentProps, ComponentState> {
       <View>
         <Image
           className="index_img"
-          src="http://spider.ws.126.net/6b1df938dab6a363b5a475c4e9e21345.jpeg"
+          src="http://photo.fylder.me/photo_1604458379649.jpg?imageMogr2/auto-orient/thumbnail/!1080x1080r/blur/1x0/quality/75"
           onError={this.imageError.bind(this, 1)}
           mode="aspectFill"
         />
